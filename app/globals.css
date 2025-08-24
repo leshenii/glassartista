@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 
-/* Note: You may need to change the path to fit your project structure */
 @config "../tailwind.config.js";
 
 .title--t1 {
@@ -13,10 +12,16 @@
 }
 
 .title--t1-cursive {
-    font-size: 3.2rem;
-    font-weight: 500;
-    font-family: 'Allura', sans-serif;
+    font-family: 'Allura', cursive;
+    font-style: normal;
 }
+
+.allura-regular {
+    font-family: "Allura", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
 
 .paragraph--p1 {
     font-size: 1.1rem;

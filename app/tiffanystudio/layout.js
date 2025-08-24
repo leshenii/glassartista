@@ -4,7 +4,7 @@ import NavbarTiffanyStudio from "@/app/components/NavbarTiffanyStudio";
 export default function TiffanyStudioLayout(props) {
     const { children } = props;
     return (
-        <section className="flex flex-col items-center justify-center">
+        <section className="min-h-screen w-11/12 justify-self-center">
             <div>
                 <NavbarTiffanyStudio />
                 {children}
