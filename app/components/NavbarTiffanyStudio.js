@@ -29,16 +29,14 @@ export default function NavbarTiffanyStudio() {
     const [isAvailableLampsOpen, setAvailableLampsIsOpen] = useState(false);
 
     return (
-        <Navbar classNames={{ base: "bg-transparent" }}>
-            <NavbarBrand>
+        <Navbar maxWidth="full" shouldHideOnScroll classNames={{ base: "items-center bg-transparent golos-text-navbar" }}>
+            <NavbarBrand className="brandAutoWidth">
                 <p className="font-bold text-inherit">Tiffany</p>
             </NavbarBrand>
-
-            <NavbarContent className="hidden sm:flex gap-2" justify="center">
+            <NavbarContent className="hidden sm:flex gap-4 centerContent" justify="center">
                 <NavbarItem>
-                    <Link href="/">Főoldal</Link>
+                    <Link href="/" className="text-xl golos-text-navbar text-white">Főoldal</Link>
                 </NavbarItem>
-
                 <Dropdown isOpen={isTiffanyLampsOpen}
                           onMouseEnter={() => setTiffanyLampsIsOpen(true)}
                           onMouseLeave={() => setTiffanyLampsIsOpen(false)}>
@@ -48,7 +46,7 @@ export default function NavbarTiffanyStudio() {
                         <DropdownTrigger>
                             <Link href="/tiffanystudio/tiffanylamps">
                                 <Button
-                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent"
+                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl golos-text-navbar"
                                     radius="sm"
                                     variant="light"
                                     endContent={<FaChevronDown />}
@@ -57,8 +55,8 @@ export default function NavbarTiffanyStudio() {
                                 </Button>
                             </Link>
                         </DropdownTrigger>
-                    </NavbarItem> 
-                    <DropdownMenu className="light-component" color="secondary" aria-label="Tiffany lámpák menü">
+                    </NavbarItem>
+                    <DropdownMenu className="light-component border-0" color="secondary" aria-label="Tiffany lámpák menü">
                         <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}>28" Magnólia Tiffany
                             Lámpa</DropdownItem>
                         <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}>Gold-Blue Dragonfly Tiffany
@@ -87,7 +85,7 @@ export default function NavbarTiffanyStudio() {
                                 className="py-2 cursor-pointer">
                         <DropdownTrigger>
                             <Button
-                                className="px-3 bg-transparent data-[hover=true]:bg-transparent"
+                                className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl golos-text-navbar"
                                 endContent={<FaChevronDown/>}
                                 radius="sm"
                                 variant="light"
@@ -97,7 +95,7 @@ export default function NavbarTiffanyStudio() {
                         </DropdownTrigger>
                     </NavbarItem>
 
-                    <DropdownMenu className="light-component" color="secondary" aria-label="Rendelhető Tiffany lámpák kategóriák">
+                    <DropdownMenu className="light-component border-0" color="secondary" aria-label="Rendelhető Tiffany lámpák kategóriák">
                         <DropdownItem startContent={<IoIosGrid size={20}/>}>Rendelhető geometrikus Tiffany
                             lámpák</DropdownItem>
                         <DropdownItem startContent={<LuLamp size={20}/>}>Rendelhető asztali Tiffany
@@ -108,11 +106,11 @@ export default function NavbarTiffanyStudio() {
                 </Dropdown>
 
                 <NavbarItem>
-                    <Link href="">Lámpatalpak</Link>
+                    <Link href="" className="text-xl golos-text-navbar text-white">Lámpatalpak</Link>
                 </NavbarItem>
 
                 <NavbarItem>
-                    <Link href="">Kapcsolat</Link>
+                    <Link href="" className="text-xl golos-text-navbar text-white">Kapcsolat</Link>
                 </NavbarItem>
             </NavbarContent>
         </Navbar>
