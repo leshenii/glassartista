@@ -9,7 +9,7 @@ export default function GlassArtistaPage() {
     return (
         <div >
             <NavbarGlassArtista />
-            <Card>ass</Card>
+            <Card></Card>
 
         </div>
     );

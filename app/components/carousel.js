@@ -2,7 +2,9 @@
 
 import {IconArrowNarrowRight} from "@tabler/icons-react";
 import {useState, useRef, useId, useEffect} from "react";
-import {PiFlowerFill} from "react-icons/pi";
+import {PiFlowerFill, PiHandPointingBold} from "react-icons/pi";
+import {LiaHandPointDown} from "react-icons/lia";
+import {FaRegHandPointDown} from "react-icons/fa";
 
 const ImageSlide = ({
                         slide,
@@ -83,7 +85,7 @@ const ImageSlide = ({
                                 : "none",
                     }}>
                     <img
-                        className="absolute inset-0 w-[100%] h-[100%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+                        className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
                         style={{
                             opacity: current === index ? 1 : 0.1,
                             objectPosition: position || "bottom center",
@@ -137,7 +139,6 @@ const TextSlide = ({
     return (
         <div className="[perspective:1200px] [transform-style:preserve-3d]">
             <li
-                ref={slideRef}
                 className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[50vmin] h-[60vmin] z-10 mx-[2vmin] cursor-pointer"
                 onClick={() => handleSlideClick(index)}
                 onMouseMove={handleMouseMove}
@@ -151,6 +152,7 @@ const TextSlide = ({
                     transformOrigin: "bottom",
                 }}>
                 <div
+
                     className="justify-items-center content-center absolute top-0 left-0 w-full h-full rounded-[1%] overflow-hidden transition-all duration-150 ease-out"
                     style={{
                         transform:
@@ -163,7 +165,7 @@ const TextSlide = ({
                             current === index ? "opacity-100 visible" : "opacity-10 visible"
                         }`}>
                         {title ? (
-                            <div className="flex flex-col items-center gap-4">
+                            <div ref={slideRef} className="flex flex-col items-center gap-4">
                                 <PiFlowerFill size={30}/>
                                 <h2 className="text-lg md:text-lg lg:text-6xl text-center font-semibold relative allura-regular">
                                     {title}
@@ -176,7 +178,7 @@ const TextSlide = ({
                                 {paragraph}
                             </p>
                         ) : (
-                                <PiFlowerFill size={30}/>
+                            <PiFlowerFill size={30}/>
                         )}
                     </article>
                 </div>
@@ -184,7 +186,6 @@ const TextSlide = ({
         </div>
     );
 };
-
 
 
 export function ImageCarousel({slides, current, setCurrent, handlePreviousClick, handleNextClick}) {
@@ -201,6 +202,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     };
 
     const handleWheel = (event) => {
+        event.stopPropagation();
         event.preventDefault();
         if (isScrolling.current) return;
         isScrolling.current = true;
@@ -220,8 +222,8 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     useEffect(() => {
         const node = containerRef.current;
         if (!node) return;
-        node.addEventListener("wheel", handleWheel, { passive: false });
-        return () => node.removeEventListener("wheel", handleWheel, { passive: false });
+        node.addEventListener("wheel", handleWheel, {passive: false});
+        return () => node.removeEventListener("wheel", handleWheel, {passive: false});
     }, [current, slides]);
 
     const handleModalClose = () => setModalOpen(false);
@@ -230,15 +232,21 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
 
     return (
         <div
-            ref={containerRef}
             className="relative w-[40vmin] h-[60vmin] mx-auto"
             aria-labelledby={`carousel-heading-${id}`}>
+            <div className="flex flex-row gap-2 pl-5 text-neutral-400">
+                <p className="text-sm ">A kép megtekintéséhez kattints!</p>
+                <FaRegHandPointDown className="text-lg" />
+            </div>
+
             <ul
-                className="absolute flex mx-[4vmin] transition-transform duration-1000 ease-in-out py-6"
+                ref={containerRef}
+                className="absolute flex mx-[4vmin] transition-transform duration-1000 ease-in-out py-3"
                 style={{
                     transform: `translateX(-${current * (100 / slides.length)}%)`,
                 }}
                 onWheel={handleWheel}
+                tabIndex={0}
             >
                 {slides.map((slide, index) => (
                     <ImageSlide
@@ -285,6 +293,7 @@ export function TextCarousel({slides, current, setCurrent}) {
     };
 
     const handleWheel = (event) => {
+        event.stopPropagation();
         event.preventDefault();
         if (isScrolling.current) return;
         isScrolling.current = true;
@@ -303,23 +312,23 @@ export function TextCarousel({slides, current, setCurrent}) {
     useEffect(() => {
         const node = containerRef.current;
         if (!node) return;
-        node.addEventListener("wheel", handleWheel, { passive: false });
-        return () => node.removeEventListener("wheel", handleWheel, { passive: false });
+        node.addEventListener("wheel", handleWheel, {passive: false});
+        return () => node.removeEventListener("wheel", handleWheel, {passive: false});
     }, [current, slides]);
 
     const id = useId();
 
     return (
         <div
-            ref={containerRef}
-            className="relative w-[50vmin] h-[70vmin] mx-auto"
+            className=" relative w-[50vmin] h-[70vmin] mx-auto"
             aria-labelledby={`carousel-heading-${id}`}>
             <ul
+                ref={containerRef}
                 className="absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
                 style={{
                     transform: `translateX(-${current * (100 / slides.length)}%)`,
                 }}
-                onWheel={handleWheel}
+                tabIndex={0}
             >
                 {slides.map((slide, index) => (
                     <TextSlide

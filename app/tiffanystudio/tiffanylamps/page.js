@@ -1,6 +1,6 @@
 'use client'
 
-import {useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import {ImageCarousel, TextCarousel} from "@/app/components/carousel";
 import {IconArrowNarrowRight} from "@tabler/icons-react";
 
@@ -75,6 +75,40 @@ export default function TiffanyLampsPage() {
         [CAROUSEL_KEYS.goldblue]: 0,
     });
 
+    const sectionRefs = [useRef(null), useRef(null)];
+    const currentSection = useRef(0);
+    const isThrottled = useRef(false);
+
+    useEffect(() => {
+        const handleWheel = (e) => {
+            if (isThrottled.current) return;
+
+            const direction = e.deltaY > 0 ? 1 : -1;
+            let nextSection = currentSection.current + direction;
+
+            if (nextSection < 0 || nextSection >= sectionRefs.length) return;
+
+            currentSection.current = nextSection;
+            isThrottled.current = true;
+
+            if (nextSection === 0) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                sectionRefs[nextSection].current.scrollIntoView({ behavior: "smooth" });
+            }
+
+            setTimeout(() => {
+                isThrottled.current = false;
+            }, 600);
+        };
+
+        window.addEventListener("wheel", handleWheel, { passive: false });
+
+        return () => {
+            window.removeEventListener("wheel", handleWheel);
+        };
+    }, []);
+
     const setCurrent = (key, value) => {
         setCarouselCurrents(curr => ({
             ...curr,
@@ -114,8 +148,8 @@ export default function TiffanyLampsPage() {
     };
 
     return (
-        <div className="">
-            <div className="w-screen h-screen-minus-navbar-desktop content-center justify-self-center">
+        <div className="overflow-hidden">
+            <div  className="w-screen h-screen-minus-navbar-desktop content-center justify-self-center">
                 <div className="w-full justify-self-center ">
                     <div className="relative overflow-hidden w-full h-full flex flex-row gap-4 ">
                         <div className="w-1/2 overflow-hidden">
@@ -148,7 +182,7 @@ export default function TiffanyLampsPage() {
                     </div>
                 </div>
             </div>
-            <div className="w-screen h-screen-minus-navbar-desktop content-center justify-self-center">
+            <div ref={sectionRefs[1]} className="w-screen h-screen-minus-navbar-desktop content-center justify-self-center">
                 <div className="w-full justify-self-center ">
                     <div className="relative overflow-hidden w-full h-full flex flex-row gap-4 ">
                         <div className="w-1/2 overflow-hidden">

@@ -29,7 +29,7 @@ export default function NavbarTiffanyStudio() {
     const [isAvailableLampsOpen, setAvailableLampsIsOpen] = useState(false);
 
     return (
-        <Navbar maxWidth="full" shouldHideOnScroll classNames={{ base: "items-center bg-transparent golos-text-navbar" }}>
+        <Navbar position="sticky" maxWidth="full"  classNames={{ base: "items-center bg-transparent golos-text-navbar" }}>
             <NavbarBrand className="brandAutoWidth">
                 <p className="font-bold text-inherit">Tiffany</p>
             </NavbarBrand>
@@ -48,7 +48,6 @@ export default function NavbarTiffanyStudio() {
                                 <Button
                                     className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl golos-text-navbar"
                                     radius="sm"
-                                    variant="light"
                                     endContent={<FaChevronDown />}
                                 >
                                     Tiffany lámpák
@@ -56,7 +55,7 @@ export default function NavbarTiffanyStudio() {
                             </Link>
                         </DropdownTrigger>
                     </NavbarItem>
-                    <DropdownMenu className="light-component border-0" color="secondary" aria-label="Tiffany lámpák menü">
+                    <DropdownMenu className="" aria-label="Tiffany lámpák menü">
                         <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}>28" Magnólia Tiffany
                             Lámpa</DropdownItem>
                         <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}>Gold-Blue Dragonfly Tiffany
@@ -95,7 +94,7 @@ export default function NavbarTiffanyStudio() {
                         </DropdownTrigger>
                     </NavbarItem>
 
-                    <DropdownMenu className="light-component border-0" color="secondary" aria-label="Rendelhető Tiffany lámpák kategóriák">
+                    <DropdownMenu className="" aria-label="Rendelhető Tiffany lámpák kategóriák">
                         <DropdownItem startContent={<IoIosGrid size={20}/>}>Rendelhető geometrikus Tiffany
                             lámpák</DropdownItem>
                         <DropdownItem startContent={<LuLamp size={20}/>}>Rendelhető asztali Tiffany
@@ -106,7 +105,7 @@ export default function NavbarTiffanyStudio() {
                 </Dropdown>
 
                 <NavbarItem>
-                    <Link href="" className="text-xl golos-text-navbar text-white">Lámpatalpak</Link>
+                    <Link isDisabled href="" className="text-xl golos-text-navbar text-white">Lámpatalpak</Link>
                 </NavbarItem>
 
                 <NavbarItem>

@@ -30,7 +30,7 @@ export default function Home() {
                     <div className="flex flex-col gap-4 justify-center h-full relative z-1">
                         <h1 className="text-4xl title--t1">Építészeti díszüveg</h1>
                         <p className="text-justify paragraph--p1">Cégünk teljeskörű megoldást kínál épület- és belsőépítészeti díszüveg készítésére a tervezéstől egészen a kivitelezésig. Ólomüveg kupolák, díszüveg előtetők, bejárati ajtók, felülvilágítók, modern üvegablakok mind a termékkörünk részét képezik. Minden munkánk a legmagasabb minőséget képviseli, több évtizedes szakmai múltra tekint vissza. Amit nyújtunk: mérnöki tervezés, legmagasabb minőségű művészeti üvegek és alapanyagok felhasználása, professzionális kivitelezés.</p>
-                        <div><Link href="/glassartista"><Button className="light" variant="faded" startContent={<GiWindowBars size={20} />}>Tovább a weboldalra</Button></Link></div>
+                        <div><Button className="light" isDisabled variant="faded" startContent={<GiWindowBars size={20} />}>Fejlesztés alatt</Button></div>
                     </div>
                 </div>
             </div>
