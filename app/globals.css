@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap');
 
 @config "../tailwind.config.js";
 
@@ -61,12 +61,12 @@ body, html {
     display: flex;
 }
 
-.golos-text-navbar {
-    font-family: "Golos Text", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-}
+.antonio-navbar {
+              font-family: "Antonio", sans-serif;
+              font-optical-sizing: auto;
+              font-weight: 100;
+              font-style: normal;
+          }
 
 .h-screen-minus-navbar-desktop {
     height: calc(100vh - 64px);
