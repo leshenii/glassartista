@@ -1,5 +1,6 @@
 import "./globals.css";
 import {Providers} from "@/app/components/Providers";
+import 'animate.css'
 
 export const metadata = {
     title: "Magnólia Tiffanystúdió és építészeti díszüveg",
@@ -23,6 +24,7 @@ export default function RootLayout({children}) {
                 href="/tiffanystudiologo.png"
             />
             <title>Magnólia Tiffanystúdió és építészeti díszüveg</title>
+            <link rel="icon" href="/favicon-256.ico"/>
         </head>
         <body className="min-h-screen bg-[#111111] inter-description">
         <Providers>

@@ -33,15 +33,15 @@ export default function NavbarTiffanyStudio() {
 
     return (
         <Navbar position="sticky" maxWidth="full"
-                classNames={{base: "bg-transparent uppercase antonio-navbar"}}>
+                classNames={{base: "animate__animated animate__fadeInDown bg-transparent select-none uppercase antonio-navbar"}}>
             <NavbarBrand>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     <Image
                         alt="Magnólia Tiffanystudió logó"
                         src="/tiffanystudiologo.png"
                         height={45}
                     />
-                    <p className="text-2xl pt-1 allura-regular normal-case">Magnólia Tiffanystúdió</p>
+                    <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">Magnólia Tiffanystúdió</p>
                 </div>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">

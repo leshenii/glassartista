@@ -69,7 +69,7 @@ const ImageSlide = ({
 
     const {src, position, title} = slide;
 
-    return (<div className="[perspective:1200px] [transform-style:preserve-3d]">
+    return (<div className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
             ref={slideRef}
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[40vmin] h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
@@ -89,7 +89,7 @@ const ImageSlide = ({
                 }}>
 
                 <img
-                    className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+                    className="select-none absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
                     style={{
                         opacity: current === index ? 1 : 0.1, objectPosition: position || "bottom center",
                     }}
@@ -141,7 +141,7 @@ const TextSlide = ({
 
     const {src, position, paragraph, title} = slide;
 
-    return (<div className="[perspective:1200px] [transform-style:preserve-3d]">
+    return (<div className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[50vmin] h-[60vmin] z-10 mx-[2vmin] cursor-pointer"
             onClick={() => handleSlideClick(index)}

@@ -20,7 +20,7 @@
 
 .allura-regular {
     font-family: "Allura", cursive;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
 }
 
@@ -34,12 +34,6 @@
 body, html {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
-}
-
-.light-component {
-    @apply asd bg-background text-foreground rounded-xl border-0;
-    border: none !important;
-    box-shadow: none !important;
 }
 
 .inter-description {
