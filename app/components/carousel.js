@@ -1,7 +1,6 @@
 "use client";
 
 import {useState, useRef, useId, useEffect} from "react";
-import {PiFlowerFill} from "react-icons/pi";
 import {FaRegHandPointDown} from "react-icons/fa";
 import {Tooltip} from "@heroui/react";
 
@@ -89,10 +88,11 @@ const ImageSlide = ({
                 }}>
 
                 <img
-                    className="select-none absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+                    className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
                     style={{
                         opacity: current === index ? 1 : 0.1, objectPosition: position || "bottom center",
                     }}
+                    draggable={false}
                     alt={title}
                     src={src}
                     onLoad={imageLoaded}
@@ -222,7 +222,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const id = useId();
 
     return (<div
-        className="relative w-[40vmin] h-[60vmin] mx-auto pl-16"
+        className="relative w-[40vmin] h-[60vmin] mx-auto pl-16 select-none"
         aria-labelledby={`carousel-heading-${id}`}>
 
 
@@ -328,10 +328,11 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
 function ImageModal({src, alt, open, onClose}) {
     if (!open) return null;
     return (<div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 select-none"
         onClick={onClose}
     >
         <img
+            draggable={false}
             src={src}
             alt={alt}
             className="max-w-[90vw] max-h-[90vh] rounded shadow-lg"

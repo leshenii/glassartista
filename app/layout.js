@@ -18,13 +18,8 @@ export default function RootLayout({children}) {
                 href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
                 rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap" rel="stylesheet"/>
-            <link
-                rel="preload"
-                as="image"
-                href="/tiffanystudiologo.png"
-            />
             <title>Magnólia Tiffanystúdió és építészeti díszüveg</title>
-            <link rel="icon" href="/favicon-256.ico"/>
+            <link rel="icon" href="/design/favicon-256.ico"/>
         </head>
         <body className="min-h-screen bg-[#111111] inter-description">
         <Providers>

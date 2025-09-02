@@ -8,16 +8,10 @@ import {useEffect} from "react";
 
 export default function Home() {
 
-    const router = useRouter()
-
-    useEffect(() => {
-        router.prefetch('/tiffanystudio');
-    }, [router]);
-
     return (
         <div className="h-screen">
             <div className="flex flex-row text-white items-center justify-center h-full ">
-                <div className="w-1/2 p-10 items-center bg-[url(/index-tiffany.webp)] bg-center bg-cover h-full relative overflow-hidden">
+                <div className="w-1/2 p-10 items-center bg-[url(/design/index-tiffany.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div className="animate__animated animate__fadeInLeft animate__slow absolute w-screen inset-0 bg-gradient-to-r from-black/90 to-black/0 z-0" />
                     <div className="animate__animated animate__fadeIn animate__slow flex flex-col gap-4 justify-center h-full relative z-1">
                         <h1 className="text-5xl allura-regular">Magnólia Tiffanystúdió</h1>
@@ -25,7 +19,7 @@ export default function Home() {
                         <div><Link href="/tiffanystudio"><Button className="light" variant="faded" startContent={<BsLampFill size={20} />}>Tovább a weboldalra</Button></Link></div>
                     </div>
                 </div>
-                <div className="w-1/2 p-10 items-center bg-[url(/index-olomuveg.webp)] bg-center bg-cover h-full relative overflow-hidden">
+                <div className="w-1/2 p-10 items-center bg-[url(/design/index-olomuveg.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div className="animate__animated animate__fadeInRight animate__slow absolute w-screen inset-y-0 -inset-x-full  bg-gradient-to-l from-black/90 to-black/0 z-0" />
                     <div className="animate__animated animate__fadeIn animate__slow flex flex-col gap-4 justify-center h-full relative z-1">
                         <h1 className="text-4xl title--t1">Építészeti díszüveg</h1>

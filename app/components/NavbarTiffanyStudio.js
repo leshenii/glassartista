@@ -39,7 +39,7 @@ export default function NavbarTiffanyStudio() {
                 <div className="flex items-center gap-3">
                     <Image
                         alt="Magnólia Tiffanystudió logó"
-                        src="/tiffanystudiologo.png"
+                        src="/design/tiffanystudiologo.png"
                         height={45}
                     />
                     <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">Magnólia
