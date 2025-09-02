@@ -12,7 +12,7 @@ import {
     Button,
     Link, Image, Tooltip,
 } from "@heroui/react";
-import {FaChevronDown, FaFacebook, FaFacebookSquare, FaInstagram} from "react-icons/fa";
+import {FaChevronDown, FaFacebook, FaFacebookSquare, FaInstagram, FaPhoneAlt} from "react-icons/fa";
 
 import {PiAcornFill, PiFlowerFill, PiFlowerTulipBold, PiFlowerTulipFill} from "react-icons/pi";
 import {GiChestnutLeaf, GiCurlingVines, GiDragonfly, GiFairyWings, GiLilyPads} from "react-icons/gi";
@@ -30,6 +30,7 @@ export default function NavbarTiffanyStudio() {
 
     const [isTiffanyLampsOpen, setTiffanyLampsIsOpen] = useState(false);
     const [isAvailableLampsOpen, setAvailableLampsIsOpen] = useState(false);
+    const [isLampBasesOpen, setLampBasesIsOpen] = useState(false);
 
     return (
         <Navbar position="sticky" maxWidth="full"
@@ -41,7 +42,8 @@ export default function NavbarTiffanyStudio() {
                         src="/tiffanystudiologo.png"
                         height={45}
                     />
-                    <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">Magnólia Tiffanystúdió</p>
+                    <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">Magnólia
+                        Tiffanystúdió</p>
                 </div>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">
@@ -53,7 +55,7 @@ export default function NavbarTiffanyStudio() {
                           onMouseLeave={() => setTiffanyLampsIsOpen(false)}>
                     <NavbarItem onMouseEnter={() => setTiffanyLampsIsOpen(true)}
                                 onMouseLeave={() => setTiffanyLampsIsOpen(false)}
-                                className="py-2 cursor-pointer">
+                                className="py-2 cursor-pointer" >
                         <DropdownTrigger>
                             <Link href="/tiffanystudio/tiffanylamps">
                                 <Button
@@ -115,9 +117,24 @@ export default function NavbarTiffanyStudio() {
                     </DropdownMenu>
                 </Dropdown>
 
-                <NavbarItem>
-                    <Link isDisabled href="" className="text-xl font-light antonio-navbar text-white">Lámpatalpak</Link>
-                </NavbarItem>
+                    <Dropdown isOpen={isLampBasesOpen} isDisabled
+                              onMouseEnter={() => setLampBasesIsOpen(true)}
+                              onMouseLeave={() => setLampBasesIsOpen(false)}>
+                        <NavbarItem onMouseEnter={() => setLampBasesIsOpen(true)}
+                                    onMouseLeave={() => setLampBasesIsOpen(false)}
+                                    className="py-2 cursor-pointer">
+                            <DropdownTrigger>
+                                <Button
+                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                                    endContent={<FaChevronDown/>}
+                                    radius="sm"
+                                    variant="light"
+                                >
+                                    Lámpatalpak
+                                </Button>
+                            </DropdownTrigger>
+                        </NavbarItem>
+                    </Dropdown>
 
                 <NavbarItem>
                     <Link href="" className="text-xl font-light antonio-navbar text-white">Kapcsolat</Link>
@@ -126,17 +143,28 @@ export default function NavbarTiffanyStudio() {
             <NavbarContent justify="end">
                 <NavbarItem>
                     <div className="flex flex-row gap-3 pt-1">
-                        <Tooltip content="Írj nekem e-mailt!" placement="bottom">
-                            <Link href="" target="_blank"
-                                  className="text-xl font-light antonio-navbar text-white"><RiMailFill size="25px"/></Link>
+                        <div className="flex flex-row gap-1 items-center justify-center pb-1">
+                            <Tooltip content="Hívj bátran!" showArrow={true} radius="full" color="foreground"
+                                     placement="bottom">
+                                    <span className="pt-0.5"><FaPhoneAlt size="16px"/></span>
+                            </Tooltip>
+                            <span className="select-all">+36-70/360-0950</span>
+                        </div>
+                        <Tooltip content="Keress e-maillel!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                            <Link href="mailto:m.tiffanystudio@gmail.com"
+                                  target="_blank"
+                                  className="text-xl font-light antonio-navbar text-white"><RiMailFill
+                                size="25px"/></Link>
                         </Tooltip>
-                        <Tooltip content="Kövess Instagramon!" placement="bottom">
-                            <Link href="" target="_blank"
-                                  className="text-xl font-light antonio-navbar text-white"><AiFillInstagram size="25px"/></Link>
+                        <Tooltip content="Kövess Instagramon!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                            <Link href="https://www.instagram.com/magnolia_tiffanystudio/" target="_blank"
+                                  className="text-xl font-light antonio-navbar text-white"><AiFillInstagram
+                                size="26px"/></Link>
                         </Tooltip>
-                        <Tooltip content="Kövess Facebookon!" placement="bottom">
-                            <Link href="" target="_blank"
-                                  className="text-xl font-light antonio-navbar text-white"><FaFacebookSquare size="25px"/></Link>
+                        <Tooltip content="Kövess Facebookon!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                            <Link href="https://www.facebook.com/profile.php?id=100054201323550#" target="_blank"
+                                  className="text-xl font-light antonio-navbar text-white"><FaFacebookSquare
+                                size="23px"/></Link>
                         </Tooltip>
                     </div>
                 </NavbarItem>

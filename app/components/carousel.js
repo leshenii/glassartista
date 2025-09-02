@@ -103,8 +103,8 @@ const ImageSlide = ({
                     <span className="flex items-center gap-2">
                         A kép megtekintéséhez kattins!
                         <FaRegHandPointDown size={16}/>
-                    </span>}
-                    placement="top">
+                    </span>} showArrow={true} placement="top" offset={15} radius="full" color="foreground"
+                >
                     <div className="absolute inset-0 bg-black/0 transition-all duration-1000"/>
                 </Tooltip>)}
             </div>
@@ -113,7 +113,7 @@ const ImageSlide = ({
 };
 
 const TextSlide = ({
-                       slide, index, current, handleSlideClick
+                       slide, index, current, handleSlideClick, icon: Icon
                    }) => {
     const slideRef = useRef(null);
 
@@ -161,7 +161,7 @@ const TextSlide = ({
                 <article
                     className={`relative  transition-opacity duration-1000 ease-in-out ${current === index ? "opacity-100 visible" : "opacity-10 visible"}`}>
                     {title ? (<div ref={slideRef} className="flex flex-col items-center gap-4">
-                            <PiFlowerFill size={30}/>
+                            {Icon && <Icon size={35} />}
                             <h2 className="text-lg md:text-lg lg:text-6xl text-center font-semibold relative allura-regular">
                                 {title}
                             </h2>
@@ -171,7 +171,7 @@ const TextSlide = ({
                     ) : paragraph ? (
                         <p className="text-lg md:text-lg lg:text-md text-justify inter-description relative">
                             {paragraph}
-                        </p>) : (<PiFlowerFill size={30}/>)}
+                        </p>) : (Icon && <Icon size={30} />)}
                 </article>
             </div>
         </li>
@@ -222,7 +222,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const id = useId();
 
     return (<div
-        className="relative w-[40vmin] h-[60vmin] mx-auto"
+        className="relative w-[40vmin] h-[60vmin] mx-auto pl-16"
         aria-labelledby={`carousel-heading-${id}`}>
 
 
@@ -253,7 +253,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     </div>);
 }
 
-export function TextCarousel({slides, current, setCurrent}) {
+export function TextCarousel({slides, current, setCurrent, icon}) {
     const [modalOpen, setModalOpen] = useState(false);
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
@@ -303,7 +303,7 @@ export function TextCarousel({slides, current, setCurrent}) {
     const id = useId();
 
     return (<div
-        className=" relative w-[50vmin] h-[70vmin] mx-auto"
+        className=" relative w-[50vmin] h-[70vmin] mx-auto ml-16"
         aria-labelledby={`carousel-heading-${id}`}>
         <ul
             ref={containerRef}
@@ -319,6 +319,7 @@ export function TextCarousel({slides, current, setCurrent}) {
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
+                icon={icon}
             />))}
         </ul>
     </div>);

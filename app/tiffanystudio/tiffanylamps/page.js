@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import {ImageCarousel, TextCarousel} from "@/app/components/carousel";
 import {IconArrowNarrowRight} from "@tabler/icons-react";
 
+import {PiAcornFill, PiFlowerFill, PiFlowerTulipBold, PiFlowerTulipFill} from "react-icons/pi";
+import {GiChestnutLeaf, GiCurlingVines, GiDragonfly, GiFairyWings, GiLilyPads} from "react-icons/gi";
+import {IoRose} from "react-icons/io5";
+
 const slideDataMagnolia = [
     {
         title: "Magnólia Tiffany Lámpa",
@@ -165,6 +169,7 @@ export default function TiffanyLampsPage() {
                                 slides={slideDataMagnolia}
                                 current={carouselCurrents[CAROUSEL_KEYS.magnolia]}
                                 setCurrent={val => setCurrent(CAROUSEL_KEYS.magnolia, val)}
+                                icon={PiFlowerFill}
                             />
                         </div>
                     </div>
@@ -198,6 +203,7 @@ export default function TiffanyLampsPage() {
                                 slides={slideDataGoldBlue}
                                 current={carouselCurrents[CAROUSEL_KEYS.goldblue]}
                                 setCurrent={val => setCurrent(CAROUSEL_KEYS.goldblue, val)}
+                                icon={GiDragonfly}
                             />
                         </div>
                     </div>
