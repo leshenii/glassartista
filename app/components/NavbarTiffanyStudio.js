@@ -25,30 +25,34 @@ import {motion} from "motion/react"
 import {AiFillInstagram} from "react-icons/ai";
 import {RiFacebookBoxFill, RiInstagramFill, RiMailFill} from "react-icons/ri";
 import {ImMail4} from "react-icons/im";
+import {usePathname} from "next/navigation";
 
 export default function NavbarTiffanyStudio() {
 
     const [isTiffanyLampsOpen, setTiffanyLampsIsOpen] = useState(false);
     const [isAvailableLampsOpen, setAvailableLampsIsOpen] = useState(false);
     const [isLampBasesOpen, setLampBasesIsOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <Navbar position="sticky" maxWidth="full"
                 classNames={{base: "animate__animated animate__fadeInDown bg-transparent select-none uppercase antonio-navbar"}}>
             <NavbarBrand>
                 <div className="flex items-center gap-3">
-                    <Image
+                    <img
+                        draggable={false}
                         alt="Magnólia Tiffanystudió logó"
                         src="/design/tiffanystudiologo.png"
-                        height={45}
-                    />
+                        loading="eager"
+                        decoding="sync"
+                        width={36}/>
                     <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">Magnólia
                         Tiffanystúdió</p>
                 </div>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                 <NavbarItem>
-                    <Link href="/tiffanystudio" className="text-xl uppercase antonio-navbar text-white">Főoldal</Link>
+                    <Link href="/tiffanystudio" className={`text-xl border-none uppercase antonio-navbar text-white ${pathname === '/tiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
                 </NavbarItem>
                 <Dropdown isOpen={isTiffanyLampsOpen}
                           onMouseEnter={() => setTiffanyLampsIsOpen(true)}
@@ -60,10 +64,10 @@ export default function NavbarTiffanyStudio() {
                             <Link href="/tiffanystudio/tiffanylamps">
                                 <Button
                                     className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
-                                    radius="sm"
-                                    endContent={<FaChevronDown/>}
+                                    radius="full"
+                                    endContent={<FaChevronDown size={20} className="pt-1" />}
                                 >
-                                    Tiffany lámpák
+                                    <span className={`${pathname === '/tiffanystudio/tiffanylamps' ? 'underline' : ''}`}>Tiffany lámpák</span>
                                 </Button>
                             </Link>
                         </DropdownTrigger>
@@ -98,11 +102,11 @@ export default function NavbarTiffanyStudio() {
                         <DropdownTrigger>
                             <Button
                                 className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
-                                endContent={<FaChevronDown/>}
-                                radius="sm"
+                                endContent={<FaChevronDown size={20} className="pt-1" />}
+                                radius="full"
                                 variant="light"
                             >
-                                Rendelhető Tiffany lámpák
+                                <span className={`${pathname === '/tiffanystudio/tiffanylampstoorder' ? 'underline' : ''}`}>Rendelhető Tiffany lámpák</span>
                             </Button>
                         </DropdownTrigger>
                     </NavbarItem>
@@ -126,7 +130,7 @@ export default function NavbarTiffanyStudio() {
                             <DropdownTrigger>
                                 <Button
                                     className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
-                                    endContent={<FaChevronDown/>}
+                                    endContent={<FaChevronDown size={20} className="pt-1" />}
                                     radius="sm"
                                     variant="light"
                                 >
@@ -150,7 +154,7 @@ export default function NavbarTiffanyStudio() {
                             </Tooltip>
                             <span className="select-all">+36-70/360-0950</span>
                         </div>
-                        <Tooltip content="Keress e-maillel!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                        <Tooltip content="Keress e-mailben!" placement="bottom" showArrow={true} radius="full" color="foreground">
                             <Link href="mailto:m.tiffanystudio@gmail.com"
                                   target="_blank"
                                   className="text-xl font-light antonio-navbar text-white"><RiMailFill

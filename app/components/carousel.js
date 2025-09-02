@@ -5,7 +5,7 @@ import {FaRegHandPointDown} from "react-icons/fa";
 import {Tooltip} from "@heroui/react";
 
 const ImageSlide = ({
-                        slide, index, current, handleSlideClick
+                        slide, index, current, handleSlideClick, icon: Icon
                     }) => {
     const slideRef = useRef(null);
 
@@ -87,19 +87,27 @@ const ImageSlide = ({
                     transform: current === index ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)" : "none",
                 }}>
 
-                <img
-                    className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-                    style={{
-                        opacity: current === index ? 1 : 0.1, objectPosition: position || "bottom center",
-                    }}
-                    draggable={false}
-                    alt={title}
-                    src={src}
-                    onLoad={imageLoaded}
-                    loading="eager"
-                    decoding="sync"/>
+                {src ? (
+                    <img
+                        className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
+                        style={{
+                            opacity: current === index ? 1 : 0.1,
+                            objectPosition: position || "bottom center",
+                        }}
+                        draggable={false}
+                        alt={title}
+                        src={src}
+                        onLoad={imageLoaded}
+                        loading="eager"
+                        decoding="sync"
+                    />
+                ) : (
+                    Icon && <div className="flex items-center justify-center w-full h-full">
+                        <Icon size={30} />
+                    </div>
+                )}
 
-                {current === index && showTooltip && (<Tooltip content={
+                {current === index && src && showTooltip && (<Tooltip content={
                     <span className="flex items-center gap-2">
                         A kép megtekintéséhez kattins!
                         <FaRegHandPointDown size={16}/>
@@ -169,9 +177,13 @@ const TextSlide = ({
                         </div>
 
                     ) : paragraph ? (
-                        <p className="text-lg md:text-lg lg:text-md text-justify inter-description relative">
+                        <p
+                            className="text-lg md:text-lg lg:text-md text-justify inter-description relative"
+                            style={{ whiteSpace: "pre-line" }}
+                        >
                             {paragraph}
-                        </p>) : (Icon && <Icon size={30} />)}
+                        </p>
+                    ) : (Icon && <Icon size={30} />)}
                 </article>
             </div>
         </li>
@@ -179,7 +191,7 @@ const TextSlide = ({
 };
 
 
-export function ImageCarousel({slides, current, setCurrent, handlePreviousClick, handleNextClick}) {
+export function ImageCarousel({slides, current, setCurrent, handlePreviousClick, handleNextClick, icon}) {
     const [modalOpen, setModalOpen] = useState(false);
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
@@ -187,10 +199,11 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const handleSlideClick = (index) => {
         if (current !== index) {
             setCurrent(index);
-        } else {
+        } else if (slides[index]?.src) {
             setModalOpen(true);
         }
     };
+
 
     const handleWheel = (event) => {
         event.stopPropagation();
@@ -241,6 +254,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
+                icon={icon}
             />))}
         </ul>
 
