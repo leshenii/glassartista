@@ -25,7 +25,7 @@ import {motion} from "motion/react"
 import {AiFillInstagram} from "react-icons/ai";
 import {RiFacebookBoxFill, RiInstagramFill, RiMailFill} from "react-icons/ri";
 import {ImMail4} from "react-icons/im";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 
 export default function NavbarTiffanyStudio() {
 
@@ -33,6 +33,17 @@ export default function NavbarTiffanyStudio() {
     const [isAvailableLampsOpen, setAvailableLampsIsOpen] = useState(false);
     const [isLampBasesOpen, setLampBasesIsOpen] = useState(false);
     const pathname = usePathname();
+
+    const router = useRouter();
+
+    const handleLampDropdownClick = (key) => {
+        if (key === 'magnolia') {
+            router.push('/magnoliatiffanystudio/tiffanylamps');
+        } else {
+            router.push(`/magnoliatiffanystudio/tiffanylamps#${key}`);
+        }
+        setTiffanyLampsIsOpen(false);
+    };
 
     return (
         <Navbar position="sticky" maxWidth="full"
@@ -52,7 +63,7 @@ export default function NavbarTiffanyStudio() {
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                 <NavbarItem>
-                    <Link href="/tiffanystudio" className={`text-xl border-none uppercase antonio-navbar text-white ${pathname === '/tiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
+                    <Link href="/magnoliatiffanystudio" className={`text-xl border-none uppercase antonio-navbar text-white ${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
                 </NavbarItem>
                 <Dropdown isOpen={isTiffanyLampsOpen}
                           onMouseEnter={() => setTiffanyLampsIsOpen(true)}
@@ -61,34 +72,34 @@ export default function NavbarTiffanyStudio() {
                                 onMouseLeave={() => setTiffanyLampsIsOpen(false)}
                                 className="py-2 cursor-pointer" >
                         <DropdownTrigger>
-                            <Link href="/tiffanystudio/tiffanylamps">
+                            <Link href="/magnoliatiffanystudio/tiffanylamps">
                                 <Button
                                     className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                                     radius="full"
                                     endContent={<FaChevronDown size={20} className="pt-1" />}
                                 >
-                                    <span className={`${pathname === '/tiffanystudio/tiffanylamps' ? 'underline' : ''}`}>Tiffany lámpák</span>
+                                    <span className={`${pathname === '/magnoliatiffanystudio/tiffanylamps' ? 'underline' : ''}`}>Tiffany lámpák</span>
                                 </Button>
                             </Link>
                         </DropdownTrigger>
                     </NavbarItem>
                     <DropdownMenu className="" aria-label="Tiffany lámpák menü">
-                        <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}>28" Magnólia Tiffany
+                        <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>} onClick={() => handleLampDropdownClick('magnolia')}>28" Magnólia Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}>Gold-Blue Dragonfly Tiffany
+                        <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>} onClick={() => handleLampDropdownClick('goldblue')}>Gold-Blue Dragonfly Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="peony" startContent={<IoRose size={20}/>}>Peony Tiffany Lámpa</DropdownItem>
-                        <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>}>Acorn Tiffany
+                        <DropdownItem key="peony" startContent={<IoRose size={20}/>} onClick={() => handleLampDropdownClick('peony')}>Peony Tiffany Lámpa</DropdownItem>
+                        <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>} onClick={() => handleLampDropdownClick('acorn')}>Acorn Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>}>Waterlily Tiffany
+                        <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>} onClick={() => handleLampDropdownClick('waterlily')}>Waterlily Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>}>Chestnut Tiffany
+                        <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>} onClick={() => handleLampDropdownClick('chestnut')}>Chestnut Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>}>Vine Ornament Tiffany
+                        <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>} onClick={() => handleLampDropdownClick('vine')}>Vine Ornament Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>}>Dragonfly Tiffany
+                        <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>} onClick={() => handleLampDropdownClick('dragonfly')}>Dragonfly Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}>Tulipános Tiffany
+                        <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>} onClick={() => handleLampDropdownClick('tulip')}>Tulipános Tiffany
                             Lámpa</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
@@ -106,7 +117,7 @@ export default function NavbarTiffanyStudio() {
                                 radius="full"
                                 variant="light"
                             >
-                                <span className={`${pathname === '/tiffanystudio/tiffanylampstoorder' ? 'underline' : ''}`}>Rendelhető Tiffany lámpák</span>
+                                <span className={`${pathname === '/magnoliatiffanystudio/tiffanylampstoorder' ? 'underline' : ''}`}>Rendelhető Tiffany lámpák</span>
                             </Button>
                         </DropdownTrigger>
                     </NavbarItem>

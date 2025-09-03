@@ -15,7 +15,7 @@ const LAMPS = [
         key: "magnolia",
         slides: [
             {
-                title: "Magnolia Tiffany Lámpa",
+                title: "Magnólia Tiffany Lámpa",
                 src: "/magnoliatiffanystudio/magnolia/magnolia-1.jpg",
             },
             {
@@ -387,6 +387,7 @@ export default function TiffanyLampsPage() {
         <div className="overflow-hidden">
             {LAMPS.map((lamp, idx) => (
                 <div
+                    id={lamp.key}
                     key={lamp.key}
                     ref={sectionRefs[lamp.refIdx]}
                     className={`w-screen h-screen content-center justify-self-center ${idx > 0 ? "pt-[64px]" : "pb-[64px]"}`}
