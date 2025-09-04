@@ -45,6 +45,15 @@ export default function NavbarTiffanyStudio() {
         setTiffanyLampsIsOpen(false);
     };
 
+    const handleAvailableLampDropdownClick = (key) => {
+        if (key === 'geometric') {
+            router.push('/magnoliatiffanystudio/tiffanylampsavailable');
+        } else {
+            router.push(`/magnoliatiffanystudio/tiffanylampsavailable#${key}`);
+        }
+        setTiffanyLampsIsOpen(false);
+    };
+
     return (
         <Navbar position="sticky" maxWidth="full"
                 classNames={{base: "animate__animated animate__fadeInDown bg-transparent select-none uppercase antonio-navbar"}}>
@@ -63,43 +72,55 @@ export default function NavbarTiffanyStudio() {
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                 <NavbarItem>
-                    <Link href="/magnoliatiffanystudio" className={`text-xl border-none uppercase antonio-navbar text-white ${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
+                    <Link href="/magnoliatiffanystudio"
+                          className={`text-xl border-none uppercase antonio-navbar text-white ${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
                 </NavbarItem>
                 <Dropdown isOpen={isTiffanyLampsOpen}
                           onMouseEnter={() => setTiffanyLampsIsOpen(true)}
                           onMouseLeave={() => setTiffanyLampsIsOpen(false)}>
                     <NavbarItem onMouseEnter={() => setTiffanyLampsIsOpen(true)}
                                 onMouseLeave={() => setTiffanyLampsIsOpen(false)}
-                                className="py-2 cursor-pointer" >
+                                className="py-2 cursor-pointer">
                         <DropdownTrigger>
                             <Link href="/magnoliatiffanystudio/tiffanylamps">
                                 <Button
                                     className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                                     radius="full"
-                                    endContent={<FaChevronDown size={20} className="pt-1" />}
+                                    endContent={<FaChevronDown size={20} className="pt-1"/>}
                                 >
-                                    <span className={`${pathname === '/magnoliatiffanystudio/tiffanylamps' ? 'underline' : ''}`}>Tiffany lámpák</span>
+                                    <span
+                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylamps' ? 'underline' : ''}`}>Tiffany lámpák</span>
                                 </Button>
                             </Link>
                         </DropdownTrigger>
                     </NavbarItem>
                     <DropdownMenu className="" aria-label="Tiffany lámpák menü">
-                        <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>} onClick={() => handleLampDropdownClick('magnolia')}>28" Magnólia Tiffany
+                        <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}
+                                      onClick={() => handleLampDropdownClick('magnolia')}>28" Magnólia Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>} onClick={() => handleLampDropdownClick('goldblue')}>Gold-Blue Dragonfly Tiffany
+                        <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}
+                                      onClick={() => handleLampDropdownClick('goldblue')}>Gold-Blue Dragonfly Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="peony" startContent={<IoRose size={20}/>} onClick={() => handleLampDropdownClick('peony')}>Peony Tiffany Lámpa</DropdownItem>
-                        <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>} onClick={() => handleLampDropdownClick('acorn')}>Acorn Tiffany
+                        <DropdownItem key="peony" startContent={<IoRose size={20}/>}
+                                      onClick={() => handleLampDropdownClick('peony')}>Peony Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>} onClick={() => handleLampDropdownClick('waterlily')}>Waterlily Tiffany
+                        <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>}
+                                      onClick={() => handleLampDropdownClick('acorn')}>Acorn Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>} onClick={() => handleLampDropdownClick('chestnut')}>Chestnut Tiffany
+                        <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>}
+                                      onClick={() => handleLampDropdownClick('waterlily')}>Waterlily Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>} onClick={() => handleLampDropdownClick('vine')}>Vine Ornament Tiffany
+                        <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>}
+                                      onClick={() => handleLampDropdownClick('chestnut')}>Chestnut Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>} onClick={() => handleLampDropdownClick('dragonfly')}>Dragonfly Tiffany
+                        <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>}
+                                      onClick={() => handleLampDropdownClick('vine')}>Vine Ornament Tiffany
                             Lámpa</DropdownItem>
-                        <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>} onClick={() => handleLampDropdownClick('tulip')}>Tulipános Tiffany
+                        <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>}
+                                      onClick={() => handleLampDropdownClick('dragonfly')}>Dragonfly Tiffany
+                            Lámpa</DropdownItem>
+                        <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
+                                      onClick={() => handleLampDropdownClick('tulip')}>Tulipános Tiffany
                             Lámpa</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
@@ -111,45 +132,48 @@ export default function NavbarTiffanyStudio() {
                                 onMouseLeave={() => setAvailableLampsIsOpen(false)}
                                 className="py-2 cursor-pointer">
                         <DropdownTrigger>
-                            <Button
-                                className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
-                                endContent={<FaChevronDown size={20} className="pt-1" />}
-                                radius="full"
-                                variant="light"
-                            >
-                                <span className={`${pathname === '/magnoliatiffanystudio/tiffanylampstoorder' ? 'underline' : ''}`}>Rendelhető Tiffany lámpák</span>
-                            </Button>
+                            <Link href="/magnoliatiffanystudio/tiffanylampsavailable">
+                                <Button
+                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                                    endContent={<FaChevronDown size={20} className="pt-1"/>}
+                                    radius="full"
+                                    variant="light"
+                                >
+                                    <span
+                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylampsavailable' ? 'underline' : ''}`}>Rendelhető Tiffany lámpák</span>
+                                </Button>
+                            </Link>
                         </DropdownTrigger>
                     </NavbarItem>
 
                     <DropdownMenu className="" aria-label="Rendelhető Tiffany lámpák kategóriák">
-                        <DropdownItem startContent={<IoIosGrid size={20}/>}>Rendelhető geometrikus Tiffany
+                        <DropdownItem startContent={<IoIosGrid size={20}/>} onClick={() => handleAvailableLampDropdownClick('geometric')}>Rendelhető geometrikus Tiffany
                             lámpák</DropdownItem>
-                        <DropdownItem startContent={<LuLamp size={20}/>}>Rendelhető asztali Tiffany
+                        <DropdownItem startContent={<LuLamp size={20}/>} onClick={() => handleAvailableLampDropdownClick('table')}>Rendelhető asztali Tiffany
                             lámpák</DropdownItem>
-                        <DropdownItem startContent={<LuLampFloor size={20}/>}>Rendelhető álló Tiffany
+                        <DropdownItem startContent={<LuLampFloor size={20}/>} onClick={() => handleAvailableLampDropdownClick('standing')}>Rendelhető álló Tiffany
                             lámpák</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
 
-                    <Dropdown isOpen={isLampBasesOpen} isDisabled
-                              onMouseEnter={() => setLampBasesIsOpen(true)}
-                              onMouseLeave={() => setLampBasesIsOpen(false)}>
-                        <NavbarItem onMouseEnter={() => setLampBasesIsOpen(true)}
-                                    onMouseLeave={() => setLampBasesIsOpen(false)}
-                                    className="py-2 cursor-pointer">
-                            <DropdownTrigger>
-                                <Button
-                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
-                                    endContent={<FaChevronDown size={20} className="pt-1" />}
-                                    radius="sm"
-                                    variant="light"
-                                >
-                                    Lámpatalpak
-                                </Button>
-                            </DropdownTrigger>
-                        </NavbarItem>
-                    </Dropdown>
+                <Dropdown isOpen={isLampBasesOpen} isDisabled
+                          onMouseEnter={() => setLampBasesIsOpen(true)}
+                          onMouseLeave={() => setLampBasesIsOpen(false)}>
+                    <NavbarItem onMouseEnter={() => setLampBasesIsOpen(true)}
+                                onMouseLeave={() => setLampBasesIsOpen(false)}
+                                className="py-2 cursor-pointer">
+                        <DropdownTrigger>
+                            <Button
+                                className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                                endContent={<FaChevronDown size={20} className="pt-1"/>}
+                                radius="sm"
+                                variant="light"
+                            >
+                                Lámpatalpak
+                            </Button>
+                        </DropdownTrigger>
+                    </NavbarItem>
+                </Dropdown>
 
                 <NavbarItem>
                     <Link href="" className="text-xl font-light antonio-navbar text-white">Kapcsolat</Link>
@@ -161,22 +185,25 @@ export default function NavbarTiffanyStudio() {
                         <div className="flex flex-row gap-1 items-center justify-center pb-1">
                             <Tooltip content="Hívj bátran!" showArrow={true} radius="full" color="foreground"
                                      placement="bottom">
-                                    <span className="pt-0.5"><FaPhoneAlt size="16px"/></span>
+                                <span className="pt-0.5"><FaPhoneAlt size="16px"/></span>
                             </Tooltip>
                             <span className="select-all">+36-70/360-0950</span>
                         </div>
-                        <Tooltip content="Keress e-mailben!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                        <Tooltip content="Keress e-mailben!" placement="bottom" showArrow={true} radius="full"
+                                 color="foreground">
                             <Link href="mailto:m.tiffanystudio@gmail.com"
                                   target="_blank"
                                   className="text-xl font-light antonio-navbar text-white"><RiMailFill
                                 size="25px"/></Link>
                         </Tooltip>
-                        <Tooltip content="Kövess Instagramon!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                        <Tooltip content="Kövess Instagramon!" placement="bottom" showArrow={true} radius="full"
+                                 color="foreground">
                             <Link href="https://www.instagram.com/magnolia_tiffanystudio/" target="_blank"
                                   className="text-xl font-light antonio-navbar text-white"><AiFillInstagram
                                 size="26px"/></Link>
                         </Tooltip>
-                        <Tooltip content="Kövess Facebookon!" placement="bottom" showArrow={true} radius="full" color="foreground">
+                        <Tooltip content="Kövess Facebookon!" placement="bottom" showArrow={true} radius="full"
+                                 color="foreground">
                             <Link href="https://www.facebook.com/profile.php?id=100054201323550#" target="_blank"
                                   className="text-xl font-light antonio-navbar text-white"><FaFacebookSquare
                                 size="23px"/></Link>

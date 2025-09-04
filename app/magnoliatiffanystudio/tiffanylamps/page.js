@@ -305,22 +305,48 @@ export default function TiffanyLampsPage() {
 
 
     useEffect(() => {
+        let touchStartY = null;
+
         const handleWheel = (e) => {
-            e.preventDefault()
+            e.preventDefault();
             if (isThrottled.current) return;
 
             const direction = e.deltaY > 0 ? 1 : -1;
-            let nextSection = currentSection.current + direction;
+            navigateSection(direction);
+        };
 
+        const handleTouchStart = (e) => {
+            e.preventDefault();
+            e.stopPropagation()
+            if (e.touches.length === 1) {
+                touchStartY = e.touches[0].clientY;
+            }
+        };
+
+        const handleTouchEnd = (e) => {
+            e.preventDefault();
+            e.stopPropagation()
+            if (touchStartY === null) return;
+            const touchEndY = e.changedTouches[0].clientY;
+            const deltaY = touchStartY - touchEndY;
+            if (Math.abs(deltaY) > 40 && !isThrottled.current) { // threshold for swipe
+                const direction = deltaY > 0 ? 1 : -1;
+                navigateSection(direction);
+            }
+            touchStartY = null;
+        };
+
+        const navigateSection = (direction) => {
+            let nextSection = currentSection.current + direction;
             if (nextSection < 0 || nextSection >= sectionRefs.length) return;
 
             currentSection.current = nextSection;
             isThrottled.current = true;
 
             if (nextSection === 0) {
-                window.scrollTo({top: 0, behavior: "smooth"});
+                window.scrollTo({ top: 0, behavior: "smooth" });
             } else {
-                sectionRefs[nextSection].current.scrollIntoView({behavior: "smooth", block: "start"});
+                sectionRefs[nextSection].current.scrollIntoView({ behavior: "smooth", block: "start" });
             }
 
             setTimeout(() => {
@@ -328,12 +354,17 @@ export default function TiffanyLampsPage() {
             }, 700);
         };
 
-        window.addEventListener("wheel", handleWheel, {passive: false});
+        window.addEventListener("wheel", handleWheel, { passive: false });
+        window.addEventListener("touchstart", handleTouchStart, { passive: false });
+        window.addEventListener("touchend", handleTouchEnd, { passive: false });
 
         return () => {
             window.removeEventListener("wheel", handleWheel);
+            window.removeEventListener("touchstart", handleTouchStart);
+            window.removeEventListener("touchend", handleTouchEnd);
         };
     }, []);
+
 
     const setCurrent = (key, value) => {
         setCarouselCurrents(curr => ({

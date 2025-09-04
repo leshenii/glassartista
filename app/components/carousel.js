@@ -339,17 +339,17 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
     </div>);
 }
 
-function ImageModal({src, alt, open, onClose}) {
+export function ImageModal({src, alt, open, onClose}) {
     if (!open) return null;
     return (<div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 select-none"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 select-none rounded-none"
         onClick={onClose}
     >
         <img
             draggable={false}
             src={src}
             alt={alt}
-            className="max-w-[90vw] max-h-[90vh] rounded shadow-lg"
+            className="max-w-[90vw] max-h-[90vh] rounded shadow-lg rounded-none"
             onClick={e => e.stopPropagation()}
         />
     </div>);
