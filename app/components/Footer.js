@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="flex flex-row gap-2 my-2 items-center justify-end text-gray-500 text-xs">
                     <FaCopyright className="mb-[1px]" size={14} />
                     <p className="leading-4">
-                        2022-2025 Magnólia TiffanyStúdió | Minden jog fenntartva.
+                        2022-2025 Magnólia Tiffanystúdió | Minden jog fenntartva.
                     </p>
                 </div>
         </footer>
