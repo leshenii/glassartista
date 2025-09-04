@@ -389,13 +389,14 @@ export default function TiffanyLampsAvailablePage() {
              className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
 
             <div className="flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center ">
+                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
                     <h1 className="text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
                     <IoIosGrid size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 ">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {GEOMETRIC_LAMPS.map((lamp) => (
-                        <div style={{position:"relative"}}  key={lamp.index} className="flex flex-col items-center gap-1">
+                        <div style={{position: "relative"}} key={lamp.index}
+                             className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
                                 A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
                                      showArrow={true} placement="top" offset={15} radius="full" color="foreground">
@@ -407,7 +408,7 @@ export default function TiffanyLampsAvailablePage() {
                                     className="h-full  mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                     onClick={() => handleImageClick(lamp.src)}
                                     priority
-                                    style={{objectFit:"cover"}}
+                                    style={{objectFit: "cover"}}
                                 />
                             </Tooltip>
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
@@ -420,23 +421,28 @@ export default function TiffanyLampsAvailablePage() {
             </div>
 
             <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center ">
+                <div className="flex flex-col items-center justify-center  animate__animated animate__fadeInDown">
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 ">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {TABLE_LAMPS.map((lamp) => (
-                        <div style={{position:"relative"}} key={lamp.index} className="flex flex-col items-center gap-1">
-                            <Image
-                                src={lamp.src}
-                                alt={lamp.name}
-                                width={269}
-                                height={358}
-                                className="h-full mb-2 rounded-lg shadow-lg select-none cursor-pointer"
-                                onClick={() => handleImageClick(lamp.src)}
-                                priority
-                                style={{objectFit:"cover"}}
-                            />
+                        <div style={{position: "relative"}} key={lamp.index}
+                             className="flex flex-col items-center gap-1">
+                            <Tooltip content={<span className="flex items-center gap-2">
+                                A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
+                                     showArrow={true} placement="top" offset={15} radius="full" color="foreground">
+                                <Image
+                                    src={lamp.src}
+                                    alt={lamp.name}
+                                    width={269}
+                                    height={358}
+                                    className="h-full mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                    onClick={() => handleImageClick(lamp.src)}
+                                    priority
+                                    style={{objectFit: "cover"}}
+                                />
+                            </Tooltip>
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
                                 <p className="text-center text-xl antonio-navbar">{`${lamp.radius} cm átmérő`}</p>
@@ -447,23 +453,28 @@ export default function TiffanyLampsAvailablePage() {
             </div>
 
             <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center ">
+                <div className="flex flex-col items-center justify-center  animate__animated animate__fadeInDown">
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 ">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {STANDING_LAMPS.map((lamp) => (
-                        <div style={{position:"relative"}}  key={lamp.index} className="flex flex-col items-center gap-1">
-                            <Image
-                                src={lamp.src}
-                                alt={lamp.name}
-                                width={269}
-                                height={537}
-                                className="h-full mb-2 rounded-lg shadow-lg select-none cursor-pointer"
-                                onClick={() => handleImageClick(lamp.src)}
-                                priority
-                                style={{objectFit:"cover"}}
-                            />
+                        <div style={{position: "relative"}} key={lamp.index}
+                             className="flex flex-col items-center gap-1">
+                            <Tooltip content={<span className="flex items-center gap-2">
+                                A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
+                                     showArrow={true} placement="top" offset={15} radius="full" color="foreground">
+                                <Image
+                                    src={lamp.src}
+                                    alt={lamp.name}
+                                    width={269}
+                                    height={537}
+                                    className="h-full mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                    onClick={() => handleImageClick(lamp.src)}
+                                    priority
+                                    style={{objectFit: "cover"}}
+                                />
+                            </Tooltip>
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
                                 <p className="text-center text-xl antonio-navbar">{`${lamp.radius} cm átmérő`}</p>
