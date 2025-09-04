@@ -473,7 +473,7 @@ export default function TiffanyLampsPage() {
                     </div>
                 </div>
             ))}
-            <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 animate__animated animate__fadeInUp">
+            <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-51 animate__animated animate__fadeInUp">
                 <Button
                     className="animate__animated animate__pulse animate__slow animate__infinite"
                     onPress={() => {

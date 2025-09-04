@@ -3,6 +3,8 @@
 import {useState, useRef, useId, useEffect} from "react";
 import {FaRegHandPointDown} from "react-icons/fa";
 import {Tooltip} from "@heroui/react";
+import {IoCloseCircle} from "react-icons/io5";
+import {Lens} from "@/app/components/lens";
 
 const ImageSlide = ({
                         slide, index, current, handleSlideClick, icon: Icon
@@ -68,7 +70,8 @@ const ImageSlide = ({
 
     const {src, position, title} = slide;
 
-    return (<div className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
+    return (<div
+        className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
             ref={slideRef}
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[40vmin] h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
@@ -103,7 +106,7 @@ const ImageSlide = ({
                     />
                 ) : (
                     Icon && <div className="flex items-center justify-center w-full h-full">
-                        <Icon size={30} />
+                        <Icon size={30}/>
                     </div>
                 )}
 
@@ -149,7 +152,8 @@ const TextSlide = ({
 
     const {src, position, paragraph, title} = slide;
 
-    return (<div className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
+    return (<div
+        className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[50vmin] h-[60vmin] z-10 mx-[2vmin] cursor-pointer"
             onClick={() => handleSlideClick(index)}
@@ -169,7 +173,7 @@ const TextSlide = ({
                 <article
                     className={`relative  transition-opacity duration-1000 ease-in-out ${current === index ? "opacity-100 visible" : "opacity-10 visible"}`}>
                     {title ? (<div ref={slideRef} className="flex flex-col items-center gap-4">
-                            {Icon && <Icon size={35} />}
+                            {Icon && <Icon size={35}/>}
                             <h2 className="text-lg md:text-lg lg:text-6xl text-center font-semibold relative allura-regular">
                                 {title}
                             </h2>
@@ -179,11 +183,11 @@ const TextSlide = ({
                     ) : paragraph ? (
                         <p
                             className="text-lg md:text-lg lg:text-md text-justify inter-description relative"
-                            style={{ whiteSpace: "pre-line" }}
+                            style={{whiteSpace: "pre-line"}}
                         >
                             {paragraph}
                         </p>
-                    ) : (Icon && <Icon size={30} />)}
+                    ) : (Icon && <Icon size={30}/>)}
                 </article>
             </div>
         </li>
@@ -341,16 +345,34 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
 
 export function ImageModal({src, alt, open, onClose}) {
     if (!open) return null;
-    return (<div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 select-none rounded-none"
-        onClick={onClose}
-    >
-        <img
-            draggable={false}
-            src={src}
-            alt={alt}
-            className="max-w-[90vw] max-h-[90vh] rounded shadow-lg rounded-none"
-            onClick={e => e.stopPropagation()}
-        />
-    </div>);
+    return (
+
+        <div
+            className="fixed inset-0 z-52 flex items-center justify-center bg-black bg-opacity-80 select-none rounded-none"
+            onClick={onClose}
+        >
+            <button
+                className="absolute top-4 right-6 text-white text-3xl font-bold z-60 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 transition"
+                onClick={e => {
+                    e.stopPropagation();
+                    onClose();
+                }}
+                aria-label="Close modal"
+                tabIndex={0}
+            >
+                <IoCloseCircle size={30} className="cursor-pointer" />
+            </button>
+            <Lens>
+            <img
+                draggable={false}
+                src={src}
+                alt={alt}
+                className="w-[90vw] h-[90vh] shadow-lg rounded-none"
+                style={{objectFit: 'contain'}}
+                onClick={e => e.stopPropagation()}
+            />
+            </Lens>
+        </div>
+
+    );
 }
