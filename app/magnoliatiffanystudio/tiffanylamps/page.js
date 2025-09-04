@@ -303,6 +303,19 @@ export default function TiffanyLampsPage() {
         }, {})
     );
 
+    useEffect(() => {
+        // On mount, check for hash and scroll to section if present
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            const idx = LAMPS.findIndex(lamp => lamp.key === hash);
+            if (idx !== -1 && sectionRefs[idx]?.current) {
+                currentSection.current = idx;
+                sectionRefs[idx].current.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }
+    }, []);
+
+
 
     useEffect(() => {
         let touchStartY = null;
@@ -341,6 +354,7 @@ export default function TiffanyLampsPage() {
             if (nextSection < 0 || nextSection >= sectionRefs.length) return;
 
             currentSection.current = nextSection;
+            window.history.replaceState(null, '', `#${LAMPS[nextSection].key}`);
             isThrottled.current = true;
 
             if (nextSection === 0) {
@@ -466,12 +480,14 @@ export default function TiffanyLampsPage() {
                         const nextSection = currentSection.current + 1;
                         if (sectionRefs[nextSection] && sectionRefs[nextSection].current) {
                             currentSection.current = nextSection;
+                            window.history.replaceState(null, '', `#${LAMPS[nextSection].key}`);
                             sectionRefs[nextSection].current.scrollIntoView({
                                 behavior: "smooth",
                                 block: "start"
                             });
                         } else {
                             currentSection.current = 0;
+                            window.history.replaceState(null, '', `#magnolia`);
                             window.scrollTo({ top: 0, behavior: "smooth" });
                         }
                     }}

@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useRef, useState} from "react";
+import {motion} from "motion/react";
 
 export default function TiffanyStudioPage() {
     const sectionRefs = Array.from({length: 8}, () => useRef(null));
@@ -93,12 +94,31 @@ export default function TiffanyStudioPage() {
             window.removeEventListener("wheel", handleWheel);
         };
     }, []);
+    const backgroundColors = [
+        "#000000", // black
+        "#170008",
+        "#0f172a", // slate-900
+        "#171717", // neutral-900
+        "#171200",
+        "#001702"
+    ];
+
 
     return (
+        <>
+            <motion.div
+                initial={{
+                    background: "linear-gradient(to bottom, #111111 0%, #000000 50%, #000000 100%)",
+                }}
+                animate={{
+                    background: `linear-gradient(to bottom, #111111 0%, ${backgroundColors[currentSection.current % backgroundColors.length]} 50%, ${backgroundColors[currentSection.current % backgroundColors.length]} 100%)`,
+                }}
+                className="fixed w-screen h-screen"></motion.div>
         <div className=" h-min items-center justify-center">
             <div className="flex flex-row gap-5 w-10/12 items-center justify-center mx-auto">
 
-                <div className="w-5/12 flex flex-col items-center justify-center  animate__animated animate__fadeInLeft">
+                <div
+                    className="w-5/12 flex flex-col items-center justify-center  animate__animated animate__fadeInLeft">
                     <div className="w-[60vmin] flex flex-col gap-10 mt-20 items-center justify-center">
                         {content.map((item, idx) => (
                             <div
@@ -107,15 +127,15 @@ export default function TiffanyStudioPage() {
                                 className="max-w-md scroll-mt-40 items-center justify-center"
                             >
                                 <div className={`flex flex-col ${item.title ? 'gap-10' : ''}`}>
-                                <h2 className={`font-bold ${activeSection === idx ? "text-white" : "opacity-20"} ${item.title === "Magnólia Tiffanystúdió" ? "text-5xl allura-regular" : "text-4xl"}`}>
-                                    {item.title}
-                                </h2>
-                                <p className={`text-lg text-justify ${activeSection === idx ? "text-white" : "opacity-20"}`}>
-                                    {item.description}
-                                </p></div>
+                                    <h2 className={`font-bold ${activeSection === idx ? "text-white" : "opacity-20"} ${item.title === "Magnólia Tiffanystúdió" ? "text-5xl allura-regular" : "text-4xl"}`}>
+                                        {item.title}
+                                    </h2>
+                                    <p className={`text-lg text-justify ${activeSection === idx ? "text-white" : "opacity-20"}`}>
+                                        {item.description}
+                                    </p></div>
                             </div>
                         ))}
-                        <div className="h-[90vh]" />
+                        <div className="h-[90vh]"/>
                     </div>
                 </div>
 
@@ -129,6 +149,6 @@ export default function TiffanyStudioPage() {
                     />
                 </div>
             </div>
-        </div>
+        </div></>
     );
 }

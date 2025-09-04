@@ -12,7 +12,14 @@ import {
     Button,
     Link, Image, Tooltip,
 } from "@heroui/react";
-import {FaChevronDown, FaFacebook, FaFacebookSquare, FaInstagram, FaPhoneAlt} from "react-icons/fa";
+import {
+    FaArrowAltCircleLeft,
+    FaChevronDown,
+    FaFacebook,
+    FaFacebookSquare,
+    FaInstagram,
+    FaPhoneAlt
+} from "react-icons/fa";
 
 import {PiAcornFill, PiFlowerFill, PiFlowerTulipBold, PiFlowerTulipFill} from "react-icons/pi";
 import {GiChestnutLeaf, GiCurlingVines, GiDragonfly, GiFairyWings, GiLilyPads} from "react-icons/gi";
@@ -72,8 +79,14 @@ export default function NavbarTiffanyStudio() {
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                 <NavbarItem>
+                    <Tooltip content="Vissza a kezdőlapra" placement="bottom" showArrow={true} radius="full"
+                             color="foreground" size="sm">
+                    <Link href="/"><FaArrowAltCircleLeft color="white" className="pt-2" size={30} /></Link>
+                    </Tooltip>
+                </NavbarItem>
+                <NavbarItem>
                     <Link href="/magnoliatiffanystudio"
-                          className={`text-xl border-none uppercase antonio-navbar text-white ${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
+                          className={`text-xl uppercase antonio-navbar text-white ${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
                 </NavbarItem>
                 <Dropdown isOpen={isTiffanyLampsOpen}
                           onMouseEnter={() => setTiffanyLampsIsOpen(true)}

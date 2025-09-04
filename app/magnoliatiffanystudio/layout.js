@@ -1,4 +1,5 @@
 import NavbarTiffanyStudio from "@/app/components/NavbarTiffanyStudio";
+import Footer from "@/app/components/Footer";
 
 export default function TiffanyStudioLayout(props) {
 
@@ -9,6 +10,7 @@ export default function TiffanyStudioLayout(props) {
             <div>
                 <NavbarTiffanyStudio />
                 {children}
+                <Footer />
             </div>
         </section>
     );
