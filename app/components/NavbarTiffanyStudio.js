@@ -84,7 +84,7 @@ export default function NavbarTiffanyStudio() {
                 <NavbarItem>
                     <Tooltip content="Vissza a kezdőlapra" placement="bottom" showArrow={true} radius="full"
                              color="foreground" size="sm">
-                    <Link href="/"><FaArrowAltCircleLeft color="white" className="pt-2" size={30} /></Link>
+                    <Link href="/"><FaArrowAltCircleLeft color="white" className="pt-1" size={27} /></Link>
                     </Tooltip>
                 </NavbarItem>
                 <NavbarItem>
