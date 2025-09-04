@@ -389,11 +389,11 @@ export default function TiffanyLampsAvailablePage() {
              className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
 
             <div className="flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
+                <div className="flex flex-col items-center justify-center ">
                     <h1 className="text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
                     <IoIosGrid size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {GEOMETRIC_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
@@ -402,8 +402,8 @@ export default function TiffanyLampsAvailablePage() {
                                 <Image
                                     src={lamp.src}
                                     alt={lamp.name}
-                                    width={400}
-                                    height={400}
+                                    width={269}
+                                    height={358}
                                     className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                     onClick={() => handleImageClick(lamp.src)}
                                     priority
@@ -419,18 +419,18 @@ export default function TiffanyLampsAvailablePage() {
             </div>
 
             <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
+                <div className="flex flex-col items-center justify-center ">
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {TABLE_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <Image
                                 src={lamp.src}
                                 alt={lamp.name}
-                                width={400}
-                                height={400}
+                                width={269}
+                                height={358}
                                 className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                 onClick={() => handleImageClick(lamp.src)}
                                 priority
@@ -445,18 +445,18 @@ export default function TiffanyLampsAvailablePage() {
             </div>
 
             <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
+                <div className="flex flex-col items-center justify-center ">
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {STANDING_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <Image
                                 src={lamp.src}
                                 alt={lamp.name}
-                                width={400}
-                                height={400}
+                                width={269}
+                                height={537}
                                 className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                 onClick={() => handleImageClick(lamp.src)}
                                 priority
