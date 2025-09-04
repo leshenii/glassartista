@@ -419,7 +419,7 @@ export default function TiffanyLampsAvailablePage() {
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInLeft">
+                <div className="grid grid-cols-3 gap-12 mx-12">
                     {TABLE_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <img src={lamp.src}
@@ -442,7 +442,7 @@ export default function TiffanyLampsAvailablePage() {
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInRight">
+                <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {STANDING_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <img src={lamp.src}
