@@ -6,6 +6,7 @@ import {IoIosGrid} from "react-icons/io";
 import {LuLamp, LuLampFloor} from "react-icons/lu";
 import {FaRegHandPointDown} from "react-icons/fa";
 import {Tooltip} from "@heroui/react";
+import Image from 'next/image'
 
 const GEOMETRIC_LAMPS = [
     {
@@ -398,11 +399,14 @@ export default function TiffanyLampsAvailablePage() {
                             <Tooltip content={<span className="flex items-center gap-2">
                                 A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
                                      showArrow={true} placement="top" offset={15} radius="full" color="foreground">
-                                <img src={lamp.src}
-                                     alt={lamp.name}
-                                     className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
-                                     draggable={false}
-                                     onClick={() => handleImageClick(lamp.src)}
+                                <Image
+                                    src={lamp.src}
+                                    alt={lamp.name}
+                                    width={400}
+                                    height={400}
+                                    className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                    onClick={() => handleImageClick(lamp.src)}
+                                    priority
                                 />
                             </Tooltip>
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
@@ -419,14 +423,17 @@ export default function TiffanyLampsAvailablePage() {
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInLeft">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {TABLE_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
-                            <img src={lamp.src}
-                                 alt={lamp.name}
-                                 className="w-[80%] h-[100%] object-cover mb-2 rounded-lg shadow-lg select-none cursor-pointer"
-                                 draggable={false}
-                                 onClick={() => handleImageClick(lamp.src)}
+                            <Image
+                                src={lamp.src}
+                                alt={lamp.name}
+                                width={400}
+                                height={400}
+                                className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                onClick={() => handleImageClick(lamp.src)}
+                                priority
                             />
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
@@ -442,14 +449,17 @@ export default function TiffanyLampsAvailablePage() {
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInRight">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {STANDING_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
-                            <img src={lamp.src}
-                                 alt={lamp.name}
-                                 className="w-[80%] h-[100%] object-cover mb-2 rounded-lg shadow-lg select-none cursor-pointer"
-                                 draggable={false}
-                                 onClick={() => handleImageClick(lamp.src)}
+                            <Image
+                                src={lamp.src}
+                                alt={lamp.name}
+                                width={400}
+                                height={400}
+                                className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                onClick={() => handleImageClick(lamp.src)}
+                                priority
                             />
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
