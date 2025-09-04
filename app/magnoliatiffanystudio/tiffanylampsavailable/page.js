@@ -395,7 +395,7 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
                 <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {GEOMETRIC_LAMPS.map((lamp) => (
-                        <div key={lamp.index} className="flex flex-col items-center gap-1">
+                        <div style={{position:"relative"}}  key={lamp.index} className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
                                 A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
                                      showArrow={true} placement="top" offset={15} radius="full" color="foreground">
@@ -404,9 +404,10 @@ export default function TiffanyLampsAvailablePage() {
                                     alt={lamp.name}
                                     width={269}
                                     height={358}
-                                    className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                    className="h-full  mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                     onClick={() => handleImageClick(lamp.src)}
                                     priority
+                                    style={{objectFit:"cover"}}
                                 />
                             </Tooltip>
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
@@ -425,15 +426,16 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
                 <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {TABLE_LAMPS.map((lamp) => (
-                        <div key={lamp.index} className="flex flex-col items-center gap-1">
+                        <div style={{position:"relative"}} key={lamp.index} className="flex flex-col items-center gap-1">
                             <Image
                                 src={lamp.src}
                                 alt={lamp.name}
                                 width={269}
                                 height={358}
-                                className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                className="h-full mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                 onClick={() => handleImageClick(lamp.src)}
                                 priority
+                                style={{objectFit:"cover"}}
                             />
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
@@ -451,15 +453,16 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
                 <div className="grid grid-cols-3 gap-12 mx-12 ">
                     {STANDING_LAMPS.map((lamp) => (
-                        <div key={lamp.index} className="flex flex-col items-center gap-1">
+                        <div style={{position:"relative"}}  key={lamp.index} className="flex flex-col items-center gap-1">
                             <Image
                                 src={lamp.src}
                                 alt={lamp.name}
                                 width={269}
                                 height={537}
-                                className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
+                                className="h-full mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                 onClick={() => handleImageClick(lamp.src)}
                                 priority
+                                style={{objectFit:"cover"}}
                             />
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
