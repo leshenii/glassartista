@@ -384,10 +384,10 @@ export default function TiffanyLampsAvailablePage() {
     };
 
     return (
-        <div id="geometric"
-             className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
+        <div id=""
+             className="max-w-screen h-fit flex flex-col gap-20 items-center justify-center my-4 ">
 
-            <div className="flex flex-col items-center justify-center overflow-hidden">
+            <div className="flex flex-col items-center justify-center ">
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
                     <IoIosGrid size={35} className="mt-6 mb-10"/>
@@ -414,7 +414,7 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
             </div>
 
-            <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
+            <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center ">
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
@@ -437,7 +437,7 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
             </div>
 
-            <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
+            <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center ">
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
