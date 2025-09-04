@@ -403,6 +403,8 @@ export default function TiffanyLampsAvailablePage() {
                                      className="w-[80%] h-auto mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                      draggable={false}
                                      onClick={() => handleImageClick(lamp.src)}
+                                    loading="eager"
+                                    decoding="sync"
                                 />
                             </Tooltip>
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
@@ -427,6 +429,8 @@ export default function TiffanyLampsAvailablePage() {
                                  className="w-[80%] h-[100%] object-cover mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                  draggable={false}
                                  onClick={() => handleImageClick(lamp.src)}
+                                loading="eager"
+                                decoding="sync"
                             />
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
@@ -450,6 +454,8 @@ export default function TiffanyLampsAvailablePage() {
                                  className="w-[80%] h-[100%] object-cover mb-2 rounded-lg shadow-lg select-none cursor-pointer"
                                  draggable={false}
                                  onClick={() => handleImageClick(lamp.src)}
+                                loading="eager"
+                                decoding="sync"
                             />
                             <p className="text-center text-2xl antonio-navbar">{lamp.name}</p>
                             {lamp.radius &&
