@@ -388,11 +388,11 @@ export default function TiffanyLampsAvailablePage() {
              className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
 
             <div className="flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInRight">
+                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
                     <h1 className="text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
                     <IoIosGrid size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInLeft">
                     {GEOMETRIC_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
@@ -419,7 +419,7 @@ export default function TiffanyLampsAvailablePage() {
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInLeft">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInRight">
                     {TABLE_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <img src={lamp.src}
@@ -442,7 +442,7 @@ export default function TiffanyLampsAvailablePage() {
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInRight">
+                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInLeft">
                     {STANDING_LAMPS.map((lamp) => (
                         <div key={lamp.index} className="flex flex-col items-center gap-1">
                             <img src={lamp.src}
