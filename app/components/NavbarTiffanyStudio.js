@@ -10,8 +10,11 @@ import {
     DropdownMenu,
     DropdownItem,
     Button,
-    Link, Image, Tooltip,
+    Tooltip,
 } from "@heroui/react";
+
+import Link from "next/link";
+
 import {
     FaArrowAltCircleLeft,
     FaChevronDown,
@@ -85,8 +88,15 @@ export default function NavbarTiffanyStudio() {
                     </Tooltip>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="/magnoliatiffanystudio"
-                          className={`text-xl uppercase antonio-navbar text-white ${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>Főoldal</Link>
+                    <Button
+                        className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                        radius="full"
+                        onPress={() => router.push('/magnoliatiffanystudio', { shallow: true })}
+                    >
+                                    <span className={`${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>
+                                        Főoldal
+                                    </span>
+                    </Button>
                 </NavbarItem>
                 <Dropdown isOpen={isTiffanyLampsOpen}
                           onMouseEnter={() => setTiffanyLampsIsOpen(true)}
@@ -95,7 +105,7 @@ export default function NavbarTiffanyStudio() {
                                 onMouseLeave={() => setTiffanyLampsIsOpen(false)}
                                 className="py-2 cursor-pointer">
                         <DropdownTrigger>
-                            <Link href="/magnoliatiffanystudio/tiffanylamps">
+                            <Link href="/magnoliatiffanystudio/tiffanylamps" prefetch={true}>
                                 <Button
                                     className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                                     radius="full"

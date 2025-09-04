@@ -398,7 +398,7 @@ export default function TiffanyLampsAvailablePage() {
                         <div style={{position: "relative"}} key={lamp.index}
                              className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
-                                A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
+                                A kép megtekintéséhez kattints!<FaRegHandPointDown size={16}/></span>}
                                      showArrow={true} placement="top" offset={15} radius="full" color="foreground">
                                 <Image
                                     src={lamp.src}
@@ -430,7 +430,7 @@ export default function TiffanyLampsAvailablePage() {
                         <div style={{position: "relative"}} key={lamp.index}
                              className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
-                                A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
+                                A kép megtekintéséhez kattints!<FaRegHandPointDown size={16}/></span>}
                                      showArrow={true} placement="top" offset={15} radius="full" color="foreground">
                                 <Image
                                     src={lamp.src}
@@ -462,7 +462,7 @@ export default function TiffanyLampsAvailablePage() {
                         <div style={{position: "relative"}} key={lamp.index}
                              className="flex flex-col items-center gap-1">
                             <Tooltip content={<span className="flex items-center gap-2">
-                                A kép megtekintéséhez kattins!<FaRegHandPointDown size={16}/></span>}
+                                A kép megtekintéséhez kattints!<FaRegHandPointDown size={16}/></span>}
                                      showArrow={true} placement="top" offset={15} radius="full" color="foreground">
                                 <Image
                                     src={lamp.src}

@@ -109,7 +109,7 @@ const ImageSlide = ({
 
                 {current === index && src && showTooltip && (<Tooltip content={
                     <span className="flex items-center gap-2">
-                        A kép megtekintéséhez kattins!
+                        A kép megtekintéséhez kattints!
                         <FaRegHandPointDown size={16}/>
                     </span>} showArrow={true} placement="top" offset={15} radius="full" color="foreground"
                 >
