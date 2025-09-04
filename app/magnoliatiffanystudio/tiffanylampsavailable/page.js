@@ -414,7 +414,7 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
             </div>
 
-            <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center ">
+            <div id="table" className=" flex flex-col items-center justify-center ">
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
@@ -437,7 +437,7 @@ export default function TiffanyLampsAvailablePage() {
                 </div>
             </div>
 
-            <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center ">
+            <div id="standing" className=" flex flex-col items-center justify-center ">
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
