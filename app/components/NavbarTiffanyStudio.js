@@ -76,24 +76,27 @@ export default function NavbarTiffanyStudio() {
                         loading="eager"
                         decoding="sync"
                         width={36}/>
-                    <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">Magnólia
-                        Tiffanystúdió</p>
+                    <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">
+                        Magnólia
+                        Tiffanystúdió
+                    </p>
                 </div>
             </NavbarBrand>
             <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                 <NavbarItem>
                     <Tooltip content="Vissza a kezdőlapra" placement="bottom" showArrow={true} radius="full"
                              color="foreground" size="sm">
-                    <Link href="/"><FaArrowAltCircleLeft color="white" className="pt-1" size={27} /></Link>
+                        <Link href="/"><FaArrowAltCircleLeft color="white" className="pt-1" size={27}/></Link>
                     </Tooltip>
                 </NavbarItem>
                 <NavbarItem>
                     <Button
                         className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                         radius="full"
-                        onPress={() => router.push('/magnoliatiffanystudio', { shallow: true })}
+                        onPress={() => router.push('/magnoliatiffanystudio', {shallow: true})}
                     >
-                                    <span className={`${pathname === '/magnoliatiffanystudio' ? 'underline' : ''}`}>
+                                    <span
+                                        className={`${pathname === '/magnoliatiffanystudio' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                         Főoldal
                                     </span>
                     </Button>
@@ -112,7 +115,7 @@ export default function NavbarTiffanyStudio() {
                                     endContent={<FaChevronDown size={20} className="pt-1"/>}
                                 >
                                     <span
-                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylamps' ? 'underline' : ''}`}>Tiffany lámpák</span>
+                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylamps' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>Tiffany lámpák</span>
                                 </Button>
                             </Link>
                         </DropdownTrigger>
@@ -163,18 +166,24 @@ export default function NavbarTiffanyStudio() {
                                     variant="light"
                                 >
                                     <span
-                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylampsavailable' ? 'underline' : ''}`}>Rendelhető Tiffany lámpák</span>
+                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylampsavailable' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>Rendelhető Tiffany lámpák</span>
                                 </Button>
                             </Link>
                         </DropdownTrigger>
                     </NavbarItem>
 
                     <DropdownMenu className="" aria-label="Rendelhető Tiffany lámpák kategóriák">
-                        <DropdownItem startContent={<IoIosGrid size={20}/>} onClick={() => handleAvailableLampDropdownClick('geometric')}>Rendelhető geometrikus Tiffany
+                        <DropdownItem startContent={<IoIosGrid size={20}/>}
+                                      onClick={() => handleAvailableLampDropdownClick('geometric')}>Rendelhető
+                            geometrikus Tiffany
                             lámpák</DropdownItem>
-                        <DropdownItem startContent={<LuLamp size={20}/>} onClick={() => handleAvailableLampDropdownClick('table')}>Rendelhető asztali Tiffany
+                        <DropdownItem startContent={<LuLamp size={20}/>}
+                                      onClick={() => handleAvailableLampDropdownClick('table')}>Rendelhető asztali
+                            Tiffany
                             lámpák</DropdownItem>
-                        <DropdownItem startContent={<LuLampFloor size={20}/>} onClick={() => handleAvailableLampDropdownClick('standing')}>Rendelhető álló Tiffany
+                        <DropdownItem startContent={<LuLampFloor size={20}/>}
+                                      onClick={() => handleAvailableLampDropdownClick('standing')}>Rendelhető álló
+                            Tiffany
                             lámpák</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
@@ -199,7 +208,15 @@ export default function NavbarTiffanyStudio() {
                 </Dropdown>
 
                 <NavbarItem>
-                    <Link href="" className="text-xl font-light antonio-navbar text-white">Kapcsolat</Link>
+                    <Button
+                        className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                        radius="full"
+                        onPress={() => router.push('/magnoliatiffanystudio/contact', {shallow: true})}
+                    >
+                        <span className={`${pathname === '/magnoliatiffanystudio/contact' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                            Kapcsolat
+                        </span>
+                    </Button>
                 </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
