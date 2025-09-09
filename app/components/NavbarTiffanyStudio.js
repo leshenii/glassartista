@@ -362,7 +362,9 @@ export default function NavbarTiffanyStudio() {
                             <div className="flex flex-row gap-1 items-center justify-center pb-1">
                                 <Tooltip content="Hívj bátran!" showArrow={true} radius="full" color="foreground"
                                          placement="bottom">
-                                    <span className="pt-0.5"><FaPhoneAlt size="16px"/></span>
+                                    <Link href="tel:+36-70/360-0950"
+                                          target="_blank"
+                                          className="text-xl font-light antonio-navbar text-white"><FaPhoneAlt size="16px"/></Link>
                                 </Tooltip>
                                 <span className="select-all">+36-70/360-0950</span>
                             </div>

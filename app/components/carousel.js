@@ -74,7 +74,7 @@ const ImageSlide = ({
         className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
             ref={slideRef}
-            className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[40vmin] h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
+            className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[60vmin] md:w-[40vmin] xl:w-[40vmin] h-[80vmin] md:h-[60vmin] xl:h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
             onClick={() => handleSlideClick(index)}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -153,9 +153,9 @@ const TextSlide = ({
     const {src, position, paragraph, title} = slide;
 
     return (<div
-        className="[perspective:1200px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
+        className="[perspective:300px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
-            className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[50vmin] h-[60vmin] z-10 mx-[2vmin] cursor-pointer"
+            className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] xl:w-[50vmin] h-[70vmin] md:h-[30vmin] xl:h-[70vmin] z-10 mx-[2vmin] cursor-pointer"
             onClick={() => handleSlideClick(index)}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -172,22 +172,29 @@ const TextSlide = ({
                 }}>
                 <article
                     className={`relative  transition-opacity duration-1000 ease-in-out ${current === index ? "opacity-100 visible" : "opacity-10 visible"}`}>
-                    {title ? (<div ref={slideRef} className="flex flex-col items-center gap-4">
-                            {Icon && <Icon size={35}/>}
-                            <h2 className="text-lg md:text-lg lg:text-6xl text-center font-semibold relative allura-regular">
-                                {title}
-                            </h2>
-
+                    {(title || paragraph) ? (
+                        <div ref={slideRef} className="flex flex-col items-center gap-2 md:gap-4 lg:gap-8">
+                            {title && (
+                                <>
+                                    {Icon && <Icon size={35} />}
+                                    <h2 className="text-2xl md:lg:text-5xl lg:text-6xl text-center font-semibold relative allura-regular">
+                                        {title}
+                                    </h2>
+                                </>
+                            )}
+                            {paragraph && (
+                                <p
+                                    className="text-sm md:text-lg text-justify inter-description relative"
+                                    style={{whiteSpace: "pre-line"}}
+                                >
+                                    {paragraph}
+                                </p>
+                            )}
                         </div>
+                    ) : (
+                        Icon && <Icon size={30} />
+                    )}
 
-                    ) : paragraph ? (
-                        <p
-                            className="text-lg md:text-lg lg:text-md text-justify inter-description relative"
-                            style={{whiteSpace: "pre-line"}}
-                        >
-                            {paragraph}
-                        </p>
-                    ) : (Icon && <Icon size={30}/>)}
                 </article>
             </div>
         </li>
@@ -239,13 +246,13 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const id = useId();
 
     return (<div
-        className="relative w-[40vmin] h-[60vmin] mx-auto pl-16 select-none"
+        className="relative w-[60vmin] md:w-[40vmin] xl:w-[40vmin] h-[80vmin] md:h-[60vmin] xl:h-[60vmin] mx-auto xl:pl-16 mb-3 select-none"
         aria-labelledby={`carousel-heading-${id}`}>
 
 
         <ul
             ref={containerRef}
-            className="absolute flex mx-[4vmin] transition-transform duration-1000 ease-in-out py-3"
+            className="absolute flex mx-[4vmin] transition-transform duration-1000 ease-in-out xl:py-3"
             style={{
                 transform: `translateX(-${current * (100 / slides.length)}%)`,
             }}
@@ -321,11 +328,11 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
     const id = useId();
 
     return (<div
-        className=" relative w-[50vmin] h-[70vmin] mx-auto ml-16"
+        className="relative w-[70vmin] xl:w-[50vmin] h-[70vmin] md:h-[30vmin] xl:h-[70vmin] mx-auto xl:ml-16"
         aria-labelledby={`carousel-heading-${id}`}>
         <ul
             ref={containerRef}
-            className="absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
+            className="absolute flex xl:mx-[-4vmin] transition-transform duration-1000 ease-in-out"
             style={{
                 transform: `translateX(-${current * (100 / slides.length)}%)`,
             }}

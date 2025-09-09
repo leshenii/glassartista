@@ -435,11 +435,11 @@ export default function TiffanyLampsPage() {
                     id={lamp.key}
                     key={lamp.key}
                     ref={sectionRefs[lamp.refIdx]}
-                    className={`w-screen h-screen content-center justify-self-center ${idx > 0 ? "pt-[64px]" : "pb-[64px]"}`}
+                    className={`w-screen h-screen-minus-navbar-desktop content-center justify-self-center ${idx > 0 ? "pt-[64px]" : "pb-[64px]"}`}
                 >
                     <div className="w-full justify-self-center ">
-                        <div className="relative overflow-hidden w-full h-full flex flex-row gap-4 ">
-                            <div className="w-1/2 overflow-hidden">
+                        <div className="relative overflow-hidden w-full h-full flex flex-col-reverse xl:flex-row gap-4 ">
+                            <div className="xl:w-1/2 overflow-hidden">
                                 <ImageCarousel
                                     slides={lamp.slides}
                                     current={carouselCurrents[lamp.key]}
@@ -449,7 +449,7 @@ export default function TiffanyLampsPage() {
                                     icon={lamp.icon}
                                 />
                             </div>
-                            <div className="w-1/2 overflow-hidden">
+                            <div className="xl:w-1/2 overflow-hidden">
                                 <TextCarousel
                                     slides={lamp.slides}
                                     current={carouselCurrents[lamp.key]}
