@@ -8,6 +8,7 @@ import {TbExternalLink} from "react-icons/tb";
 import {Form, Input, Button, Textarea, Spinner, Skeleton} from "@heroui/react";
 import {useState} from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import Link from "next/link";
 
 export default function ContactPage() {
 
@@ -34,12 +35,12 @@ export default function ContactPage() {
     };
 
     const handleBlur = (e) => {
-        setTouched({ ...touched, [e.target.name]: true });
+        setTouched({...touched, [e.target.name]: true});
         setValid(validateFields(fields));
     };
 
     const handleChange = (e) => {
-        const newFields = { ...fields, [e.target.name]: e.target.value };
+        const newFields = {...fields, [e.target.name]: e.target.value};
         setFields(newFields);
         setValid(validateFields(newFields));
     };
@@ -51,7 +52,7 @@ export default function ContactPage() {
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             });
             const result = await res.json();
@@ -71,33 +72,42 @@ export default function ContactPage() {
     function onRecaptchaChange(value) {
         setRecaptchaToken(value);
     }
+
     function handleRecaptchaLoad() {
         setRecaptchaLoaded(true);
     }
 
     return (
-        <div className="flex flex-row gap-24 w-screen items-center justify-center h-screen-minus-navbar-desktop pb-16 pl-16">
-            <div className="flex flex-col gap-6 w-min justify-center items-start">
-                <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8">Nyíri Eszter</h2>
-                <div className="flex flex-row items-center gap-2 ">
+        <div
+            className="flex flex-col overflow-visible lg:flex-row gap-10 lg:gap-24 w-screen items-center justify-center lg:h-screen-minus-navbar-desktop mt-4 lg:mt-0 lg:pl-16">
+            <div className="flex flex-col gap-6 h-full w-min justify-center items-start">
+                <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8 mx-auto">Nyíri Eszter</h2>
+                <div className="flex flex-row items-center gap-2 select-all ">
                     <FaPhoneAlt size={25}/>
                     +36-70/360-0950
                 </div>
-                <div className="flex flex-row items-center gap-2 ">
+                <div className="flex flex-row items-center gap-2 select-all ">
                     <RiMailFill size={30}/>
-                    m.tiffanystudio@gmail.com <TbExternalLink size={15}/>
+                    m.tiffanystudio@gmail.com
+
                 </div>
-                <div className="flex flex-row items-center gap-2 ">
-                    <AiFillInstagram size={30}/>
-                    magnolia_tiffanystudio <TbExternalLink size={15}/>
-                </div>
-                <div className="flex flex-row items-center gap-2 ">
-                    <FaFacebookSquare size={30}/>
-                    Magnólia Tiffanystúdió <TbExternalLink size={15}/>
-                </div>
+                <Link href="https://www.instagram.com/magnolia_tiffanystudio/" target="_blank">
+                    <div className="flex flex-row items-center gap-2 ">
+                        <AiFillInstagram size={30}/>
+                        magnolia_tiffanystudio
+                        <TbExternalLink size={16}/>
+                    </div>
+                </Link>
+                <Link href="https://www.facebook.com/profile.php?id=100054201323550#" target="_blank">
+                    <div className="flex flex-row items-center gap-2 ">
+                        <FaFacebookSquare size={30}/>
+                        Magnólia Tiffanystúdió
+                        <TbExternalLink size={16}/>
+                    </div>
+                </Link>
             </div>
-            <div className="flex flex-col w-1/2">
-                <h2 className="font-semibold text-neutral-400 pb-5">Vedd fel velem a kapcsolatot!</h2>
+            <div className="flex flex-col w-10/12 pb-24 lg:pb-0 lg:w-1/2">
+                <h2 className="font-semibold text-neutral-400 lg:pb-5">Vedd fel velem a kapcsolatot!</h2>
                 <Form className="w-full" onSubmit={onSubmit} validationBehavior="aria">
                     <div className="flex flex-row gap-6 w-full">
                         <Input
@@ -172,11 +182,11 @@ export default function ContactPage() {
                         }}
                     />
                     {!recaptchaLoaded && (
-                    <Skeleton className="rounded-sm">
-                        <div className="h-[70px] w-[304px] rounded-sm bg-default-300" />
-                    </Skeleton>
+                        <Skeleton className="rounded-sm">
+                            <div className="h-[70px] w-[304px] rounded-sm bg-default-300"/>
+                        </Skeleton>
                     )}
-                    <div style={{ colorScheme: "light" }}>
+                    <div style={{colorScheme: "light"}}>
                         <ReCAPTCHA
                             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                             onChange={onRecaptchaChange}
@@ -188,13 +198,14 @@ export default function ContactPage() {
                         type="submit"
                         variant="bordered"
                         isDisabled={!valid || !recaptchaToken || loading}
-                        startContent={loading ? <Spinner size="sm" color="primary" /> : undefined}
+                        startContent={loading ? <Spinner size="sm" color="primary"/> : undefined}
                     >
                         Küldés
                     </Button>
                     {submitted && (
                         <div className="text-small text-default-500">
-                            Köszönöm, {submitted.name}! Az üzenetedet megkaptam, hamarosan felveszem veled a kapcsolatot.
+                            Köszönöm, {submitted.name}! Az üzenetedet megkaptam, hamarosan felveszem veled a
+                            kapcsolatot.
                         </div>
                     )}
                 </Form>

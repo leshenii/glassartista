@@ -387,7 +387,6 @@ export default function TiffanyLampsAvailablePage() {
     return (
         <div id="geometric"
              className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
-
             <div className="flex flex-col items-center justify-center overflow-hidden">
                 <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
                     <h1 className="text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
