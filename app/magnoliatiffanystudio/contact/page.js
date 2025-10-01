@@ -7,6 +7,7 @@ import {AiFillInstagram} from "react-icons/ai";
 import {TbExternalLink} from "react-icons/tb";
 import {Form, Input, Button, Textarea, Spinner} from "@heroui/react";
 import {useState} from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactPage() {
 
@@ -65,6 +66,9 @@ export default function ContactPage() {
         }
     };
 
+    function onChange(value) {
+        console.log("Captcha value:", value);
+    }
 
     return (
         <div className="flex flex-row gap-24 w-screen items-center justify-center h-screen-minus-navbar-desktop pb-16 pl-16">
@@ -161,6 +165,13 @@ export default function ContactPage() {
                             }
                             return null;
                         }}
+                    />
+                    <ReCAPTCHA
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                        onChange={onChange}
+                        size="normal"
+                        style={{ display: "inline-block" }}
+                        theme="dark"
                     />
                     <Button
                         type="submit"
