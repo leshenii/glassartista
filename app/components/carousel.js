@@ -151,7 +151,7 @@ const TextSlide = ({
     };
 
     const {src, position, paragraph, title} = slide;
-
+ 
     return (<div
         className="[perspective:300px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li

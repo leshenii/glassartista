@@ -240,8 +240,9 @@ export default function NavbarTiffanyStudio() {
                                     className="py-2 cursor-pointer">
                             <DropdownTrigger>
                                 <Button
-                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar cursor-default"
                                     radius="full"
+                                    disableRipple={true}
                                     endContent={
                                         <FaChevronDown
                                             size={15}
@@ -295,13 +296,14 @@ export default function NavbarTiffanyStudio() {
                                     className="py-2 cursor-pointer">
                             <DropdownTrigger>
                                 <Button
-                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                                    className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar cursor-default"
                                     endContent={<FaChevronDown size={15}
                                                                className={`mt-1 transition-transform duration-300 ${isAvailableLampsOpen ? 'rotate-180' : ''}`}/>}
                                     radius="full"
+                                    disableRipple={true}
                                     variant="light">
                                     <span
-                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylampsavailable' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylampsavailable' ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
                                         Rendelhető Tiffany lámpák
                                     </span>
                                 </Button>
