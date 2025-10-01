@@ -5,7 +5,7 @@ import {FaAddressCard, FaFacebookSquare, FaPhoneAlt} from "react-icons/fa";
 import {RiMailFill} from "react-icons/ri";
 import {AiFillInstagram} from "react-icons/ai";
 import {TbExternalLink} from "react-icons/tb";
-import {Form, Input, Button, Textarea, Spinner} from "@heroui/react";
+import {Form, Input, Button, Textarea, Spinner, Skeleton} from "@heroui/react";
 import {useState} from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -20,6 +20,8 @@ export default function ContactPage() {
         message: ""
     });
     const [valid, setValid] = useState(false);
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -66,8 +68,11 @@ export default function ContactPage() {
         }
     };
 
-    function onChange(value) {
-        console.log("Captcha value:", value);
+    function onRecaptchaChange(value) {
+        setRecaptchaToken(value);
+    }
+    function handleRecaptchaLoad() {
+        setRecaptchaLoaded(true);
     }
 
     return (
@@ -166,17 +171,23 @@ export default function ContactPage() {
                             return null;
                         }}
                     />
-                    <ReCAPTCHA
-                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                        onChange={onChange}
-                        size="normal"
-                        style={{ display: "inline-block" }}
-                        theme="dark"
-                    />
+                    {!recaptchaLoaded && (
+                    <Skeleton className="rounded-sm">
+                        <div className="h-[70px] w-[304px] rounded-sm bg-default-300" />
+                    </Skeleton>
+                    )}
+                    <div style={{ colorScheme: "light" }}>
+                        <ReCAPTCHA
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                            onChange={onRecaptchaChange}
+                            asyncScriptOnLoad={handleRecaptchaLoad}
+                            theme="dark"
+                        />
+                    </div>
                     <Button
                         type="submit"
                         variant="bordered"
-                        isDisabled={!valid || loading}
+                        isDisabled={!valid || !recaptchaToken || loading}
                         startContent={loading ? <Spinner size="sm" color="primary" /> : undefined}
                     >
                         Küldés
