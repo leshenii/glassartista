@@ -435,7 +435,7 @@ export default function TiffanyLampsPage() {
                     id={lamp.key}
                     key={lamp.key}
                     ref={sectionRefs[lamp.refIdx]}
-                    className={`w-screen h-screen-minus-navbar-desktop content-center justify-self-center ${idx > 0 ? "pt-[64px]" : "pb-[64px]"}`}
+                    className={`w-screen h-screen-minus-navbar-desktop content-center justify-self-center `}
                 >
                     <div className="w-full justify-self-center ">
                         <div className="relative overflow-hidden w-full h-full flex flex-col-reverse xl:flex-row gap-4 ">
@@ -473,7 +473,7 @@ export default function TiffanyLampsPage() {
                     </div>
                 </div>
             ))}
-            <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-51 animate__animated animate__fadeInUp">
+            <div className="fixed bottom-7 lg:bottom-3 left-1/2 -translate-x-1/2 z-51 animate__animated animate__fadeInUp">
                 <Button
                     className="animate__animated animate__pulse animate__slow animate__infinite"
                     onPress={() => {

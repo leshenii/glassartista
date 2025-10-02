@@ -206,6 +206,21 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const [modalOpen, setModalOpen] = useState(false);
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
+    const touchStartX = useRef(null);
+    const touchMoved = useRef(false);
+
+    useEffect(() => {
+        const node = containerRef.current;
+        if (!node) return;
+
+        node.addEventListener("touchstart", handleTouchStart, { passive: false });
+        node.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+        return () => {
+            node.removeEventListener("touchstart", handleTouchStart, { passive: false });
+            node.removeEventListener("touchmove", handleTouchMove, { passive: false });
+        };
+    }, [current, slides]);
 
     const handleSlideClick = (index) => {
         if (current !== index) {
@@ -215,6 +230,33 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         }
     };
 
+    const handleTouchStart = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (e.touches.length === 1) {
+            touchStartX.current = e.touches[0].clientX;
+            touchMoved.current = false;
+        }
+    };
+
+    const handleTouchMove = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (touchStartX.current === null || touchMoved.current) return;
+        const deltaX = e.touches[0].clientX - touchStartX.current;
+        const threshold = 30; // px, adjust for sensitivity
+
+        if (Math.abs(deltaX) > threshold) {
+            touchMoved.current = true;
+            if (deltaX > 0) {
+                // Swipe right: previous
+                handlePreviousClick();
+            } else {
+                // Swipe left: next
+                handleNextClick(slides);
+            }
+        }
+    };
 
     const handleWheel = (event) => {
         event.stopPropagation();
@@ -282,6 +324,49 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
     const [modalOpen, setModalOpen] = useState(false);
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
+    const touchStartX = useRef(null);
+    const touchMoved = useRef(false);
+
+    const handleTouchStart = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (e.touches.length === 1) {
+            touchStartX.current = e.touches[0].clientX;
+            touchMoved.current = false;
+        }
+    };
+
+    const handleTouchMove = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (touchStartX.current === null || touchMoved.current) return;
+        const deltaX = e.touches[0].clientX - touchStartX.current;
+        const threshold = 30; // px, adjust for sensitivity
+
+        if (Math.abs(deltaX) > threshold) {
+            touchMoved.current = true;
+            if (deltaX > 0) {
+                // Swipe right: previous
+                handlePreviousClick();
+            } else {
+                // Swipe left: next
+                handleNextClick(slides);
+            }
+        }
+    };
+
+    useEffect(() => {
+        const node = containerRef.current;
+        if (!node) return;
+
+        node.addEventListener("touchstart", handleTouchStart, { passive: false });
+        node.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+        return () => {
+            node.removeEventListener("touchstart", handleTouchStart, { passive: false });
+            node.removeEventListener("touchmove", handleTouchMove, { passive: false });
+        };
+    }, [current, slides]);
 
     const handlePreviousClick = () => {
         const previous = current - 1;
