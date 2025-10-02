@@ -185,13 +185,19 @@ export default function TiffanyStudioPage() {
     };
 
     const backgroundColors = [
-        "#000000", // black
+        "#000000",
         "#170008",
-        "#0f172a", // slate-900
-        "#171717", // neutral-900
+        "#0f172a",
+        "#171717",
         "#171200",
         "#001702"
     ];
+
+    useEffect(() => {
+        if (window.innerWidth < 1280) { // xl breakpoint
+            currentSection.current = carouselCurrents[contentMobile.key];
+        }
+    }, [carouselCurrents[contentMobile.key]]);
 
 
     return (
