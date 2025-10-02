@@ -7,7 +7,7 @@ import {IoCloseCircle} from "react-icons/io5";
 import {Lens} from "@/app/components/lens";
 
 const ImageSlide = ({
-                        slide, index, current, handleSlideClick, icon: Icon, threshold
+                        slide, index, current, handleSlideClick, icon: Icon, threshold, setCurrent
                     }) => {
     const slideRef = useRef(null);
 
@@ -77,7 +77,9 @@ const ImageSlide = ({
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[60vmin] md:w-[40vmin] xl:w-[40vmin] h-[80vmin] md:h-[60vmin] xl:h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
             onClick={() => handleSlideClick(index)}
             onTouchEnd={() => {
-                if (threshold < 30) handleSlideClick(index);
+                if (threshold < 30 && current !== index) {
+                    setCurrent(index);
+                }
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -309,6 +311,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
             {slides.map((slide, index) => (<ImageSlide
                 key={index}
                 slide={slide}
+                setCurrent={setCurrent}
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
