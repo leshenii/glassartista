@@ -435,7 +435,7 @@ export default function TiffanyLampsPage() {
                     id={lamp.key}
                     key={lamp.key}
                     ref={sectionRefs[lamp.refIdx]}
-                    className={`w-screen h-screen-minus-navbar-desktop content-center justify-self-center `}
+                    className={`w-screen h-screen-minus-navbar-desktop content-center justify-self-center ${idx > 0 ? "lg:pt-[64px]" : "lg:pb-[64px]"}`}
                 >
                     <div className="w-full justify-self-center ">
                         <div className="relative overflow-hidden w-full h-full flex flex-col-reverse xl:flex-row gap-4 ">

@@ -7,7 +7,7 @@ import {IoCloseCircle} from "react-icons/io5";
 import {Lens} from "@/app/components/lens";
 
 const ImageSlide = ({
-                        slide, index, current, handleSlideClick, icon: Icon
+                        slide, index, current, handleSlideClick, icon: Icon, threshold
                     }) => {
     const slideRef = useRef(null);
 
@@ -76,6 +76,9 @@ const ImageSlide = ({
             ref={slideRef}
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[60vmin] md:w-[40vmin] xl:w-[40vmin] h-[80vmin] md:h-[60vmin] xl:h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
             onClick={() => handleSlideClick(index)}
+            onTouchEnd={() => {
+                if (threshold < 30) handleSlideClick(index);
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -157,6 +160,7 @@ const TextSlide = ({
         <li
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] xl:w-[50vmin] h-[70vmin] md:h-[30vmin] xl:h-[70vmin] z-10 mx-[2vmin] cursor-pointer"
             onClick={() => handleSlideClick(index)}
+
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -208,6 +212,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const containerRef = useRef(null);
     const touchStartX = useRef(null);
     const touchMoved = useRef(false);
+    let threshold = 0
 
     useEffect(() => {
         const node = containerRef.current;
@@ -244,7 +249,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         e.stopPropagation()
         if (touchStartX.current === null || touchMoved.current) return;
         const deltaX = e.touches[0].clientX - touchStartX.current;
-        const threshold = 30; // px, adjust for sensitivity
+        threshold = 30; // px, adjust for sensitivity
 
         if (Math.abs(deltaX) > threshold) {
             touchMoved.current = true;
@@ -307,6 +312,7 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
+                threshold={threshold}
                 icon={icon}
             />))}
         </ul>
