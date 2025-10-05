@@ -7,7 +7,7 @@ import {IoCloseCircle} from "react-icons/io5";
 import {Lens} from "@/app/components/lens";
 
 const ImageSlide = ({
-                        slide, index, current, handleSlideClick, icon: Icon, threshold, setCurrent
+                        slide, index, current, handleSlideClick, icon: Icon, handleTouchEnd, handleTouchMove, handleTouchStart
                     }) => {
     const slideRef = useRef(null);
 
@@ -76,11 +76,9 @@ const ImageSlide = ({
             ref={slideRef}
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[60vmin] md:w-[40vmin] xl:w-[40vmin] h-[80vmin] md:h-[60vmin] xl:h-[60vmin] mx-[-2vmin] z-10 cursor-pointer"
             onClick={() => handleSlideClick(index)}
-            onTouchEnd={() => {
-                if (threshold < 30 && current !== index) {
-                    setCurrent(index);
-                }
-            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -129,13 +127,14 @@ const ImageSlide = ({
 };
 
 const TextSlide = ({
-                       slide, index, current, handleSlideClick, icon: Icon
+                       slide, index, current, handleSlideClick, icon: Icon, handleTouchEnd, handleTouchMove, handleTouchStart
                    }) => {
     const slideRef = useRef(null);
 
     const xRef = useRef(0);
     const yRef = useRef(0);
     const frameRef = useRef();
+
 
     const handleMouseMove = (event) => {
         const el = slideRef.current;
@@ -151,10 +150,6 @@ const TextSlide = ({
         yRef.current = 0;
     };
 
-    const imageLoaded = (event) => {
-        event.currentTarget.style.opacity = "1";
-    };
-
     const {src, position, paragraph, title} = slide;
  
     return (<div
@@ -162,7 +157,9 @@ const TextSlide = ({
         <li
             className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] xl:w-[50vmin] h-[70vmin] md:h-[30vmin] xl:h-[70vmin] z-10 mx-[2vmin] cursor-pointer"
             onClick={() => handleSlideClick(index)}
-
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -212,22 +209,8 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const [modalOpen, setModalOpen] = useState(false);
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
-    const touchStartX = useRef(null);
-    const touchMoved = useRef(false);
-    let threshold = 0
-
-    useEffect(() => {
-        const node = containerRef.current;
-        if (!node) return;
-
-        node.addEventListener("touchstart", handleTouchStart, { passive: false });
-        node.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-        return () => {
-            node.removeEventListener("touchstart", handleTouchStart, { passive: false });
-            node.removeEventListener("touchmove", handleTouchMove, { passive: false });
-        };
-    }, [current, slides]);
+    const [touchStartX, setTouchStartX] = useState(null);
+    const [touchEndX, setTouchEndX] = useState(null);
 
     const handleSlideClick = (index) => {
         if (current !== index) {
@@ -238,31 +221,28 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     };
 
     const handleTouchStart = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        if (e.touches.length === 1) {
-            touchStartX.current = e.touches[0].clientX;
-            touchMoved.current = false;
-        }
+        setTouchStartX(e.touches[0].clientX);
     };
 
     const handleTouchMove = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        if (touchStartX.current === null || touchMoved.current) return;
-        const deltaX = e.touches[0].clientX - touchStartX.current;
-        threshold = 30; // px, adjust for sensitivity
+        setTouchEndX(e.touches[0].clientX);
+    };
 
-        if (Math.abs(deltaX) > threshold) {
-            touchMoved.current = true;
-            if (deltaX > 0) {
-                // Swipe right: previous
-                handlePreviousClick();
-            } else {
-                // Swipe left: next
-                handleNextClick(slides);
-            }
+    const handleTouchEnd = () => {
+        if (touchStartX === null || touchEndX === null) return;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) < 10) {
+            // Tap
+            //handleSlideClick(index);
+        } else if (diff > 50) {
+            // Swipe left
+            handleNextClick && handleNextClick();
+        } else if (diff < -50) {
+            // Swipe right
+            handlePreviousClick && handlePreviousClick();
         }
+        setTouchStartX(null);
+        setTouchEndX(null);
     };
 
     const handleWheel = (event) => {
@@ -298,7 +278,6 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         className="relative w-[60vmin] md:w-[40vmin] xl:w-[40vmin] h-[80vmin] md:h-[60vmin] xl:h-[60vmin] mx-auto xl:pl-16 mb-3 select-none"
         aria-labelledby={`carousel-heading-${id}`}>
 
-
         <ul
             ref={containerRef}
             className="absolute flex mx-[4vmin] transition-transform duration-1000 ease-in-out xl:py-3"
@@ -311,11 +290,12 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
             {slides.map((slide, index) => (<ImageSlide
                 key={index}
                 slide={slide}
-                setCurrent={setCurrent}
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
-                threshold={threshold}
+                handleTouchStart={handleTouchStart}
+                handleTouchMove={handleTouchMove}
+                handleTouchEnd={handleTouchEnd}
                 icon={icon}
             />))}
         </ul>
@@ -333,49 +313,33 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
     const [modalOpen, setModalOpen] = useState(false);
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
-    const touchStartX = useRef(null);
-    const touchMoved = useRef(false);
+    const [touchStartX, setTouchStartX] = useState(null);
+    const [touchEndX, setTouchEndX] = useState(null);
 
     const handleTouchStart = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        if (e.touches.length === 1) {
-            touchStartX.current = e.touches[0].clientX;
-            touchMoved.current = false;
-        }
+        setTouchStartX(e.touches[0].clientX);
     };
 
     const handleTouchMove = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        if (touchStartX.current === null || touchMoved.current) return;
-        const deltaX = e.touches[0].clientX - touchStartX.current;
-        const threshold = 30; // px, adjust for sensitivity
-
-        if (Math.abs(deltaX) > threshold) {
-            touchMoved.current = true;
-            if (deltaX > 0) {
-                // Swipe right: previous
-                handlePreviousClick();
-            } else {
-                // Swipe left: next
-                handleNextClick(slides);
-            }
-        }
+        setTouchEndX(e.touches[0].clientX);
     };
 
-    useEffect(() => {
-        const node = containerRef.current;
-        if (!node) return;
-
-        node.addEventListener("touchstart", handleTouchStart, { passive: false });
-        node.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-        return () => {
-            node.removeEventListener("touchstart", handleTouchStart, { passive: false });
-            node.removeEventListener("touchmove", handleTouchMove, { passive: false });
-        };
-    }, [current, slides]);
+    const handleTouchEnd = () => {
+        if (touchStartX === null || touchEndX === null) return;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) < 10) {
+            // Tap
+            handleSlideClick(index);
+        } else if (diff > 50) {
+            // Swipe left
+            handleNextClick && handleNextClick();
+        } else if (diff < -50) {
+            // Swipe right
+            handlePreviousClick && handlePreviousClick();
+        }
+        setTouchStartX(null);
+        setTouchEndX(null);
+    };
 
     const handlePreviousClick = () => {
         const previous = current - 1;
@@ -438,6 +402,9 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
                 index={index}
                 current={current}
                 handleSlideClick={handleSlideClick}
+                handleTouchStart={handleTouchStart}
+                handleTouchMove={handleTouchMove}
+                handleTouchEnd={handleTouchEnd}
                 icon={icon}
             />))}
         </ul>
