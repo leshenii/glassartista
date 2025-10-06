@@ -329,7 +329,7 @@ export default function TiffanyLampsPage() {
         };
 
         const handleTouchStart = (e) => {
-            e.preventDefault();
+            //e.preventDefault();
             //e.stopPropagation()
             if (e.touches.length === 1) {
                 touchStartY = e.touches[0].clientY;
