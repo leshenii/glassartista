@@ -10,9 +10,9 @@ export default function Home() {
 
     return (
         <div className="h-screen">
-            <div className="flex flex-row text-white items-center justify-center h-full ">
+            <div className="flex flex-col lg:flex-row text-white items-center justify-center h-full ">
                 <div
-                    className="w-1/2 p-10 items-center bg-[url(/design/index-tiffany.webp)] bg-center bg-cover h-full relative overflow-hidden">
+                    className="lg:w-1/2 p-10 items-center bg-[url(/design/index-tiffany.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div
                         className="animate__animated animate__fadeInLeft animate__slow absolute w-screen inset-0 bg-gradient-to-r from-black/90 to-black/0 z-0"/>
                     <div
@@ -41,7 +41,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div
-                    className="w-1/2 p-10 items-center bg-[url(/design/index-olomuveg.webp)] bg-center bg-cover h-full relative overflow-hidden">
+                    className="lg:w-1/2 p-10 items-center bg-[url(/design/index-olomuveg.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div
                         className="animate__animated animate__fadeInRight animate__slow absolute w-screen inset-y-0 -inset-x-full  bg-gradient-to-l from-black/90 to-black/0 z-0"/>
                     <div

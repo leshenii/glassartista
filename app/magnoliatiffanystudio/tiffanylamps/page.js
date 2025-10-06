@@ -330,7 +330,7 @@ export default function TiffanyLampsPage() {
 
         const handleTouchStart = (e) => {
             e.preventDefault();
-            e.stopPropagation()
+            //e.stopPropagation()
             if (e.touches.length === 1) {
                 touchStartY = e.touches[0].clientY;
             }
@@ -338,7 +338,7 @@ export default function TiffanyLampsPage() {
 
         const handleTouchEnd = (e) => {
             e.preventDefault();
-            e.stopPropagation()
+            //e.stopPropagation()
             if (touchStartY === null) return;
             const touchEndY = e.changedTouches[0].clientY;
             const deltaY = touchStartY - touchEndY;
@@ -429,7 +429,7 @@ export default function TiffanyLampsPage() {
     };
 
     return (
-        <div className="  pb-12">
+        <div className="overflow-x-hidden pb-12">
             {LAMPS.map((lamp, idx) => (
                 <div
                     id={lamp.key}
@@ -439,7 +439,7 @@ export default function TiffanyLampsPage() {
                 >
                     <div className="w-full justify-self-center ">
                         <div className="relative  w-full h-full flex flex-col-reverse xl:flex-row gap-4 ">
-                            <div className="xl:w-1/2  ">
+                            <div className="xl:w-1/2 overflow-hidden">
                                 <ImageCarousel
                                     slides={lamp.slides}
                                     current={carouselCurrents[lamp.key]}
