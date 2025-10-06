@@ -78,7 +78,7 @@ const ImageSlide = ({
             onClick={() => handleSlideClick(index)}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            onTouchEnd={() => handleTouchEnd(index)}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -159,7 +159,7 @@ const TextSlide = ({
             onClick={() => handleSlideClick(index)}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+            onTouchEnd={() => handleTouchEnd(index)}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -228,12 +228,19 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         setTouchEndX(e.touches[0].clientX);
     };
 
-    const handleTouchEnd = () => {
-        if (touchStartX === null || touchEndX === null) return;
+    const handleTouchEnd = (index) => {
+        if (touchStartX === null || touchEndX === null) {
+            if (current !== index) {
+                setCurrent(index);
+            } else if (slides[index]?.src) {
+                setModalOpen(true);
+            }
+            return
+        }
         const diff = touchStartX - touchEndX;
         if (Math.abs(diff) < 10) {
             // Tap
-            //handleSlideClick(index);
+
         } else if (diff > 50) {
             // Swipe left
             handleNextClick && handleNextClick();
@@ -324,8 +331,13 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
         setTouchEndX(e.touches[0].clientX);
     };
 
-    const handleTouchEnd = () => {
-        if (touchStartX === null || touchEndX === null) return;
+    const handleTouchEnd = (index) => {
+        if (touchStartX === null || touchEndX === null) {
+            if (current !== index) {
+                setCurrent(index);
+            }
+            return
+        }
         const diff = touchStartX - touchEndX;
         if (Math.abs(diff) < 10) {
             // Tap

@@ -429,7 +429,7 @@ export default function TiffanyLampsPage() {
     };
 
     return (
-        <div className="overflow-hidden">
+        <div className="  pb-12">
             {LAMPS.map((lamp, idx) => (
                 <div
                     id={lamp.key}
@@ -438,8 +438,8 @@ export default function TiffanyLampsPage() {
                     className={`w-screen h-screen-minus-navbar-desktop content-center justify-self-center ${idx > 0 ? "lg:pt-[64px]" : "lg:pb-[64px]"}`}
                 >
                     <div className="w-full justify-self-center ">
-                        <div className="relative overflow-hidden w-full h-full flex flex-col-reverse xl:flex-row gap-4 ">
-                            <div className="xl:w-1/2 overflow-hidden">
+                        <div className="relative  w-full h-full flex flex-col-reverse xl:flex-row gap-4 ">
+                            <div className="xl:w-1/2  ">
                                 <ImageCarousel
                                     slides={lamp.slides}
                                     current={carouselCurrents[lamp.key]}
