@@ -240,6 +240,9 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         const diff = touchStartX - touchEndX;
         if (Math.abs(diff) < 10) {
             // Tap
+            if (slides[index]?.src) {
+                setModalOpen(true);
+            }
 
         } else if (diff > 50) {
             // Swipe left
