@@ -388,8 +388,8 @@ export default function TiffanyLampsAvailablePage() {
         <div id="geometric"
              className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
             <div className="flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
-                    <p className="text-3xl text-balance lg:text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</p>
+                <div className="flex flex-col items-center justify-center text-center animate__animated animate__fadeInDown">
+                    <h1 className="text-3xl px-10 text-balance lg:text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
                     <IoIosGrid size={35} className="mt-6 mb-10"/>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
@@ -420,8 +420,8 @@ export default function TiffanyLampsAvailablePage() {
             </div>
 
             <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center  animate__animated animate__fadeInDown">
-                    <h1 className="text-3xl text-balance lg:text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
+                <div className="flex flex-col items-center justify-center text-center animate__animated animate__fadeInDown">
+                    <h1 className="text-3xl px-10 text-balance lg:text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
@@ -452,8 +452,8 @@ export default function TiffanyLampsAvailablePage() {
             </div>
 
             <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex flex-col items-center justify-center  animate__animated animate__fadeInDown">
-                    <h1 className="text-3xl text-balance lg:text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
+                <div className="flex flex-col items-center justify-center text-center animate__animated animate__fadeInDown">
+                    <h1 className="text-3xl px-10 text-balance lg:text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">

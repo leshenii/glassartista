@@ -83,24 +83,25 @@ export default function NavbarTiffanyStudio() {
         <>
             <Navbar position="sticky"
                     className="xl:hidden"
-                    classNames={{base: "animate__animated animate__fadeInDown bg-transparent select-none uppercase antonio-navbar"}}>
+                    classNames={{base: "!px-0 animate__animated animate__fadeInDown bg-transparent select-none uppercase antonio-navbar"}}>
                 <NavbarBrand>
-                    <div className="flex items-center gap-3">
                         <img
                             draggable={false}
                             alt="Magnólia Tiffanystudió logó"
                             src="/design/tiffanystudiologotext.png"
                             loading="eager"
                             decoding="sync"
-                            width={50}/>
-                    </div>
+                            width={50}
+                        />
                 </NavbarBrand>
                 <NavbarContent justify="center">
                     <Dropdown>
                         <DropdownTrigger>
                             <Button
                                 className="bg-transparent data-[hover=true]:bg-transparent text-lg md:text-xl uppercase antonio-navbar"
-                                radius="full"
+                                radius="none"
+                                size="sm"
+                                style={{ padding: 0}}
                                 endContent={
                                     <FaChevronDown
                                         size={15}
@@ -179,14 +180,15 @@ export default function NavbarTiffanyStudio() {
                                               onClick={() => handleAvailableLampDropdownClick('standing')}>Rendelhető
                                     álló
                                     Tiffany
-                                    lámpák</DropdownItem>
+                                    lámpák
+                                </DropdownItem>
                             </DropdownSection>
                         </DropdownMenu>
                     </Dropdown>
                 </NavbarContent>
                 <NavbarContent justify="end">
                     <NavbarItem>
-                        <div className="flex flex-row gap-3 pt-1">
+                        <div className="flex flex-row gap-1 md:gap-3 pt-1">
                             <a href="mailto:m.tiffanystudio@gmail.com"
                                className="text-xl font-light antonio-navbar text-white">
                                 <RiMailFill size="25px"/>

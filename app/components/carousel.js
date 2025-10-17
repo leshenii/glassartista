@@ -437,6 +437,10 @@ export function ImageModal({src, alt, open, onClose}) {
                     e.stopPropagation();
                     onClose();
                 }}
+                onTouchEnd={e => {
+                    e.stopPropagation();
+                    onClose();
+                }}
                 aria-label="Close modal"
                 tabIndex={0}
             >
