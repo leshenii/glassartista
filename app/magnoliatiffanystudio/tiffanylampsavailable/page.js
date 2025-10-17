@@ -389,10 +389,10 @@ export default function TiffanyLampsAvailablePage() {
              className="max-w-screen h-fit overflow-hidden flex flex-col gap-20 items-center justify-center my-4 ">
             <div className="flex flex-col items-center justify-center overflow-hidden">
                 <div className="flex flex-col items-center justify-center animate__animated animate__fadeInDown">
-                    <h1 className="text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</h1>
+                    <p className="text-3xl text-balance lg:text-5xl allura-regular ">Rendelhető geometrikus Tiffany lámpák</p>
                     <IoIosGrid size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {GEOMETRIC_LAMPS.map((lamp) => (
                         <div style={{position: "relative"}} key={lamp.index}
                              className="flex flex-col items-center gap-1">
@@ -421,10 +421,10 @@ export default function TiffanyLampsAvailablePage() {
 
             <div id="table" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
                 <div className="flex flex-col items-center justify-center  animate__animated animate__fadeInDown">
-                    <h1 className="text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
+                    <h1 className="text-3xl text-balance lg:text-5xl allura-regular ">Rendelhető asztali Tiffany lámpák</h1>
                     <LuLamp size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {TABLE_LAMPS.map((lamp) => (
                         <div style={{position: "relative"}} key={lamp.index}
                              className="flex flex-col items-center gap-1">
@@ -453,10 +453,10 @@ export default function TiffanyLampsAvailablePage() {
 
             <div id="standing" className="scroll-mt-20 flex flex-col items-center justify-center overflow-hidden">
                 <div className="flex flex-col items-center justify-center  animate__animated animate__fadeInDown">
-                    <h1 className="text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
+                    <h1 className="text-3xl text-balance lg:text-5xl allura-regular ">Rendelhető álló Tiffany lámpák</h1>
                     <LuLampFloor size={35} className="mt-6 mb-10"/>
                 </div>
-                <div className="grid grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-12 animate__animated animate__fadeInUp">
                     {STANDING_LAMPS.map((lamp) => (
                         <div style={{position: "relative"}} key={lamp.index}
                              className="flex flex-col items-center gap-1">

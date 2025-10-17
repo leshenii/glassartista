@@ -99,7 +99,7 @@ export default function NavbarTiffanyStudio() {
                     <Dropdown>
                         <DropdownTrigger>
                             <Button
-                                className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
+                                className="px-3 bg-transparent data-[hover=true]:bg-transparent text-medium md:text-xl uppercase antonio-navbar"
                                 radius="full"
                                 endContent={
                                     <FaChevronDown
