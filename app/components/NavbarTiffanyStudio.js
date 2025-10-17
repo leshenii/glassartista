@@ -71,7 +71,7 @@ export default function NavbarTiffanyStudio() {
             case '/magnoliatiffanystudio/tiffanylamps':
                 return 'Tiffany lámpák';
             case '/magnoliatiffanystudio/tiffanylampsavailable':
-                return 'Rendelhető Tiffany lámpák';
+                return 'Rendelhető lámpák';
             case '/magnoliatiffanystudio/contact':
                 return 'Kapcsolat';
             default:
@@ -99,7 +99,7 @@ export default function NavbarTiffanyStudio() {
                     <Dropdown>
                         <DropdownTrigger>
                             <Button
-                                className="px-3 bg-transparent data-[hover=true]:bg-transparent text-medium md:text-xl uppercase antonio-navbar"
+                                className="bg-transparent data-[hover=true]:bg-transparent text-lg md:text-xl uppercase antonio-navbar"
                                 radius="full"
                                 endContent={
                                     <FaChevronDown

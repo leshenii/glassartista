@@ -304,7 +304,6 @@ export default function TiffanyLampsPage() {
     );
 
     useEffect(() => {
-        // On mount, check for hash and scroll to section if present
         const hash = window.location.hash.replace('#', '');
         if (hash) {
             const idx = LAMPS.findIndex(lamp => lamp.key === hash);
@@ -314,8 +313,6 @@ export default function TiffanyLampsPage() {
             }
         }
     }, []);
-
-
 
     useEffect(() => {
         let touchStartY = null;
