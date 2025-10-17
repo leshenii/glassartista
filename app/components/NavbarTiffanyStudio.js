@@ -113,6 +113,13 @@ export default function NavbarTiffanyStudio() {
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Dropdown menu">
                             <DropdownSection showDivider>
+                                <DropdownItem key="landing_page"
+                                              onPress={() => router.push('/', {shallow: true})}>
+                                <span
+                                    className='hover:underline hover:decoration-dashed'>
+                                    Kezdőlap
+                                </span>
+                                </DropdownItem>
                                 <DropdownItem key="main_page"
                                               onPress={() => router.push('/magnoliatiffanystudio', {shallow: true})}>
                                 <span

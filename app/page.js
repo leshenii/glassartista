@@ -43,7 +43,7 @@ export default function Home() {
                 <div
                     className="lg:w-1/2 p-10 items-center bg-[url(/design/index-olomuveg.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div
-                        className="animate__animated animate__fadeInRight animate__slow absolute w-[200vw] lg:w-screen inset-y-0 right-0 lg:-inset-x-full bg-gradient-to-l from-black/90 to-black/0 z-0"/>
+                        className="animate__animated animate__fadeInRight animate__slow absolute w-[300vw] lg:w-screen inset-y-0 right-0 lg:-inset-x-full bg-gradient-to-l from-black/90 to-black/0 z-0"/>
                     <div
                         className="animate__animated animate__fadeIn animate__slow flex flex-col gap-4 justify-center h-full relative z-1">
                         <div className="flex flex-row gap-3">
