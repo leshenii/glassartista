@@ -14,7 +14,7 @@ export default function Home() {
                 <div
                     className="lg:w-1/2 p-10 items-center bg-[url(/design/index-tiffany.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div
-                        className="animate__animated animate__fadeInLeft animate__slow absolute w-screen inset-0 bg-gradient-to-r from-black/90 to-black/0 z-0"/>
+                        className="animate__animated animate__fadeInLeft animate__slow absolute w-[200vw] lg:w-screen inset-0 bg-gradient-to-r from-black/90 to-black/0 z-0"/>
                     <div
                         className="animate__animated animate__fadeIn animate__slow flex flex-col gap-4 justify-center h-full relative z-1">
                         <div className="flex flex-row gap-3">
@@ -27,9 +27,9 @@ export default function Home() {
                                 width={36}
                                 style={{ objectFit: "contain" }}
                             />
-                            <h1 className="text-5xl allura-regular pt-2">Magnólia Tiffanystúdió</h1>
+                            <h1 className="text-3xl lg:text-5xl allura-regular pt-2">Magnólia Tiffanystúdió</h1>
                         </div>
-                        <p className="text-justify paragraph--p1">A Diósgyőri vár szomszédságában található Magnólia
+                        <p className="text-sm lg:text-xl text-justify paragraph--p1">A Diósgyőri vár szomszédságában található Magnólia
                             Tiffanystúdió több, mint 20 éve foglalkozik az építészethez kapcsolódó külső és belső
                             tereket díszítő vagy elválasztó üvegművészeti alkotások tervezésével és kivitelezésével.
                             Számos üvegablak, ajtóbetét, Tiffany lámpa elkészítése mellett, a régi üvegablakok,
@@ -43,7 +43,7 @@ export default function Home() {
                 <div
                     className="lg:w-1/2 p-10 items-center bg-[url(/design/index-olomuveg.webp)] bg-center bg-cover h-full relative overflow-hidden">
                     <div
-                        className="animate__animated animate__fadeInRight animate__slow absolute w-screen inset-y-0 -inset-x-full  bg-gradient-to-l from-black/90 to-black/0 z-0"/>
+                        className="animate__animated animate__fadeInRight animate__slow absolute w-[200vw] lg:w-screen inset-y-0 right-0 lg:-inset-x-full bg-gradient-to-l from-black/90 to-black/0 z-0"/>
                     <div
                         className="animate__animated animate__fadeIn animate__slow flex flex-col gap-4 justify-center h-full relative z-1">
                         <div className="flex flex-row gap-3">
@@ -56,9 +56,9 @@ export default function Home() {
                                 width={48}
                                 style={{ objectFit: "contain" }}
                             />
-                            <h1 className="text-4xl title--t1 antonio-navbar tracking-wider ">Építészeti díszüveg</h1>
+                            <h1 className="text-3xl lg:text-4xl antonio-navbar tracking-wider ">Építészeti díszüveg</h1>
                         </div>
-                        <p className="text-justify paragraph--p1">Cégünk teljeskörű megoldást kínál épület- és
+                        <p className="text-sm lg:text-xl text-justify paragraph--p1">Cégünk teljeskörű megoldást kínál épület- és
                             belsőépítészeti díszüveg készítésére a tervezéstől egészen a kivitelezésig. Ólomüveg
                             kupolák, díszüveg előtetők, bejárati ajtók, felülvilágítók, modern üvegablakok mind a
                             termékkörünk részét képezik. Minden munkánk a legmagasabb minőséget képviseli, több
