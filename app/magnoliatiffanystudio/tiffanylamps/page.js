@@ -319,6 +319,7 @@ export default function TiffanyLampsPage() {
 
         const handleWheel = (e) => {
             e.preventDefault();
+            e.stopPropagation()
             if (isThrottled.current) return;
 
             const direction = e.deltaY > 0 ? 1 : -1;
@@ -327,7 +328,7 @@ export default function TiffanyLampsPage() {
 
         const handleTouchStart = (e) => {
             e.preventDefault();
-            //e.stopPropagation()
+            e.stopPropagation()
             if (e.touches.length === 1) {
                 touchStartY = e.touches[0].clientY;
             }
