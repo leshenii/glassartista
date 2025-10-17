@@ -210,7 +210,9 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
     const isScrolling = useRef(false);
     const containerRef = useRef(null);
     const [touchStartX, setTouchStartX] = useState(null);
+    const [touchStartY, setTouchStartY] = useState(null);
     const [touchEndX, setTouchEndX] = useState(null);
+    const [touchEndY, setTouchEndY] = useState(null);
 
     const handleSlideClick = (index) => {
         if (current !== index) {
@@ -222,10 +224,12 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
 
     const handleTouchStart = (e) => {
         setTouchStartX(e.touches[0].clientX);
+        setTouchStartY(e.touches[0].clientY);
     };
 
     const handleTouchMove = (e) => {
         setTouchEndX(e.touches[0].clientX);
+        setTouchEndY(e.touches[0].clientY);
     };
 
     const handleTouchEnd = (index) => {
@@ -237,8 +241,9 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
             }
             return
         }
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) < 10) {
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
+        if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
             // Tap
             if (current !== index) {
                 setCurrent(index);
@@ -246,15 +251,17 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
                 setModalOpen(true);
             }
 
-        } else if (diff > 50) {
+        } else if (diffX > 50) {
             // Swipe left
             handleNextClick && handleNextClick();
-        } else if (diff < -50) {
+        } else if (diffX < -50) {
             // Swipe right
             handlePreviousClick && handlePreviousClick();
         }
         setTouchStartX(null);
         setTouchEndX(null);
+        setTouchStartY(null);
+        setTouchEndY(null);
     };
 
     const handleWheel = (event) => {
