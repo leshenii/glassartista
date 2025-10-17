@@ -240,7 +240,9 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         const diff = touchStartX - touchEndX;
         if (Math.abs(diff) < 10) {
             // Tap
-            if (slides[index]?.src) {
+            if (current !== index) {
+                setCurrent(index);
+            } else if (slides[index]?.src) {
                 setModalOpen(true);
             }
 
