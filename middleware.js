@@ -20,7 +20,7 @@ function parseAcceptLanguage(header) {
 
 export function middleware(request) {
     const url = request.nextUrl.clone();
-    let { pathname } = url;
+    const { pathname } = url;
 
     // Skip internals and assets
     if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.includes('.')) {
@@ -33,34 +33,22 @@ export function middleware(request) {
     const studioHosts = new Set(['tiffanystudio.at', 'tiffanystudio.hu']);
     const isStudio = studioHosts.has(hostname);
 
-    // If path has a locale prefix
-    const parts = (pathname || '/').split('/'); // ['', 'hu', 'tiffanylamps', ...]
-    const locale = parts.length > 1 && LOCALES.includes(parts[1]) ? parts[1] : null;
+    // If path already has a locale prefix
+    const pathnameHasLocale = LOCALES.some(
+        (loc) => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`)
+    );
 
-    if (locale) {
-        // If on studio host, ensure the `magnoliatiffanystudio` segment is present after locale.
-        if (isStudio) {
-            const second = parts[2] || '';
-            if (second === '' || second === undefined) {
-                // `/hu` or `/hu/` -> serve `/hu/magnoliatiffanystudio`
-                url.pathname = `/${locale}/magnoliatiffanystudio`;
-                return NextResponse.rewrite(url);
-            }
-            if (second !== 'magnoliatiffanystudio') {
-                // `/hu/tiffanylamps...` -> `/hu/magnoliatiffanystudio/tiffanylamps...`
-                const rest = parts.slice(2).join('/');
-                url.pathname = `/${locale}/magnoliatiffanystudio/${rest}`;
-                return NextResponse.rewrite(url);
-            }
-            // if already `/hu/magnoliatiffanystudio...` do nothing special
-            return NextResponse.next();
+    if (pathnameHasLocale) {
+        const matchedLocale = LOCALES.find(loc => pathname === `/${loc}` || pathname === `/${loc}/`);
+        if (matchedLocale && isStudio) {
+            // internally serve the tiffanystudio page for bare locale roots on studio hosts
+            url.pathname = `/${matchedLocale}/tiffanystudio`;
+            return NextResponse.rewrite(url);
         }
-
-        // Non-studio hosts with locale prefix, proceed normally
         return NextResponse.next();
     }
 
-    // No locale in path -> handle root / studio root and detection logic
+    // If requesting the site root on a studio host, rewrite to the studio home (preserve browser URL)
     if (isStudio && (pathname === '/' || pathname === '')) {
         // Respect cookie if present
         let targetLocale = request.cookies.get(COOKIE_NAME)?.value;
@@ -80,7 +68,8 @@ export function middleware(request) {
             targetLocale = parseAcceptLanguage(accept) || DEFAULT;
         }
 
-        url.pathname = `/${targetLocale}/magnoliatiffanystudio`;
+        url.pathname = `/${targetLocale}/tiffanystudio`;
+        // Keep browser URL as `/` (or later you might prefer redirect to `/${targetLocale}`), using rewrite to serve studio home
         return NextResponse.rewrite(url);
     }
 
