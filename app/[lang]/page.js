@@ -73,7 +73,7 @@ export default function Home({ params }) {
     const goToStudio = () => {
         const locale = getLocaleFromCookie();
         setLocaleCookie(locale);
-        router.push(`/${locale}/magnoliatiffanystudio`);
+        router.push(`/${locale}/tiffanystudio`);
     };
 
     return (

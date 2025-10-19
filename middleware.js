@@ -41,8 +41,8 @@ export function middleware(request) {
     if (pathnameHasLocale) {
         const matchedLocale = LOCALES.find(loc => pathname === `/${loc}` || pathname === `/${loc}/`);
         if (matchedLocale && isStudio) {
-            // internally serve the magnoliatiffanystudio page for bare locale roots on studio hosts
-            url.pathname = `/${matchedLocale}/magnoliatiffanystudio`;
+            // internally serve the tiffanystudio page for bare locale roots on studio hosts
+            url.pathname = `/${matchedLocale}/tiffanystudio`;
             return NextResponse.rewrite(url);
         }
         return NextResponse.next();
@@ -68,7 +68,7 @@ export function middleware(request) {
             targetLocale = parseAcceptLanguage(accept) || DEFAULT;
         }
 
-        url.pathname = `/${targetLocale}/magnoliatiffanystudio`;
+        url.pathname = `/${targetLocale}/tiffanystudio`;
         // Keep browser URL as `/` (or later you might prefer redirect to `/${targetLocale}`), using rewrite to serve studio home
         return NextResponse.rewrite(url);
     }

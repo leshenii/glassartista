@@ -189,18 +189,18 @@ export default function NavbarTiffanyStudio() {
 
     const handleLampDropdownClick = (key) => {
         if (key === 'magnolia') {
-            router.push(localized('/magnoliatiffanystudio/tiffanylamps'));
+            router.push(localized('/tiffanystudio/tiffanylamps'));
         } else {
-            router.push(localized(`/magnoliatiffanystudio/tiffanylamps#${key}`));
+            router.push(localized(`/tiffanystudio/tiffanylamps#${key}`));
         }
         setTiffanyLampsIsOpen(false);
     };
 
     const handleAvailableLampDropdownClick = (key) => {
         if (key === 'geometric') {
-            router.push(localized('/magnoliatiffanystudio/tiffanylampsavailable'));
+            router.push(localized('/tiffanystudio/tiffanylampsavailable'));
         } else {
-            router.push(localized(`/magnoliatiffanystudio/tiffanylampsavailable#${key}`));
+            router.push(localized(`/tiffanystudio/tiffanylampsavailable#${key}`));
         }
         setTiffanyLampsIsOpen(false);
     };
@@ -211,16 +211,16 @@ export default function NavbarTiffanyStudio() {
 
     const getNavbarLabel = () => {
         const stripped = (pathname || '/').split('/').slice(2).join('/');
-        const route = `/${stripped}` === '/magnoliatiffanystudio' || pathname === `/` ? `/magnoliatiffanystudio` : `/${stripped}`;
+        const route = `/${stripped}` === '/tiffanystudio' || pathname === `/` ? `/tiffanystudio` : `/${stripped}`;
         const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
         switch (route) {
-            case '/magnoliatiffanystudio':
+            case '/tiffanystudio':
                 return t.main;
-            case '/magnoliatiffanystudio/tiffanylamps':
+            case '/tiffanystudio/tiffanylamps':
                 return t.tiffanyLamps;
-            case '/magnoliatiffanystudio/tiffanylampsavailable':
+            case '/tiffanystudio/tiffanylampsavailable':
                 return t.availableLamps;
-            case '/magnoliatiffanystudio/contact':
+            case '/tiffanystudio/contact':
                 return t.contact;
             default:
                 return '';
@@ -273,16 +273,16 @@ export default function NavbarTiffanyStudio() {
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="main_page"
-                                              onPress={() => handleNavPush('/magnoliatiffanystudio')}>
+                                              onPress={() => handleNavPush('/tiffanystudio')}>
                                 <span
-                                    className={`${pathname === '/magnoliatiffanystudio' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                    className={`${pathname === '/tiffanystudio' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                     {t.main}
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="contact"
-                                              onPress={() => handleNavPush('/magnoliatiffanystudio/contact')}>
+                                              onPress={() => handleNavPush('/tiffanystudio/contact')}>
                                 <span
-                                    className={`${pathname && pathname.endsWith('/magnoliatiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                    className={`${pathname && pathname.endsWith('/tiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                     {t.contact}
                                 </span>
                                 </DropdownItem>
@@ -397,10 +397,10 @@ export default function NavbarTiffanyStudio() {
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => handleNavPush('/magnoliatiffanystudio')}
+                            onPress={() => handleNavPush('/tiffanystudio')}
                         >
                                     <span
-                                        className={`${pathname && pathname.endsWith('/magnoliatiffanystudio') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        className={`${pathname && pathname.endsWith('/tiffanystudio') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                         {t.main}
                                     </span>
                         </Button>
@@ -424,7 +424,7 @@ export default function NavbarTiffanyStudio() {
                                         />
                                     }>
                                     <span
-                                        className={`${pathname && pathname.endsWith('/magnoliatiffanystudio/tiffanylamps') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        className={`${pathname && pathname.endsWith('/tiffanystudio/tiffanylamps') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                         {t.tiffanyLamps}
                                     </span>
                                 </Button>
@@ -469,7 +469,7 @@ export default function NavbarTiffanyStudio() {
                                     disableRipple={true}
                                     variant="light">
                                     <span
-                                        className={`${pathname === localized('/magnoliatiffanystudio/tiffanylampsavailable') ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
+                                        className={`${pathname === localized('/tiffanystudio/tiffanylampsavailable') ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
                                         {t.availableLamps}
                                     </span>
                                 </Button>
@@ -509,10 +509,10 @@ export default function NavbarTiffanyStudio() {
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => handleNavPush('/magnoliatiffanystudio/contact')}
+                            onPress={() => handleNavPush('/tiffanystudio/contact')}
                         >
                         <span
-                            className={`${pathname && pathname.endsWith('/magnoliatiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                            className={`${pathname && pathname.endsWith('/tiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                             {t.contact}
                         </span>
                         </Button>
