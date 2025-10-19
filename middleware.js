@@ -30,7 +30,18 @@ export function middleware(request) {
     const pathnameHasLocale = LOCALES.some(
         (loc) => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`)
     );
-    if (pathnameHasLocale) return NextResponse.next();
+    const hostname = request.headers.get('host')?.split(':')[0] || '';
+    const studioHosts = new Set(['tiffanystudio.at', 'tiffanystudio.hu']);
+
+    if (pathnameHasLocale) {
+        // If the request is for a bare locale root on a studio host, rewrite internally
+        const matchedLocale = LOCALES.find(loc => pathname === `/${loc}` || pathname === `/${loc}/`);
+        if (matchedLocale && studioHosts.has(hostname)) {
+            url.pathname = `/${matchedLocale}/magnoliatiffanystudio`;
+            return NextResponse.rewrite(url); // serves the studio page while keeping /hu in the browser
+        }
+        return NextResponse.next();
+    }
 
     // Respect cookie if present
     const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
