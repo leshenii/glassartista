@@ -39,13 +39,39 @@ export function middleware(request) {
     );
 
     if (pathnameHasLocale) {
-        const matchedLocale = LOCALES.find(loc => pathname === `/${loc}` || pathname === `/${loc}/`);
-        if (matchedLocale && isStudio) {
-            // internally serve the tiffanystudio page for bare locale roots on studio hosts
-            url.pathname = `/${matchedLocale}/tiffanystudio`;
-            return NextResponse.rewrite(url);
+        const matchedLocale = LOCALES.find(loc => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`));
+        if (matchedLocale) {
+            if (isStudio) {
+                // Map certain top-level locale routes to the tiffanystudio subtree
+                const MAP = {
+                    '/contact': '/tiffanystudio/contact',
+                    '/lampbases': '/tiffanystudio/lampbases',
+                    '/tiffanylamps': '/tiffanystudio/tiffanylamps',
+                    '/tiffanylampsavailable': '/tiffanystudio/tiffanylampsavailable'
+                };
+
+                const afterLocale = pathname.slice(`/${matchedLocale}`.length) || '/';
+
+                for (const [src, dst] of Object.entries(MAP)) {
+                    if (
+                        afterLocale === src ||
+                        afterLocale === src + '/' ||
+                        afterLocale.startsWith(src + '/')
+                    ) {
+                        const rest = afterLocale.slice(src.length); // keep any subpath or trailing slash
+                        url.pathname = `/${matchedLocale}${dst}${rest}`;
+                        return NextResponse.rewrite(url);
+                    }
+                }
+
+                // internally serve the tiffanystudio page for bare locale roots on studio hosts
+                if (pathname === `/${matchedLocale}` || pathname === `/${matchedLocale}/`) {
+                    url.pathname = `/${matchedLocale}/tiffanystudio`;
+                    return NextResponse.rewrite(url);
+                }
+            }
+            return NextResponse.next();
         }
-        return NextResponse.next();
     }
 
     // If requesting the site root on a studio host, rewrite to the studio home (preserve browser URL)
