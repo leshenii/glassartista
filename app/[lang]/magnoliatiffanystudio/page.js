@@ -1,36 +1,29 @@
 'use client'
 
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {motion} from "motion/react";
 import {ImageCarousel, TextCarousel} from "@/app/components/carousel";
 import {IconArrowNarrowRight} from "@tabler/icons-react";
 
-export default function TiffanyStudioPage() {
-    const sectionRefs = Array.from({length: 8}, () => useRef(null));
-    const currentSection = useRef(0);
-    const isThrottled = useRef(false);
-    const [activeSection, setActiveSection] = useState(0);
-    const [carouselCurrents, setCarouselCurrents] = useState({ content: 0 });
+const LOCALES = ['hu', 'de', 'en'];
+const DEFAULT_LOCALE = 'en';
 
-    const contentMobile = {
-        key: "content",
+const TEXTS = {
+    hu: {
         slides: [
             {
                 title: "Magnólia Tiffanystúdió",
-                paragraph:
-                    "A Diósgyőri vár szomszédságában található Magnólia Tiffanystúdió több, mint 20 éve foglalkozik az építészethez kapcsolódó külső és belső tereket díszítő vagy elválasztó üvegművészeti alkotások tervezésével és kivitelezésével. Számos üvegablak, ajtóbetét, Tiffany lámpa elkészítése mellett, a régi üvegablakok, lámpák helyreállítása és restaurálása is a munkánk része.",
+                paragraph: "A Diósgyőri vár szomszédságában található Magnólia Tiffanystúdió több, mint 20 éve foglalkozik az építészethez kapcsolódó külső és belső tereket díszítő vagy elválasztó üvegművészeti alkotások tervezésével és kivitelezésével. Számos üvegablak, ajtóbetét, Tiffany lámpa elkészítése mellett, a régi üvegablakok, lámpák helyreállítása és restaurálása is a munkánk része.",
                 src: "/magnoliatiffanystudio/magnolia/magnolia-3.jpg"
             },
             {
                 title: "Tiffany lámpák Louis de Comfort Tiffany tervei alapján",
-                paragraph:
-                    "Az itt látható lámpák különlegessége, hogy a híres Louis de Comfort Tiffany eredeti tervei alapján készülnek.",
+                paragraph: "Az itt látható lámpák különlegessége, hogy a híres Louis de Comfort Tiffany eredeti tervei alapján készülnek.",
                 src: "/magnoliatiffanystudio/table/table-40.jpg"
             },
             {
                 title: "",
-                paragraph:
-                    "Ezek a lámpák a legmagasabb minőségű, kifejezetten lámpakészítésre gyártott színes Tiffany üvegből készülnek, mint pl. Uroboros, Youghiogheny, Bullseye, Kokomo. Ezek a csodaszép Tiffany-lámpák sokszor igen jelentős súllyal bírnak (hiszen vannak közöttük meglehetősen nagy 66-71 cm átmérővel rendelkezők is), ami megköveteli a bronz lámpatalp alkalmazását.",
+                paragraph: "Ezek a lámpák a legmagasabb minőségű, kifejezetten lámpakészítésre gyártott színes Tiffany üvegből készülnek, mint pl. Uroboros, Youghiogheny, Bullseye, Kokomo. Ezek a csodaszép Tiffany-lámpák sokszor igen jelentős súllyal bírnak (hiszen vannak közöttük meglehetősen nagy 66-71 cm átmérővel rendelkezők is), ami megköveteli a bronz lámpatalp alkalmazását.",
                 src: "/magnoliatiffanystudio/misc/misc-1.jpg"
             },
             {
@@ -57,62 +50,126 @@ export default function TiffanyStudioPage() {
                 title: "",
                 paragraph: "A Tiffany-üveg érdekessége, hogy nem az üveg felületét festik meg, hanem a gyártás során, még folyékony állapotban, színező oxidokat (pl.: szelén, kobalt, arany) kevernek hozzájuk. Ezáltal nem csak a színük változik, hanem különböző mintázatok is keletkeznek az üvegen.",
                 src: "/magnoliatiffanystudio/misc/misc-3.jpg"
-            }],
+            }
+        ]
+    },
+
+    de: {
+        slides: [
+            {
+                title: "Magnolia Tiffany Studio",
+                paragraph: "Seit 2005 fertige ich außergewöhnliche Reproduktionen von Tiffany-Lampendesigns für meine Kunden weltweit, darunter Architekten, Innenarchitekten und Privatpersonen, die die Arbeiten der Tiffany Studios schätzen, aber nicht die unglaublich hohen Preise zahlen möchten, die originale antike Lampen erzielen.",
+                src: "/magnoliatiffanystudio/magnolia/magnolia-3.jpg"
+            },
+            {
+                title: "Tiffany-Lampen nach den Entwürfen von Louis de Comfort Tiffany",
+                paragraph: "Das Besondere an den hier gezeigten Lampen ist, dass sie nach den Originalentwürfen des berühmten Louis de Comfort Tiffany gefertigt sind.",
+                src: "/magnoliatiffanystudio/table/table-40.jpg"
+            },
+            {
+                title: "",
+                paragraph: "Diese Lampen bestehen aus hochwertigen farbigen Tiffany-Gläsern, die speziell für die Lampenherstellung hergestellt wurden, wie zum Beispiel Uroboros, Youghiogheny, Bullseye Oceana und Kokomo Gläser. Diese wunderschönen Tiffany-Lampen haben oft ein beträchtliches Gewicht (da es einige mit einem recht großen Durchmesser von 66–71 cm gibt), was die Verwendung eines bronzenen Lampenfußes erfordert.",
+                src: "/magnoliatiffanystudio/misc/misc-1.jpg"
+            },
+            {
+                title: "",
+                paragraph: "Ich restauriere und repariere auch professionell originale Tiffany Studios Lampen. Sie können uns jederzeit per E-Mail kontaktieren, um sich nach verfügbaren, fertigen Lampen und Sonderanfertigungen zu erkundigen.",
+                src: "/magnoliatiffanystudio/waterlily/waterlily-6.jpg"
+            },
+            {
+                title: "",
+                paragraph: "Viele der von uns hergestellten Lampen finden ihre Käufer bei Privatpersonen und Sammlern, die den Stil schätzen.",
+                src: "/magnoliatiffanystudio/chestnut/chestnut-4.jpg"
+            },
+            {
+                title: "Tiffany-Glas",
+                paragraph: "Louis Comfort Tiffany war ein amerikanischer Innenarchitekt, der sich besonders für die Natur der Glasmalerei interessierte. 1878 eröffnete er sein Unternehmen Tiffany Studios. Da er kein Glas fand, das seinen Vorstellungen entsprach, betrieb er zusätzlich eine eigene Glasgießerei. Er führte revolutionäre Innovationen sowohl in der Glasproduktion als auch in der Fensterglasproduktionstechnologie ein.",
+                src: "/magnoliatiffanystudio/misc/misc-2.jpg"
+            },
+            {
+                title: "",
+                paragraph: "Eine der größten Neuerungen betraf das Löten, da sich dieses dekorative Glas im Gegensatz zur bisherigen Bleischienentechnik für die Gestaltung kleinerer Flächen eignete und zudem gewölbte Oberflächen mit Buntglas verziert werden konnten.",
+                src: "/magnoliatiffanystudio/goldblue/goldblue-3.jpg"
+            },
+            {
+                title: "",
+                paragraph: "Das Interessante an Tiffany-Glas ist, dass die Oberfläche des Glases nicht bemalt wird, sondern ihm während der Herstellung farbgebende Oxide (z. B. Selen, Kobalt, Gold) beigemischt werden, während es sich noch im flüssigen Zustand befindet. Dadurch entstehen verschiedene Muster im Glas.",
+                src: "/magnoliatiffanystudio/misc/misc-3.jpg"
+            }
+        ]
+    },
+
+    en: {
+        slides: [
+            {
+                title: "Magnolia Tiffany Studio",
+                paragraph: "Magnolia Tiffany Studio has been producing Tiffany-style lamps and architectural glass works for many years. We create both bespoke pieces and reproductions for clients including architects, interior designers and private collectors.",
+                src: "/magnoliatiffanystudio/magnolia/magnolia-3.jpg"
+            },
+            {
+                title: "Tiffany lamps after designs by Louis Comfort Tiffany",
+                paragraph: "The lamps shown here are made following the original designs of the famous Louis Comfort Tiffany.",
+                src: "/magnoliatiffanystudio/table/table-40.jpg"
+            },
+            {
+                title: "",
+                paragraph: "These lamps are made from high-quality coloured Tiffany glass manufactured specifically for lamp-making, such as Uroboros, Youghiogheny, Bullseye and Kokomo. Many of these beautiful Tiffany lamps are quite heavy (some measure 66–71 cm in diameter), which requires a bronze lamp base.",
+                src: "/magnoliatiffanystudio/misc/misc-1.jpg"
+            },
+            {
+                title: "",
+                paragraph: "We also professionally restore and repair original Tiffany Studios lamps. Please contact us by email at any time to enquire about available finished lamps or bespoke commissions.",
+                src: "/magnoliatiffanystudio/waterlily/waterlily-6.jpg"
+            },
+            {
+                title: "",
+                paragraph: "The lamps we create are purchased by private customers, often collectors who appreciate the craftsmanship.",
+                src: "/magnoliatiffanystudio/chestnut/chestnut-4.jpg"
+            },
+            {
+                title: "Tiffany glass",
+                paragraph: "Louis Comfort Tiffany was an American interior designer particularly interested in the nature of stained glass. In 1878 he founded his company, Tiffany Studios. Not finding glass that met his ideas, he also ran his own glass casting works and introduced revolutionary innovations in glass production and window glass technology.",
+                src: "/magnoliatiffanystudio/misc/misc-2.jpg"
+            },
+            {
+                title: "",
+                paragraph: "One of the major innovations concerned soldering: unlike the earlier lead strip technique, this decorative glass became suitable for creating smaller areas and could be used to decorate curved surfaces.",
+                src: "/magnoliatiffanystudio/goldblue/goldblue-3.jpg"
+            },
+            {
+                title: "",
+                paragraph: "The interesting feature of Tiffany glass is that the surface is not painted; colouring oxides (e.g. selenium, cobalt, gold) are mixed into the glass during manufacture while still molten, which not only changes the colour but also produces various patterns in the glass.",
+                src: "/magnoliatiffanystudio/misc/misc-3.jpg"
+            }
+        ]
+    }
+};
+
+
+export default function TiffanyStudioPage({ params }) {
+    const resolvedParams = React.use ? React.use(params) : params;
+    const langParam = resolvedParams?.lang;
+    const lang = (langParam && LOCALES.includes(langParam)) ? langParam : DEFAULT_LOCALE;
+    const t = TEXTS[lang] || TEXTS[DEFAULT_LOCALE];
+
+    const sectionRefs = Array.from({length: 8}, () => useRef(null));
+    const currentSection = useRef(0);
+    const isThrottled = useRef(false);
+    const [activeSection, setActiveSection] = useState(0);
+    const [carouselCurrents, setCarouselCurrents] = useState({ content: 0 });
+
+    const contentMobile = {
+        key: "content",
+        slides: t.slides,
         refIdx: 0
     };
-    const contentDesktop = [
-        {
-            title: "Magnólia Tiffanystúdió",
-            description:
-                "A Diósgyőri vár szomszédságában található Magnólia Tiffanystúdió több, mint 20 éve foglalkozik az építészethez kapcsolódó külső és belső tereket díszítő vagy elválasztó üvegművészeti alkotások tervezésével és kivitelezésével. Számos üvegablak, ajtóbetét, Tiffany lámpa elkészítése mellett, a régi üvegablakok, lámpák helyreállítása és restaurálása is a munkánk része.",
-            image: "/magnoliatiffanystudio/magnolia/magnolia-3.jpg",
-            ref: sectionRefs[0]
-        },
-        {
-            title: "Tiffany lámpák Louis de Comfort Tiffany tervei alapján",
-            description:
-                "Az itt látható lámpák különlegessége, hogy a híres Louis de Comfort Tiffany eredeti tervei alapján készülnek.",
-            image: "/magnoliatiffanystudio/table/table-40.jpg",
-            ref: sectionRefs[1]
-        },
-        {
-            title: "",
-            description:
-                "Ezek a lámpák a legmagasabb minőségű, kifejezetten lámpakészítésre gyártott színes Tiffany üvegből készülnek, mint pl. Uroboros, Youghiogheny, Bullseye, Kokomo. Ezek a csodaszép Tiffany-lámpák sokszor igen jelentős súllyal bírnak (hiszen vannak közöttük meglehetősen nagy 66-71 cm átmérővel rendelkezők is), ami megköveteli a bronz lámpatalp alkalmazását.",
-            image: "/magnoliatiffanystudio/misc/misc-1.jpg",
-            ref: sectionRefs[2]
-        },
-        {
-            title: "",
-            description: "Stúdiónk által készített Tiffany-lámpáknál mindig ügyelünk arra, hogy az adott mintázatú lámpa csakis a hozzá tartozó bronz lámpatalpra kerüljön, hiszen így lesz teljes az összkép.",
-            image: "/magnoliatiffanystudio/waterlily/waterlily-6.jpg",
-            ref: sectionRefs[3]
-        },
-        {
-            title: "",
-            description: "Az általunk készített lámpákat magánemberek, sokszor gyűjtők vásárolják.",
-            image: "/magnoliatiffanystudio/chestnut/chestnut-4.jpg",
-            ref: sectionRefs[4]
-        },
-        {
-            title: "Tiffany-üveg",
-            description: "Louis Comfort Tiffany amerikai belsőépítész volt, akit különösen érdekelt az ólomüvegezés természete. 1878-ban nyitotta meg vállalkozását, Tiffany Studios, néven. Mivel nem talált az elképzeléseihez illő üveget, ezért saját üvegöntő műhelyt is fenntartott. Forradalmi újításokat vezetett be mind az üveggyártásban, mind az ablaküveg-készítés technológiájában.",
-            image: "/magnoliatiffanystudio/misc/misc-2.jpg",
-            ref: sectionRefs[5]
-        },
-        {
-            title: "",
-            description: "Az egyik legnagyobb reform a forrasztásban jelentkezett, ugyanis a korábbi, ólomsínes technikával szemben ez a díszüveg alkalmas lett kisebb felületek létrehozására is, ráadásul az ólomüveggel így íveltebb felületeket is lehetett díszíteni.",
-            image: "/magnoliatiffanystudio/goldblue/goldblue-3.jpg",
-            ref: sectionRefs[6]
-        },
-        {
-            title: "",
-            description: "A Tiffany-üveg érdekessége, hogy nem az üveg felületét festik meg, hanem a gyártás során, még folyékony állapotban, színező oxidokat (pl.: szelén, kobalt, arany) kevernek hozzájuk. Ezáltal nem csak a színük változik, hanem különböző mintázatok is keletkeznek az üvegen.",
-            image: "/magnoliatiffanystudio/misc/misc-3.jpg",
-            ref: sectionRefs[7]
-        }
-    ];
+
+    const contentDesktop = t.slides.map((s, idx) => ({
+        title: s.title || "",
+        description: s.paragraph || "",
+        image: s.src,
+        ref: sectionRefs[idx]
+    }));
 
     useEffect(() => {
         const handleWheel = (e) => {
@@ -223,7 +280,7 @@ export default function TiffanyStudioPage() {
                                     className="max-w-md scroll-mt-40 items-center justify-center"
                                 >
                                     <div className={`flex flex-col ${item.title ? 'gap-10' : ''}`}>
-                                        <h2 className={`font-bold ${activeSection === idx ? "text-white" : "opacity-20"} ${item.title === "Magnólia Tiffanystúdió" ? "text-5xl allura-regular" : "text-4xl"}`}>
+                                        <h2 className={`font-bold ${activeSection === idx ? "text-white" : "opacity-20"} ${item.title === "Magnólia Tiffanystúdió" || item.title === "Magnolia Tiffany Studio" ? "text-5xl allura-regular" : "text-4xl"}`}>
                                             {item.title}
                                         </h2>
                                         <p className={`text-lg text-justify ${activeSection === idx ? "text-white" : "opacity-20"}`}>

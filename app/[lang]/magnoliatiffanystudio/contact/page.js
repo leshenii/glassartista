@@ -6,11 +6,64 @@ import {RiMailFill} from "react-icons/ri";
 import {AiFillInstagram} from "react-icons/ai";
 import {TbExternalLink} from "react-icons/tb";
 import {Form, Input, Button, Textarea, Spinner, Skeleton} from "@heroui/react";
-import {useState} from "react";
+import React, {useState} from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Link from "next/link";
 
-export default function ContactPage() {
+const LOCALES = ['hu', 'de', 'en'];
+const DEFAULT_LOCALE = 'en';
+
+const DICT = {
+    hu: {
+        pageHeading: "Vedd fel velem a kapcsolatot!",
+        name: "Név",
+        tel: "Telefonszám",
+        email: "E-mail címed",
+        subject: "Tárgy",
+        message: "Üzenet",
+        send: "Küldés",
+        requiredName: "Kérlek add meg a neved!",
+        requiredEmail: "Kérlek érvényes e-mail címet adj meg!",
+        requiredMessage: "Kérlek írd meg az üzeneted!",
+        thanks: (n) => `Köszönöm, ${n}! Az üzenetedet megkaptam, hamarosan felveszem veled a kapcsolatot.`,
+        contactNameHeader: "Nyíri Eszter"
+    },
+    de: {
+        pageHeading: "Kontaktieren Sie mich!",
+        name: "Name",
+        tel: "Telefonnummer",
+        email: "Ihre E-Mail",
+        subject: "Betreff",
+        message: "Nachricht",
+        send: "Absenden",
+        requiredName: "Bitte gib deinen Namen an!",
+        requiredEmail: "Bitte geben Sie eine gültige E-Mail-Adresse an!",
+        requiredMessage: "Bitte schreiben Sie Ihre Nachricht!",
+        thanks: (n) => `Danke, ${n}! Ich habe Ihre Nachricht erhalten und melde mich bald bei Ihnen.`,
+        contactNameHeader: "Eszter Nyíri"
+    },
+    en: {
+        pageHeading: "Contact me!",
+        name: "Name",
+        tel: "Phone",
+        email: "Your email",
+        subject: "Subject",
+        message: "Message",
+        send: "Send",
+        requiredName: "Please enter your name!",
+        requiredEmail: "Please provide a valid email address!",
+        requiredMessage: "Please write your message!",
+        thanks: (n) => `Thank you, ${n}! I received your message and will contact you soon.`,
+        contactNameHeader: "Eszter Nyíri"
+    }
+};
+
+export default function ContactPage({ params }) {
+
+    const resolvedParams = React.use ? React.use(params) : params;
+    const langParam = resolvedParams?.lang;
+    const lang = (langParam && LOCALES.includes(langParam)) ? langParam : DEFAULT_LOCALE;
+    const L = DICT[lang];
 
     const [submitted, setSubmitted] = useState(null);
     const [touched, setTouched] = useState({});
@@ -59,7 +112,7 @@ export default function ContactPage() {
             if (result.success) {
                 setSubmitted(data);
             } else {
-                alert('Something went wrong: ' + result.error);
+                alert((result.error && typeof result.error === 'string') ? result.error : 'Something went wrong');
             }
         } catch (error) {
             console.error(error);
@@ -81,7 +134,7 @@ export default function ContactPage() {
         <div
             className="flex flex-col overflow-visible lg:flex-row gap-10 lg:gap-24 w-screen items-center justify-center lg:h-screen-minus-navbar-desktop mt-4 lg:mt-0 lg:pl-16">
             <div className="flex flex-col gap-6 h-full w-min justify-center items-start">
-                <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8 mx-auto">Nyíri Eszter</h2>
+                <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8 mx-auto">{L.contactNameHeader}</h2>
                 <div className="flex flex-row items-center gap-2 select-all ">
                     <FaPhoneAlt size={25}/>
                     +36-70/360-0950
@@ -89,7 +142,6 @@ export default function ContactPage() {
                 <div className="flex flex-row items-center gap-2 select-all ">
                     <RiMailFill size={30}/>
                     m.tiffanystudio@gmail.com
-
                 </div>
                 <Link href="https://www.instagram.com/magnolia_tiffanystudio/" target="_blank">
                     <div className="flex flex-row items-center gap-2 ">
@@ -107,12 +159,12 @@ export default function ContactPage() {
                 </Link>
             </div>
             <div className="flex flex-col w-10/12 pb-24 lg:pb-0 lg:w-1/2">
-                <h2 className="font-semibold text-neutral-400 lg:pb-5">Vedd fel velem a kapcsolatot!</h2>
+                <h2 className="font-semibold text-neutral-400 lg:pb-5">{L.pageHeading}</h2>
                 <Form className="w-full" onSubmit={onSubmit} validationBehavior="aria">
                     <div className="flex flex-row gap-6 w-full">
                         <Input
                             isRequired
-                            label="Név"
+                            label={L.name}
                             labelPlacement="outside"
                             name="name"
                             type="text"
@@ -123,13 +175,13 @@ export default function ContactPage() {
                             value={fields.name}
                             validate={(value) => {
                                 if (touched.name && value.length === 0) {
-                                    return "Kérlek add meg a neved!";
+                                    return L.requiredName;
                                 }
                                 return null;
                             }}
                         />
                         <Input
-                            label="Telefonszám"
+                            label={L.tel}
                             labelPlacement="outside"
                             name="tel"
                             type="tel"
@@ -138,7 +190,7 @@ export default function ContactPage() {
                     </div>
                     <Input
                         isRequired
-                        label="E-mail címed"
+                        label={L.email}
                         labelPlacement="outside"
                         name="email"
                         type="email"
@@ -148,13 +200,13 @@ export default function ContactPage() {
                         value={fields.email}
                         validate={(value) => {
                             if (touched.email && !emailRegex.test(value)) {
-                                return "Kérlek érvényes e-mail címet adj meg!";
+                                return L.requiredEmail;
                             }
                             return null;
                         }}
                     />
                     <Input
-                        label="Tárgy"
+                        label={L.subject}
                         labelPlacement="outside"
                         name="text"
                         type="text"
@@ -163,7 +215,7 @@ export default function ContactPage() {
                     <Textarea
                         className="py-5"
                         isRequired
-                        label="Üzenet"
+                        label={L.message}
                         labelPlacement="outside"
                         name="message"
                         type="text"
@@ -176,7 +228,7 @@ export default function ContactPage() {
                         value={fields.message}
                         validate={(value) => {
                             if (touched.message && value.length === 0) {
-                                return "Kérlek írd meg az üzeneted!";
+                                return L.requiredMessage;
                             }
                             return null;
                         }}
@@ -192,6 +244,7 @@ export default function ContactPage() {
                             onChange={onRecaptchaChange}
                             asyncScriptOnLoad={handleRecaptchaLoad}
                             theme="dark"
+                            hl={lang}
                         />
                     </div>
                     <Button
@@ -200,12 +253,11 @@ export default function ContactPage() {
                         isDisabled={!valid || !recaptchaToken || loading}
                         startContent={loading ? <Spinner size="sm" color="primary"/> : undefined}
                     >
-                        Küldés
+                        {L.send}
                     </Button>
                     {submitted && (
                         <div className="text-small text-default-500">
-                            Köszönöm, {submitted.name}! Az üzenetedet megkaptam, hamarosan felveszem veled a
-                            kapcsolatot.
+                            {L.thanks(submitted.name)}
                         </div>
                     )}
                 </Form>

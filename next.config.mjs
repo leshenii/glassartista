@@ -1,4 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+/** Minimal config for App Router */
+const nextConfig = {
+    reactStrictMode: true
+};
 
 export default nextConfig;

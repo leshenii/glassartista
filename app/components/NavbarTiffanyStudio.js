@@ -35,49 +35,196 @@ import {motion} from "motion/react"
 import {AiFillInstagram} from "react-icons/ai";
 import {RiFacebookBoxFill, RiInstagramFill, RiMailFill} from "react-icons/ri";
 import {ImMail4} from "react-icons/im";
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 export default function NavbarTiffanyStudio() {
+
+    const LOCALES = ['hu', 'de', 'en'];
+    const DEFAULT_LOCALE = 'en';
+    const COOKIE_NAME = 'NEXT_LOCALE';
+    const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+    const TEXT = {
+        hu: {
+            landing: 'Kezdőlap',
+            main: 'Főoldal',
+            tiffanyLamps: 'Tiffany lámpák',
+            availableLamps: 'Rendelhető Tiffany lámpák',
+            lampBases: 'Lámpatalpak',
+            contact: 'Kapcsolat',
+            backTooltip: 'Vissza a kezdőlapra',
+            callTooltip: 'Hívj bátran!',
+            emailTooltip: 'Keress e-mailben!',
+            instagramTooltip: 'Kövess Instagramon!',
+            facebookTooltip: 'Kövess Facebookon!',
+            branding: 'Magnólia Tiffanystúdió',
+            // lamp names
+            lampMagnolia: `28" Magnólia Tiffany Lámpa`,
+            lampGoldBlue: 'Arany-kék Szitakötő Tiffany Lámpa',
+            lampPeony: 'Bazsarózsa Tiffany Lámpa',
+            lampAcorn: 'Makk Tiffany Lámpa',
+            lampWaterlily: 'Vízi­liliom Tiffany Lámpa',
+            lampChestnut: 'Gesztenye Tiffany Lámpa',
+            lampVine: 'Indás dísz Tiffany Lámpa',
+            lampDragonfly: 'Szitakötő Tiffany Lámpa',
+            lampTulip: 'Tulipános Tiffany Lámpa',
+            // available categories
+            availableGeometric: 'Rendelhető geometrikus Tiffany lámpák',
+            availableTable: 'Rendelhető asztali Tiffany lámpák',
+            availableStanding: 'Rendelhető álló Tiffany lámpák'
+        },
+        de: {
+            landing: 'Landingpage',
+            main: 'Startseite',
+            tiffanyLamps: 'Tiffany-Lampen',
+            availableLamps: 'Bestellbare Tiffany-Lampen',
+            lampBases: 'Lampenfüße',
+            contact: 'Kontakt',
+            backTooltip: 'Zur Landingpage',
+            callTooltip: 'Ruf uns an!',
+            emailTooltip: 'Schreib uns per E-Mail!',
+            instagramTooltip: 'Folge auf Instagram!',
+            facebookTooltip: 'Folge auf Facebook!',
+            branding: 'Magnolia Tiffany Studio',
+            // lamp names
+            lampMagnolia: `28" Magnólia Tiffany Lampe`,
+            lampGoldBlue: 'Gold-Blau Libelle Tiffany Lampe',
+            lampPeony: 'Pfingstrose Tiffany Lampe',
+            lampAcorn: 'Eichel Tiffany Lampe',
+            lampWaterlily: 'Seerose Tiffany Lampe',
+            lampChestnut: 'Kastanie Tiffany Lampe',
+            lampVine: 'Ranken-Ornament Tiffany Lampe',
+            lampDragonfly: 'Libelle Tiffany Lampe',
+            lampTulip: 'Tulpen Tiffany Lampe',
+            // available categories
+            availableGeometric: 'Bestellbare geometrische Tiffany-Lampen',
+            availableTable: 'Bestellbare Tisch-Tiffany-Lampen',
+            availableStanding: 'Bestellbare Stehende Tiffany-Lampen'
+        },
+        en: {
+            landing: 'Home',
+            main: 'Main',
+            tiffanyLamps: 'Tiffany Lamps',
+            availableLamps: 'Available Tiffany Lamps',
+            lampBases: 'Lamp bases',
+            contact: 'Contact',
+            backTooltip: 'Back to home',
+            callTooltip: 'Call us!',
+            emailTooltip: 'Contact by email!',
+            instagramTooltip: 'Follow on Instagram!',
+            facebookTooltip: 'Follow on Facebook!',
+            branding: 'Magnolia Tiffany Studio',
+            // lamp names
+            lampMagnolia: `28" Magnolia Tiffany Lamp`,
+            lampGoldBlue: 'Gold-Blue Dragonfly Tiffany Lamp',
+            lampPeony: 'Peony Tiffany Lamp',
+            lampAcorn: 'Acorn Tiffany Lamp',
+            lampWaterlily: 'Waterlily Tiffany Lamp',
+            lampChestnut: 'Chestnut Tiffany Lamp',
+            lampVine: 'Vine Ornament Tiffany Lamp',
+            lampDragonfly: 'Dragonfly Tiffany Lamp',
+            lampTulip: 'Tulip Tiffany Lamp',
+            // available categories
+            availableGeometric: 'Available geometric Tiffany lamps',
+            availableTable: 'Available table Tiffany lamps',
+            availableStanding: 'Available standing Tiffany lamps'
+        }
+    };
 
     const [isTiffanyLampsOpen, setTiffanyLampsIsOpen] = useState(false);
     const [isAvailableLampsOpen, setAvailableLampsIsOpen] = useState(false);
     const [isLampBasesOpen, setLampBasesIsOpen] = useState(false);
-    const pathname = usePathname();
 
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
     const router = useRouter();
+
+    function stripLocaleFromPath(path) {
+        const p = (path || '/').split('/');
+        if (p.length > 1 && LOCALES.includes(p[1])) {
+            p.splice(1, 1);
+            const joined = p.join('/');
+            return joined === '' ? '/' : joined;
+        }
+        return path || '/';
+    }
+
+    function getLocaleFromPath(path) {
+        const parts = (path || '/').split('/');
+        return (parts.length > 1 && LOCALES.includes(parts[1])) ? parts[1] : null;
+    }
+
+    function setLocaleCookie(locale) {
+        if (typeof document === 'undefined') return;
+        document.cookie = `${COOKIE_NAME}=${locale}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax`;
+    }
+
+    const getLocaleFromCookie = () => {
+        if (typeof document === 'undefined') return undefined;
+        const m = document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]+)/);
+        return m ? m[1] : undefined;
+    };
+
+    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || DEFAULT_LOCALE;
+    const search = searchParams ? `?${searchParams.toString()}` : '';
+
+    // build localized path for navigation
+    const localized = (targetPath) => {
+        if (!targetPath.startsWith('/')) targetPath = `/${targetPath}`;
+        return `/${currentLocale}${targetPath}`;
+    };
+
+    const changeLocale = (locale) => {
+        if (!LOCALES.includes(locale)) return;
+        setLocaleCookie(locale);
+        const basePath = stripLocaleFromPath(pathname || '/');
+        const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
+        const to = `/${locale}${basePath}${search}${hash}`;
+        router.push(to);
+    };
 
     const handleLampDropdownClick = (key) => {
         if (key === 'magnolia') {
-            router.push('/magnoliatiffanystudio/tiffanylamps');
+            router.push(localized('/magnoliatiffanystudio/tiffanylamps'));
         } else {
-            router.push(`/magnoliatiffanystudio/tiffanylamps#${key}`);
+            router.push(localized(`/magnoliatiffanystudio/tiffanylamps#${key}`));
         }
         setTiffanyLampsIsOpen(false);
     };
 
     const handleAvailableLampDropdownClick = (key) => {
         if (key === 'geometric') {
-            router.push('/magnoliatiffanystudio/tiffanylampsavailable');
+            router.push(localized('/magnoliatiffanystudio/tiffanylampsavailable'));
         } else {
-            router.push(`/magnoliatiffanystudio/tiffanylampsavailable#${key}`);
+            router.push(localized(`/magnoliatiffanystudio/tiffanylampsavailable#${key}`));
         }
         setTiffanyLampsIsOpen(false);
     };
 
+    const handleNavPush = (path) => {
+        router.push(localized(path));
+    };
+
     const getNavbarLabel = () => {
-        switch (pathname) {
+        const stripped = (pathname || '/').split('/').slice(2).join('/');
+        const route = `/${stripped}` === '/magnoliatiffanystudio' || pathname === `/` ? `/magnoliatiffanystudio` : `/${stripped}`;
+        const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
+        switch (route) {
             case '/magnoliatiffanystudio':
-                return 'Főoldal';
+                return t.main;
             case '/magnoliatiffanystudio/tiffanylamps':
-                return 'Tiffany lámpák';
+                return t.tiffanyLamps;
             case '/magnoliatiffanystudio/tiffanylampsavailable':
-                return 'Rendelhető lámpák';
+                return t.availableLamps;
             case '/magnoliatiffanystudio/contact':
-                return 'Kapcsolat';
+                return t.contact;
             default:
                 return '';
         }
     };
+
+    const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
+    const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
 
     return (
         <>
@@ -85,14 +232,14 @@ export default function NavbarTiffanyStudio() {
                     className="xl:hidden"
                     classNames={{base: "!px-0 animate__animated animate__fadeInDown bg-transparent select-none uppercase antonio-navbar"}}>
                 <NavbarBrand>
-                        <img
-                            draggable={false}
-                            alt="Magnólia Tiffanystudió logó"
-                            src="/design/tiffanystudiologotext.png"
-                            loading="eager"
-                            decoding="sync"
-                            width={50}
-                        />
+                    <img
+                        draggable={false}
+                        alt="Magnólia Tiffanystudió logó"
+                        src="/design/tiffanystudiologotext.png"
+                        loading="eager"
+                        decoding="sync"
+                        width={50}
+                    />
                 </NavbarBrand>
                 <NavbarContent justify="center">
                     <Dropdown>
@@ -101,7 +248,7 @@ export default function NavbarTiffanyStudio() {
                                 className="bg-transparent data-[hover=true]:bg-transparent text-lg md:text-xl uppercase antonio-navbar"
                                 radius="none"
                                 size="sm"
-                                style={{ padding: 0}}
+                                style={{padding: 0}}
                                 endContent={
                                     <FaChevronDown
                                         size={15}
@@ -115,73 +262,85 @@ export default function NavbarTiffanyStudio() {
                         <DropdownMenu aria-label="Dropdown menu">
                             <DropdownSection showDivider>
                                 <DropdownItem key="landing_page"
-                                              onPress={() => router.push('/', {shallow: true})}>
+                                              onPress={() => router.push(localized('/'))}>
                                 <span
                                     className='hover:underline hover:decoration-dashed'>
-                                    Kezdőlap
+                                    {t.landing}
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="main_page"
-                                              onPress={() => router.push('/magnoliatiffanystudio', {shallow: true})}>
+                                              onPress={() => handleNavPush('/magnoliatiffanystudio')}>
                                 <span
                                     className={`${pathname === '/magnoliatiffanystudio' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                                    Főoldal
+                                    {t.main}
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="contact"
-                                              onPress={() => router.push('/magnoliatiffanystudio/contact', {shallow: true})}>
+                                              onPress={() => handleNavPush('/magnoliatiffanystudio/contact')}>
                                 <span
-                                    className={`${pathname === '/magnoliatiffanystudio/contact' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                                    Kapcsolat
+                                    className={`${pathname && pathname.endsWith('/magnoliatiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                    {t.contact}
                                 </span>
                                 </DropdownItem>
                             </DropdownSection>
-                            <DropdownSection showDivider title="Tiffany lámpák">
+                            <DropdownSection showDivider title={t.tiffanyLamps}>
                                 <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}
-                                              onClick={() => handleLampDropdownClick('magnolia')}>28" Magnólia Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('magnolia')}>{t.lampMagnolia}</DropdownItem>
                                 <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}
-                                              onClick={() => handleLampDropdownClick('goldblue')}>Gold-Blue Dragonfly
-                                    Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('goldblue')}>{t.lampGoldBlue}</DropdownItem>
                                 <DropdownItem key="peony" startContent={<IoRose size={20}/>}
-                                              onClick={() => handleLampDropdownClick('peony')}>Peony Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('peony')}>{t.lampPeony}</DropdownItem>
                                 <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>}
-                                              onClick={() => handleLampDropdownClick('acorn')}>Acorn Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('acorn')}>{t.lampAcorn}</DropdownItem>
                                 <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>}
-                                              onClick={() => handleLampDropdownClick('waterlily')}>Waterlily Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('waterlily')}>{t.lampWaterlily}</DropdownItem>
                                 <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>}
-                                              onClick={() => handleLampDropdownClick('chestnut')}>Chestnut Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('chestnut')}>{t.lampChestnut}</DropdownItem>
                                 <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>}
-                                              onClick={() => handleLampDropdownClick('vine')}>Vine Ornament Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('vine')}>{t.lampVine}</DropdownItem>
                                 <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>}
-                                              onClick={() => handleLampDropdownClick('dragonfly')}>Dragonfly Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('dragonfly')}>{t.lampDragonfly}</DropdownItem>
                                 <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
-                                              onClick={() => handleLampDropdownClick('tulip')}>Tulipános Tiffany
-                                    Lámpa</DropdownItem>
+                                              onClick={() => handleLampDropdownClick('tulip')}>{t.lampTulip}</DropdownItem>
                             </DropdownSection>
-                            <DropdownSection showDivider title="Rendelhető Tiffany lámpák">
+                            <DropdownSection showDivider title={t.availableLamps}>
                                 <DropdownItem startContent={<IoIosGrid size={20}/>}
-                                              onClick={() => handleAvailableLampDropdownClick('geometric')}>Rendelhető
-                                    geometrikus Tiffany
-                                    lámpák</DropdownItem>
+                                              onClick={() => handleAvailableLampDropdownClick('geometric')}>{t.availableGeometric}</DropdownItem>
                                 <DropdownItem startContent={<LuLamp size={20}/>}
-                                              onClick={() => handleAvailableLampDropdownClick('table')}>Rendelhető
-                                    asztali
-                                    Tiffany
-                                    lámpák</DropdownItem>
+                                              onClick={() => handleAvailableLampDropdownClick('table')}>{t.availableTable}</DropdownItem>
                                 <DropdownItem startContent={<LuLampFloor size={20}/>}
-                                              onClick={() => handleAvailableLampDropdownClick('standing')}>Rendelhető
-                                    álló
-                                    Tiffany
-                                    lámpák
-                                </DropdownItem>
+                                              onClick={() => handleAvailableLampDropdownClick('standing')}>{t.availableStanding}</DropdownItem>
+                            </DropdownSection>
+                            <DropdownSection classNames={{
+                                group: "flex flex-row w-fit gap-4 mx-auto text-neutral-400",
+                            }}
+                            >
+
+                                    <DropdownItem
+                                        aria-label="Magyar"
+                                        aria-current={currentLocale === 'hu' ? 'true' : undefined}
+                                        onClick={() => changeLocale('hu')}
+                                        className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
+                                    >
+                                        magyar
+                                    </DropdownItem>
+                                    <DropdownItem
+                                        aria-label="Deutsch"
+                                        aria-current={currentLocale === 'de' ? 'true' : undefined}
+                                        onClick={() => changeLocale('de')}
+                                        className={`${baseBtnClass} ${currentLocale === 'de' ? 'underline' : ''}`}
+                                    >
+                                        deutsch
+                                    </DropdownItem>
+                                    <DropdownItem
+                                        aria-label="English"
+                                        aria-current={currentLocale === 'en' ? 'true' : undefined}
+                                        onClick={() => changeLocale('en')}
+                                        className={`${baseBtnClass} ${currentLocale === 'en' ? 'underline' : ''}`}
+                                    >
+                                        english
+                                    </DropdownItem>
+
                             </DropdownSection>
                         </DropdownMenu>
                     </Dropdown>
@@ -203,7 +362,6 @@ export default function NavbarTiffanyStudio() {
                             </Link>
                         </div>
                     </NavbarItem>
-
                 </NavbarContent>
             </Navbar>
             <Navbar position="sticky" maxWidth="full" className="hidden xl:block"
@@ -218,26 +376,26 @@ export default function NavbarTiffanyStudio() {
                             decoding="sync"
                             width={36}/>
                         <p className="text-2xl pt-1 allura-regular normal-case bg-gradient-to-r from-[#896b60] to-[#ce9c72] inline-block text-transparent bg-clip-text">
-                            Magnólia Tiffanystúdió
+                            {t.branding}
                         </p>
                     </div>
                 </NavbarBrand>
                 <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                     <NavbarItem>
-                        <Tooltip content="Vissza a kezdőlapra" placement="bottom" showArrow={true} radius="full"
+                        <Tooltip content={t.backTooltip} placement="bottom" showArrow={true} radius="full"
                                  color="foreground" size="sm">
-                            <Link href="/"><FaArrowAltCircleLeft color="white" className="pt-1" size={27}/></Link>
+                            <Link href={localized('/')}><FaArrowAltCircleLeft color="white" className="pt-1" size={27}/></Link>
                         </Tooltip>
                     </NavbarItem>
                     <NavbarItem>
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => router.push('/magnoliatiffanystudio', {shallow: true})}
+                            onPress={() => handleNavPush('/magnoliatiffanystudio')}
                         >
                                     <span
-                                        className={`${pathname === '/magnoliatiffanystudio' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                                        Főoldal
+                                        className={`${pathname && pathname.endsWith('/magnoliatiffanystudio') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        {t.main}
                                     </span>
                         </Button>
                     </NavbarItem>
@@ -259,41 +417,31 @@ export default function NavbarTiffanyStudio() {
                                         />
                                     }>
                                     <span
-                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylamps' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                                        Tiffany lámpák
+                                        className={`${pathname && pathname.endsWith('/magnoliatiffanystudio/tiffanylamps') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        {t.tiffanyLamps}
                                     </span>
                                 </Button>
                             </DropdownTrigger>
                         </NavbarItem>
                         <DropdownMenu className="" aria-label="Tiffany lámpák menü">
                             <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}
-                                          onClick={() => handleLampDropdownClick('magnolia')}>28" Magnólia Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('magnolia')}>{t.lampMagnolia}</DropdownItem>
                             <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}
-                                          onClick={() => handleLampDropdownClick('goldblue')}>Gold-Blue Dragonfly
-                                Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('goldblue')}>{t.lampGoldBlue}</DropdownItem>
                             <DropdownItem key="peony" startContent={<IoRose size={20}/>}
-                                          onClick={() => handleLampDropdownClick('peony')}>Peony Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('peony')}>{t.lampPeony}</DropdownItem>
                             <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>}
-                                          onClick={() => handleLampDropdownClick('acorn')}>Acorn Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('acorn')}>{t.lampAcorn}</DropdownItem>
                             <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>}
-                                          onClick={() => handleLampDropdownClick('waterlily')}>Waterlily Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('waterlily')}>{t.lampWaterlily}</DropdownItem>
                             <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>}
-                                          onClick={() => handleLampDropdownClick('chestnut')}>Chestnut Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('chestnut')}>{t.lampChestnut}</DropdownItem>
                             <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>}
-                                          onClick={() => handleLampDropdownClick('vine')}>Vine Ornament Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('vine')}>{t.lampVine}</DropdownItem>
                             <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>}
-                                          onClick={() => handleLampDropdownClick('dragonfly')}>Dragonfly Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('dragonfly')}>{t.lampDragonfly}</DropdownItem>
                             <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
-                                          onClick={() => handleLampDropdownClick('tulip')}>Tulipános Tiffany
-                                Lámpa</DropdownItem>
+                                          onClick={() => handleLampDropdownClick('tulip')}>{t.lampTulip}</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
@@ -312,8 +460,8 @@ export default function NavbarTiffanyStudio() {
                                     disableRipple={true}
                                     variant="light">
                                     <span
-                                        className={`${pathname === '/magnoliatiffanystudio/tiffanylampsavailable' ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
-                                        Rendelhető Tiffany lámpák
+                                        className={`${pathname === localized('/magnoliatiffanystudio/tiffanylampsavailable') ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
+                                        {t.availableLamps}
                                     </span>
                                 </Button>
                             </DropdownTrigger>
@@ -321,17 +469,11 @@ export default function NavbarTiffanyStudio() {
 
                         <DropdownMenu className="" aria-label="Rendelhető Tiffany lámpák kategóriák">
                             <DropdownItem startContent={<IoIosGrid size={20}/>}
-                                          onClick={() => handleAvailableLampDropdownClick('geometric')}>Rendelhető
-                                geometrikus Tiffany
-                                lámpák</DropdownItem>
+                                          onClick={() => handleAvailableLampDropdownClick('geometric')}>{t.availableGeometric}</DropdownItem>
                             <DropdownItem startContent={<LuLamp size={20}/>}
-                                          onClick={() => handleAvailableLampDropdownClick('table')}>Rendelhető asztali
-                                Tiffany
-                                lámpák</DropdownItem>
+                                          onClick={() => handleAvailableLampDropdownClick('table')}>{t.availableTable}</DropdownItem>
                             <DropdownItem startContent={<LuLampFloor size={20}/>}
-                                          onClick={() => handleAvailableLampDropdownClick('standing')}>Rendelhető álló
-                                Tiffany
-                                lámpák</DropdownItem>
+                                          onClick={() => handleAvailableLampDropdownClick('standing')}>{t.availableStanding}</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
@@ -348,7 +490,7 @@ export default function NavbarTiffanyStudio() {
                                     radius="sm"
                                     variant="light"
                                 >
-                                    Lámpatalpak
+                                    {t.lampBases}
                                 </Button>
                             </DropdownTrigger>
                         </NavbarItem>
@@ -358,11 +500,11 @@ export default function NavbarTiffanyStudio() {
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => router.push('/magnoliatiffanystudio/contact', {shallow: true})}
+                            onPress={() => handleNavPush('/magnoliatiffanystudio/contact')}
                         >
                         <span
-                            className={`${pathname === '/magnoliatiffanystudio/contact' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                            Kapcsolat
+                            className={`${pathname && pathname.endsWith('/magnoliatiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                            {t.contact}
                         </span>
                         </Button>
                     </NavbarItem>
@@ -371,28 +513,29 @@ export default function NavbarTiffanyStudio() {
                     <NavbarItem>
                         <div className="flex flex-row gap-3 pt-1">
                             <div className="flex flex-row gap-1 items-center justify-center pb-1">
-                                <Tooltip content="Hívj bátran!" showArrow={true} radius="full" color="foreground"
+                                <Tooltip content={t.callTooltip} showArrow={true} radius="full" color="foreground"
                                          placement="bottom">
                                     <Link href="tel:+36-70/360-0950"
                                           target="_blank"
-                                          className="text-xl font-light antonio-navbar text-white"><FaPhoneAlt size="16px"/></Link>
+                                          className="text-xl font-light antonio-navbar text-white"><FaPhoneAlt
+                                        size="16px"/></Link>
                                 </Tooltip>
                                 <span className="select-all">+36-70/360-0950</span>
                             </div>
-                            <Tooltip content="Keress e-mailben!" placement="bottom" showArrow={true} radius="full"
+                            <Tooltip content={t.emailTooltip} placement="bottom" showArrow={true} radius="full"
                                      color="foreground">
                                 <Link href="mailto:m.tiffanystudio@gmail.com"
                                       target="_blank"
                                       className="text-xl font-light antonio-navbar text-white"><RiMailFill
                                     size="25px"/></Link>
                             </Tooltip>
-                            <Tooltip content="Kövess Instagramon!" placement="bottom" showArrow={true} radius="full"
+                            <Tooltip content={t.instagramTooltip} placement="bottom" showArrow={true} radius="full"
                                      color="foreground">
                                 <Link href="https://www.instagram.com/magnolia_tiffanystudio/" target="_blank"
                                       className="text-xl font-light antonio-navbar text-white"><AiFillInstagram
                                     size="26px"/></Link>
                             </Tooltip>
-                            <Tooltip content="Kövess Facebookon!" placement="bottom" showArrow={true} radius="full"
+                            <Tooltip content={t.facebookTooltip} placement="bottom" showArrow={true} radius="full"
                                      color="foreground">
                                 <Link href="https://www.facebook.com/profile.php?id=100054201323550#" target="_blank"
                                       className="text-xl font-light antonio-navbar text-white"><FaFacebookSquare

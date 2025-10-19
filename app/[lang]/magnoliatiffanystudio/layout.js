@@ -10,7 +10,7 @@ export default function TiffanyStudioLayout(props) {
             <div>
                 <NavbarTiffanyStudio />
                 {children}
-                <Footer />
+
             </div>
         </section>
     );
