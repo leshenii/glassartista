@@ -36,6 +36,7 @@ import {AiFillInstagram} from "react-icons/ai";
 import {RiFacebookBoxFill, RiInstagramFill, RiMailFill} from "react-icons/ri";
 import {ImMail4} from "react-icons/im";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {MdLocalFlorist} from "react-icons/md";
 
 export default function NavbarTiffanyStudio() {
 
@@ -59,15 +60,16 @@ export default function NavbarTiffanyStudio() {
             facebookTooltip: 'Kövess Facebookon!',
             branding: 'Magnólia Tiffanystúdió',
             // lamp names
-            lampMagnolia: `28" Magnólia Tiffany Lámpa`,
-            lampGoldBlue: 'Arany-kék Szitakötő Tiffany Lámpa',
-            lampPeony: 'Bazsarózsa Tiffany Lámpa',
-            lampAcorn: 'Makk Tiffany Lámpa',
-            lampWaterlily: 'Vízi­liliom Tiffany Lámpa',
-            lampChestnut: 'Gesztenye Tiffany Lámpa',
-            lampVine: 'Indás dísz Tiffany Lámpa',
-            lampDragonfly: 'Szitakötő Tiffany Lámpa',
-            lampTulip: 'Tulipános Tiffany Lámpa',
+            lampMagnolia: `28" Magnolia Tiffany lámpa`,
+            lampGoldBlue: 'Gold-Blue Dragonfly Tiffany lámpa',
+            lampPeony: 'Peony Tiffany lámpa',
+            lampAcorn: 'Acorn Tiffany lámpa',
+            lampWaterlily: 'Waterlily Tiffany lámpa',
+            lampChestnut: 'Chestnut Tiffany lámpa',
+            lampVine: 'Vine Ornament Tiffany lámpa',
+            lampDragonfly: 'Dragonfly Tiffany lámpa',
+            lampTulip: 'Tulip Tiffany lámpa',
+            lampSmallPeony: 'Kis Peony Tiffany lámpa',
             // available categories
             availableGeometric: 'Rendelhető geometrikus Tiffany lámpák',
             availableTable: 'Rendelhető asztali Tiffany lámpák',
@@ -75,7 +77,7 @@ export default function NavbarTiffanyStudio() {
         },
         de: {
             landing: 'Landingpage',
-            main: 'Startseite',
+            main: 'Hauptseite',
             tiffanyLamps: 'Tiffany-Lampen',
             availableLamps: 'Bestellbare Tiffany-Lampen',
             lampBases: 'Lampenfüße',
@@ -87,15 +89,16 @@ export default function NavbarTiffanyStudio() {
             facebookTooltip: 'Folge auf Facebook!',
             branding: 'Magnolia Tiffany Studio',
             // lamp names
-            lampMagnolia: `28" Magnólia Tiffany Lampe`,
+            lampMagnolia: `28" Magnolia Tiffany Lampe`,
             lampGoldBlue: 'Gold-Blau Libelle Tiffany Lampe',
-            lampPeony: 'Pfingstrose Tiffany Lampe',
+            lampPeony: 'Peony Tiffany Lampe',
             lampAcorn: 'Eichel Tiffany Lampe',
             lampWaterlily: 'Seerose Tiffany Lampe',
             lampChestnut: 'Kastanie Tiffany Lampe',
             lampVine: 'Ranken-Ornament Tiffany Lampe',
             lampDragonfly: 'Libelle Tiffany Lampe',
-            lampTulip: 'Tulpen Tiffany Lampe',
+            lampTulip: 'Tulip Tiffany Lampe',
+            lampSmallPeony: 'Kleine Peony Tiffany Lampe',
             // available categories
             availableGeometric: 'Bestellbare geometrische Tiffany-Lampen',
             availableTable: 'Bestellbare Tisch-Tiffany-Lampen',
@@ -108,11 +111,11 @@ export default function NavbarTiffanyStudio() {
             availableLamps: 'Available Tiffany Lamps',
             lampBases: 'Lamp bases',
             contact: 'Contact',
-            backTooltip: 'Back to home',
-            callTooltip: 'Call us!',
+            backTooltip: 'Back to landing page',
+            callTooltip: 'Call me!',
             emailTooltip: 'Contact by email!',
-            instagramTooltip: 'Follow on Instagram!',
-            facebookTooltip: 'Follow on Facebook!',
+            instagramTooltip: 'Follow on me Instagram!',
+            facebookTooltip: 'Follow on me Facebook!',
             branding: 'Magnolia Tiffany Studio',
             // lamp names
             lampMagnolia: `28" Magnolia Tiffany Lamp`,
@@ -124,6 +127,7 @@ export default function NavbarTiffanyStudio() {
             lampVine: 'Vine Ornament Tiffany Lamp',
             lampDragonfly: 'Dragonfly Tiffany Lamp',
             lampTulip: 'Tulip Tiffany Lamp',
+            lampSmallPeony: 'Small Peony Tiffany Lamp',
             // available categories
             availableGeometric: 'Available geometric Tiffany lamps',
             availableTable: 'Available table Tiffany lamps',
@@ -302,6 +306,8 @@ export default function NavbarTiffanyStudio() {
                                               onClick={() => handleLampDropdownClick('dragonfly')}>{t.lampDragonfly}</DropdownItem>
                                 <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
                                               onClick={() => handleLampDropdownClick('tulip')}>{t.lampTulip}</DropdownItem>
+                                <DropdownItem key="small_peony" startContent={<MdLocalFlorist  size={20}/>}
+                                              onClick={() => handleLampDropdownClick('small_peony')}>{t.lampSmallPeony}</DropdownItem>
                             </DropdownSection>
                             <DropdownSection showDivider title={t.availableLamps}>
                                 <DropdownItem startContent={<IoIosGrid size={20}/>}
@@ -401,7 +407,8 @@ export default function NavbarTiffanyStudio() {
                     </NavbarItem>
                     <Dropdown isOpen={isTiffanyLampsOpen}
                               onMouseEnter={() => setTiffanyLampsIsOpen(true)}
-                              onMouseLeave={() => setTiffanyLampsIsOpen(false)}>
+                              onMouseLeave={() => setTiffanyLampsIsOpen(false)}
+                    >
                         <NavbarItem onMouseEnter={() => setTiffanyLampsIsOpen(true)}
                                     onMouseLeave={() => setTiffanyLampsIsOpen(false)}
                                     className="py-2 cursor-pointer">
@@ -423,7 +430,7 @@ export default function NavbarTiffanyStudio() {
                                 </Button>
                             </DropdownTrigger>
                         </NavbarItem>
-                        <DropdownMenu className="" aria-label="Tiffany lámpák menü">
+                        <DropdownMenu aria-label="Tiffany lámpák menü">
                             <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}
                                           onClick={() => handleLampDropdownClick('magnolia')}>{t.lampMagnolia}</DropdownItem>
                             <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}
@@ -442,6 +449,8 @@ export default function NavbarTiffanyStudio() {
                                           onClick={() => handleLampDropdownClick('dragonfly')}>{t.lampDragonfly}</DropdownItem>
                             <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
                                           onClick={() => handleLampDropdownClick('tulip')}>{t.lampTulip}</DropdownItem>
+                            <DropdownItem key="small_peony" startContent={<MdLocalFlorist  size={20}/>}
+                                          onClick={() => handleLampDropdownClick('small_peony')}>{t.lampSmallPeony}</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 

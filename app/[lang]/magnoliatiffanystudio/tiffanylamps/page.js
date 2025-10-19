@@ -10,6 +10,7 @@ import {GiChestnutLeaf, GiCurlingVines, GiDragonfly, GiFairyWings, GiLilyPads} f
 import {IoRose} from "react-icons/io5";
 import {Button} from "@heroui/react";
 import {FaArrowAltCircleDown, FaArrowAltCircleUp} from "react-icons/fa";
+import {MdLocalFlorist} from "react-icons/md";
 
 const LOCALES = ['hu', 'de', 'en'];
 const DEFAULT_LOCALE = 'en';
@@ -25,6 +26,7 @@ const LAMPS_META = [
     { key: "vine", icon: GiCurlingVines, refIdx: 6 },
     { key: "dragonfly", icon: GiFairyWings, refIdx: 7 },
     { key: "tulip", icon: PiFlowerTulipFill, refIdx: 8 },
+    { key: "little_peony", icon: MdLocalFlorist, refIdx: 9 },
 ];
 
 // localized texts (slides per lamp). Maintain same slide count/order as original Hungarian layout.
@@ -97,87 +99,97 @@ const TEXTS = {
         ],
         tulip: [
             { title: "Tulip Tiffany Lámpa", src: "/magnoliatiffanystudio/tulip/tulip-1.jpg" },
-            { paragraph: "A Tulipános Tiffany lámpa egy bájos és elegáns darab, amely a tulipánok kecsességét és szépségét örökíti meg. A lámpa gyönyörű, meleg színtónusait a kiváló minőségű Bullseye Tiffany üveg biztosítja, amelyek finoman árnyalják a fényt, és meleg hangulatot árasztanak a szobában.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" },
-            { paragraph: "A Tiffany lámpa magassága 35 cm, így kompakt méretének köszönhetően tökéletes választás egy kisebb asztalra vagy polcra is. Oldalainak szélessége 24 cm, így elegánsan illeszkedik bármely enteriőrbe anélkül, hogy túlzottan dominálna.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" }
+            { paragraph: "Ez a tulipánmintás Tiffany lámpa egy elbűvölő és elegáns darab, amely a tulipánok kecsességét és szépségét örökíti meg.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" },
+            { paragraph: "A lámpa gyönyörű színárnyalatú Uroboros és Youghiogheny Tiffany lámpaüvegből készült. 36 cm átmérőjű tiffany lámpa egy csodaszép bronz lámpatalpon áll.", src: "/magnoliatiffanystudio/tulip/tulip-3.jpg" },
+            { paragraph: "Ez a kis, tulipánmotívumos Tiffany-lámpa a tavasz frissességét és a Tiffany-stílus időtlen szépségét ötvözi.Ez a kis, tulipánmotívumos Tiffany-lámpa a tavasz frissességét és a Tiffany-stílus időtlen szépségét ötvözi.", src: "/magnoliatiffanystudio/tulip/tulip-4.jpg" },
+        ],
+        little_peony: [
+            { title: "Kis Pünkösdirózsás Tiffany Lámpa", src: "/magnoliatiffanystudio/little_peony/little_peony-1.jpg" },
+            { paragraph: "Csodaszép színes üvegek jellemzik ezt a pünkösdirózsa mintájú Tiffany lámpát.", src: "/magnoliatiffanystudio/little_peony/little_peony-2.jpg" },
+            { paragraph: "A lámpa Youghiogheny és Bullseye üvegből készült, 36 cm-es átmérővel a kisebb méretű Tiffany lámpák közé tartozik.", src: "/magnoliatiffanystudio/little_peony/little_peony-3.jpg" },
+            { paragraph: "A virágmintás bronz lámpatalppal különleges látványt nyújt ez az asztali lámpa.", src: "/magnoliatiffanystudio/little_peony/little_peony-4.jpg" },
         ],
     },
-
     de: {
-        // German - split/refit to same slide structure
         magnolia: [
-            { title: "Magnolia Tiffany-Lampe", src: "/magnoliatiffanystudio/magnolia/magnolia-1.jpg" },
-            { paragraph: "Die „Magnolia“ Tiffany-Lampe ist ein wahres Kunstwerk und eines der größten und spektakulärsten Stücke unter den Tiffany-Lampen. Sie wurde nach Originalentwürfen von Louis Comfort Tiffany gefertigt und zeigt das wunderschöne Muster der Magnolienblüten. Der Durchmesser beträgt 71 cm (28 Inch).", src: "/magnoliatiffanystudio/magnolia/magnolia-2.jpg" },
-            { paragraph: "Das Besondere an meiner Lampe ist, dass ein Teil der Blütenblätter aus Drapery Tiffany-Glas gefertigt wurde, dessen gewellte Oberfläche die natürliche Bewegung der Blüten wiedergibt. Die Lampe besteht aus insgesamt 1260 sorgfältig ausgewählten Youghiogheny-, Uroboros- und Bullseye-Glasstücken, sodass das Spiel von Licht und Farben in jedem Detail sichtbar ist.", src: "/magnoliatiffanystudio/magnolia/magnolia-3.jpg" },
-            { paragraph: "Die bronzene „Senior Floor“ Lampenbasis gibt der Lampe Stabilität und verleiht dem Ensemble mit einer Gesamthöhe von 207 cm eine imposante Erscheinung.", src: "/magnoliatiffanystudio/magnolia/magnolia-4.jpg" },
-            { paragraph: "Dieses Stück ist eine Rarität für Sammler und Museen und gilt durch seine aufwendige Verarbeitung und historischen Bezüge als besonders wertvoll.", src: "/magnoliatiffanystudio/magnolia/magnolia-5.jpg" },
+            { title: "Magnólia Tiffany-Lampe", src: "/magnoliatiffanystudio/magnolia/magnolia-1.jpg" },
+            { paragraph: "A „Magnólia” Tiffany lámpa egy igazi műalkotás, amely a Tiffany lámpák egyik legnagyobb és leglátványosabb darabja. Louis Comfort Tiffany eredeti tervei alapján készült, és a magnólia virágainak gyönyörű mintázatát jeleníti meg. A tiffany lámpa átmérője lenyűgöző, 71 cm-es (28 inch), ami már önmagában is tekintélyes méretet kölcsönöz ennek a műremeknek.", src: "/magnoliatiffanystudio/magnolia/magnolia-2.jpg" },
+            { paragraph: "Az általam készített lámpa különlegessége, hogy a virágszirmok egy részét a Drapery Tiffany üvegből alkottam meg, amely drapériaszerűen hullámzó felületével adja vissza a virágok természetes mozgását. A lámpa összesen 1260 darab, gondosan kiválogatott Youghiogheny, Uroboros és Bullseye Tiffany üvegből készült, így a fény és a színek játéka minden részletben megfigyelhető.", src: "/magnoliatiffanystudio/magnolia/magnolia-3.jpg" },
+            { paragraph: "A bronz „Senior Floor” lámpatalp, amely a tiffany lámpa stabil alapját adja, a Tiffany lámpatalpak egyik legritkább és legértékesebb darabja. Az egész tiffany lámpa magassága 207 cm, így nem csupán egy fényforrás, hanem egy igazán látványos állólámpa, amely bármely szobát díszíthet.", src: "/magnoliatiffanystudio/magnolia/magnolia-4.jpg" },
+            { paragraph: "Ez a lámpa igazi különlegesség a Tiffany művek között, és leginkább gyűjtők, múzeumok tulajdonában található meg. Az eredeti, 1900-as évek elején készült lámpák ritkaságnak számítanak, és gyakran felbukkannak aukciókon is, ahol jelentős összegekért cserélnek gazdát. A „Magnólia” Tiffany lámpa csodálatos és bonyolult mintázata, valamint a felhasznált kiváló minőségű üvegek miatt az egyik legértékesebb Tiffany lámpának tekinthető.", src: "/magnoliatiffanystudio/magnolia/magnolia-5.jpg" },
             { src: "/magnoliatiffanystudio/magnolia/magnolia-6.jpg" },
             { src: "/magnoliatiffanystudio/magnolia/magnolia-7.jpg" },
             { src: "/magnoliatiffanystudio/magnolia/magnolia-8.jpg" },
             { src: "/magnoliatiffanystudio/magnolia/magnolia-9.jpg" }
         ],
         goldblue: [
-            { title: "Gold-Blue „Dragonfly“ Tiffany-Lampe", src: "/magnoliatiffanystudio/goldblue/goldblue-1.jpg" },
-            { paragraph: "Die Gold-Blaue „Libelle“ Tiffany Lampe ist ein wahres Schmuckstück, das in der faszinierenden Harmonie von Gold- und Blautönen erstrahlt.", src: "/magnoliatiffanystudio/goldblue/goldblue-2.jpg" },
-            { paragraph: "Die Besonderheit liegt im Libellenmuster nach Originalentwürfen von Louis Comfort Tiffany. Farblich passende Glassteine verstärken das luxuriöse Erscheinungsbild und das besondere Lichtspiel.", src: "/magnoliatiffanystudio/goldblue/goldblue-3.jpg" },
-            { paragraph: "Der Schirm hat 50 cm Durchmesser und besteht aus 406 sorgfältig platzierten Youghiogheny- und Uroboros-Glasstücken. Mit dem bronzenen Lampenfuß „Twisted Vine“ erreicht die Gesamthöhe 76 cm.", src: "/magnoliatiffanystudio/goldblue/goldblue-4.jpg" },
-            { paragraph: "Diese Lampe ist ein Kunstwerk, das Natur und klassischen Tiffany-Charme vereint und eine besonders gemütliche Atmosphäre schafft.", src: "/magnoliatiffanystudio/goldblue/goldblue-5.jpg" }
+            { title: "Gold-Blue Dragonfly Tiffany-Lampe", src: "/magnoliatiffanystudio/goldblue/goldblue-1.jpg" },
+            { paragraph: "A Gold-Blue „Dragonfly” Tiffany lámpa igazi ékkő a Tiffany lámpák között, amely az arany és kék színek lenyűgöző harmóniájában pompázik.", src: "/magnoliatiffanystudio/goldblue/goldblue-2.jpg" },
+            { paragraph: "A lámpa különlegességét a szitakötő mintázat adja, amely Louis Comfort Tiffany eredeti tervei alapján készült, így hűen tükrözi Tiffany stílusának eleganciáját. A színekben hozzá illő üvegkövek még inkább fokozzák a lámpa luxus megjelenését, eleganciát és különleges fényjátékot kölcsönözve neki.", src: "/magnoliatiffanystudio/goldblue/goldblue-3.jpg" },
+            { paragraph: "A Tiffany lámpa burája 50 cm átmérőjű, és 406 darab gondosan elhelyezett Youghiogheny és Uroboros üvegcséből áll, amelyek együttesen megteremtik a lámpa lélegzetelállító mintázatát. Az egész alkotás magassága a „Twisted Vine” bronz lámpatalppal együtt eléri a 76 cm-t, így igazi figyelemfelkeltő darab bármely térben.", src: "/magnoliatiffanystudio/goldblue/goldblue-4.jpg" },
+            { paragraph: "Ez a lámpa nem csupán fényforrás, hanem egy művészi alkotás, amely a természet szépségét és a Tiffany lámpák klasszikus varázsát ötvözi. Az arany és kék árnyalatok lenyűgöző kombinációja, valamint a lámpa részletgazdag kidolgozása különleges, meghitt hangulatot teremt.", src: "/magnoliatiffanystudio/goldblue/goldblue-5.jpg" }
         ],
         peony: [
             { title: "Peony Tiffany-Lampe", src: "/magnoliatiffanystudio/peony/peony-1.jpg" },
-            { paragraph: "Die „Peony“ Tiffany-Lampe bringt die beeindruckende Schönheit der Pfingstrose ins Zuhause. Nach den Originalentwürfen von Louis Comfort Tiffany gefertigt, spiegelt sie Eleganz und künstlerischen Anspruch wider.", src: "/magnoliatiffanystudio/peony/peony-2.jpg" },
-            { paragraph: "Der Schirm besteht aus 513 handgeschnittenen Youghiogheny- und Uroboros-Glasstücken, deren Farbgebung die Pracht der Pfingstrose zum Leben erweckt.", src: "/magnoliatiffanystudio/peony/peony-3.jpg" },
-            { paragraph: "Mit 45 cm Durchmesser und der „Lady“ Bronzbasis erreicht die Lampe eine Höhe von ca. 80 cm und wirkt als elegantes Zentrum jedes Raums.", src: "/magnoliatiffanystudio/peony/peony-4.jpg" },
-            { paragraph: "Die „Peony“ ist mehr als Licht — ein kunstvoll gefertigtes Einzelstück.", src: "/magnoliatiffanystudio/peony/peony-5.jpg" },
+            { paragraph: "A „Peony” Tiffany lámpa a pünkösdi rózsa lenyűgöző szépségét hozza el otthonokba. Az eredeti Louis Comfort Tiffany tervei alapján készült, és minden részlete a Tiffany stílus eleganciáját és művészi kifinomultságát tükrözi.", src: "/magnoliatiffanystudio/peony/peony-2.jpg" },
+            { paragraph: "A tiffany lámpa burája 513 darab kézzel vágott, kiváló minőségű Youghiogheny és Uroboros Tiffany üvegből készült, amelyek különleges színvilágukkal életre keltik a pünkösdi rózsa virágzásának pompáját.", src: "/magnoliatiffanystudio/peony/peony-3.jpg" },
+            { paragraph: "A tiffany lámpa 45 cm átmérőjű, ami impozáns méretet biztosít, míg magassága a „Lady” bronz lámpatalppal együtt eléri a 80 cm-t. Ez a méret igazán kiemeli a tiffany lámpa művészi megjelenését, és egy elegáns, mégis meghitt központi darabként funkcionál bármely szobában.", src: "/magnoliatiffanystudio/peony/peony-4.jpg" },
+            { paragraph: "A „Peony” Tiffany lámpa nem csupán egy világító eszköz, hanem egyedi műalkotás is, amely a természet szépségét ötvözi a kiváló mestermunkával. A tiffany lámpa csodálatos fényjátéka és részletgazdag mintázata melegséget és stílust visz otthona bármely sarkába.", src: "/magnoliatiffanystudio/peony/peony-5.jpg" },
             { src: "/magnoliatiffanystudio/peony/peony-6.jpg" },
             { src: "/magnoliatiffanystudio/peony/peony-7.jpg" },
             { src: "/magnoliatiffanystudio/peony/peony-8.jpg" }
         ],
         acorn: [
             { title: "Acorn Tiffany-Lampe", src: "/magnoliatiffanystudio/acorn/acorn-1.jpg" },
-            { paragraph: "Die „Acorn“ Tiffany-Lampe besticht durch ihr solides, dennoch raffiniertes Muster nach Originalentwürfen von Louis Comfort Tiffany. Hochwertige Youghiogheny- und Bullseye-Gläser mit schöner Farbpalette wurden verwendet.", src: "/magnoliatiffanystudio/acorn/acorn-2.jpg" },
-            { paragraph: "Der Schirm hat 40 cm Durchmesser und besteht aus 468 handgeschnittenen Glasstücken. Die bronzene „Acorn“ Basis wurde speziell für diese Lampe angefertigt.", src: "/magnoliatiffanystudio/acorn/acorn-3.jpg" }
+            { paragraph: "Az „Acorn” Tiffany lámpa egyszerű, mégis kifinomult mintázatával hódít, amely az ikonikus Louis Comfort Tiffany eredeti tervei alapján készült. A lámpa készítéséhez kiváló minőségű, csodálatos színvilágú Youghiogheny és Bullseye Tiffany üvegeket használtam, amelyek tökéletesen visszaadják a Tiffany stílus esszenciáját.", src: "/magnoliatiffanystudio/acorn/acorn-2.jpg" },
+            { paragraph: "A lámpabura 40 cm átmérőjű, és 468 darab kézzel vágott, gondosan összeállított üvegelemből áll. A bronz talapzat, melynek neve szintén „Acorn”, kifejezetten ehhez a lámpához készült, hogy harmonizáljon a lámpa elegáns megjelenésével.", src: "/magnoliatiffanystudio/acorn/acorn-3.jpg" }
         ],
         waterlily: [
             { title: "Waterlily Tiffany-Lampe", src: "/magnoliatiffanystudio/waterlily/waterlily-1.jpg" },
-            { paragraph: "Die „Waterlily“ Tiffany-Lampe ist ein Meisterwerk, das an die anmutige Schönheit der Seerosen erinnert. Nach Originalentwürfen von Louis Comfort Tiffany gefertigt, spiegelt sie feine Eleganz wider.", src: "/magnoliatiffanystudio/waterlily/waterlily-2.jpg" },
-            { paragraph: "Der Schirm aus Youghiogheny- und Uroboros-Glas spiegelt Harmonie und Farbenpracht der Natur wider.", src: "/magnoliatiffanystudio/waterlily/waterlily-3.jpg" },
-            { paragraph: "Mit 50 cm Durchmesser und 70 cm Höhe hat die Lampe eine eindrucksvolle Präsenz im Raum.", src: "/magnoliatiffanystudio/waterlily/waterlily-4.jpg" },
-            { paragraph: "Der Schirm besteht aus 420 handgeschnittenen Glaselementen; die bronzene „Waterlily“ Basis ergänzt das natürliche Erscheinungsbild.", src: "/magnoliatiffanystudio/waterlily/waterlily-5.jpg" },
-            { paragraph: "Diese Lampe ist ein kunstvolles Blickfangstück, das jedem Raum eine elegante, beruhigende Atmosphäre verleiht.", src: "/magnoliatiffanystudio/waterlily/waterlily-6.jpg" },
+            { paragraph: "A „Waterlily” Tiffany lámpa valódi mestermű, mely a vízililiomok kecses szépségét idézi. Eredeti Louis Comfort Tiffany tervei alapján készült, így hűen visszaadja a Tiffany stílusának finom eleganciáját.", src: "/magnoliatiffanystudio/waterlily/waterlily-2.jpg" },
+            { paragraph: "A lámpa különlegessége a gyönyörű, Youghiogheny és Uroboros Tiffany üvegekből készült bura, amely egyedülálló módon tükrözi a természet harmóniáját és színpompáját.", src: "/magnoliatiffanystudio/waterlily/waterlily-3.jpg" },
+            { paragraph: "A lámpa 50 cm átmérőjű, ami már önmagában is impozáns méret, azonban magassága, amely eléri a 70 cm-t, még inkább kiemeli jelenlétét a térben.", src: "/magnoliatiffanystudio/waterlily/waterlily-4.jpg" },
+            { paragraph: "A tiffany lámpa burája 420 darab kézzel vágott üvegelemből áll, melyek gondosan összeállítva alkotják meg a vízililiom mintát. A bronz lámpatalp, amely szintén a „Waterlily” nevet viseli, tökéletesen kiegészíti a lámpa természetközeli megjelenését, stabil és elegáns alapot biztosítva számára.", src: "/magnoliatiffanystudio/waterlily/waterlily-5.jpg" },
+            { paragraph: "Ez a lámpa nem csak egy megvilágító eszköz, hanem egy szemet gyönyörködtető, művészi darab, amely bármely helyiséget elegáns, nyugalmat árasztó hangulattal tölt meg.", src: "/magnoliatiffanystudio/waterlily/waterlily-6.jpg" },
             { src: "/magnoliatiffanystudio/waterlily/waterlily-7.jpg" }
         ],
         chestnut: [
-            { title: "Chesnut Tiffany-Lampe", src: "/magnoliatiffanystudio/chestnut/chestnut-1.jpg" },
-            { paragraph: "Die „Chesnut“ Tiffany-Lampe zeichnet sich durch ein von Kastanienblättern inspiriertes Muster und einen ungewöhnlichen, wellenförmigen Lampenschirm aus.", src: "/magnoliatiffanystudio/chestnut/chestnut-2.jpg" },
-            { paragraph: "Nach den ursprünglichen Entwürfen von Louis Comfort Tiffany gefertigt, gibt sie Natur und Tiffanys Eleganz treu wieder.", src: "/magnoliatiffanystudio/chestnut/chestnut-3.jpg" },
-            { paragraph: "Der Schirm hat 30 cm Durchmesser und besteht aus 219 sorgfältig zusammengefügten Youghiogheny- und Bullseye-Glasstücken in wunderschönen Farben.", src: "/magnoliatiffanystudio/chestnut/chestnut-4.jpg" },
-            { paragraph: "Die wellenförmigen Linien und naturnahen Farben schaffen eine besondere Atmosphäre und heben die Lampe hervor.", src: "/magnoliatiffanystudio/chestnut/chestnut-5.jpg" },
-            { paragraph: "Die „Chesnut“ Lampe ist ein Kunstwerk, das Natur und Kunst verbindet und jedem Raum Gemütlichkeit verleiht.", src: "/magnoliatiffanystudio/chestnut/chestnut-6.jpg" },
+            { title: "Chestnut Tiffany-Lampe", src: "/magnoliatiffanystudio/chestnut/chestnut-1.jpg" },
+            { paragraph: "A „Chestnut” Tiffany lámpa különlegessége abban rejlik, hogy a gesztenyelevelek ihlette mintázata és a lámpabura szokatlan, hullámzó formája egészen egyedi látványt nyújt.", src: "/magnoliatiffanystudio/chestnut/chestnut-2.jpg" },
+            { paragraph: "Louis Comfort Tiffany eredeti tervei alapján készült, így hűen visszaadja a természet szépségét és Tiffany stílusának különleges eleganciáját.", src: "/magnoliatiffanystudio/chestnut/chestnut-3.jpg" },
+            { paragraph: "A Tiffany lámpabúra 30 cm átmérőjű, és 219 darab gondosan összeillesztett Youghiogheny és Bullseye üvegelemből áll, amelyek csodálatos színekben pompáznak, életre keltve a gesztenyelevél mintázatát.", src: "/magnoliatiffanystudio/chestnut/chestnut-4.jpg" },
+            { paragraph: "A Tiffany lámpa hullámzó vonalai és természetközeli színei különleges hangulatot teremtenek, miközben a lámpák között is kiemelkedik egyedi formavilágával.", src: "/magnoliatiffanystudio/chestnut/chestnut-5.jpg" },
+            { paragraph: "A „Chestnut” Tiffany lámpa nemcsak egy világító eszköz, hanem egy művészi alkotás, amely a természet és a művészet találkozásának tökéletes példája. Egyedisége és különleges megjelenése bármely térnek eleganciát kölcsönöz.", src: "/magnoliatiffanystudio/chestnut/chestnut-6.jpg" },
             { src: "/magnoliatiffanystudio/chestnut/chestnut-7.jpg" }
         ],
         vine: [
             { title: "Vine Ornament Tiffany-Lampe", src: "/magnoliatiffanystudio/vine/vine-1.jpg" },
-            { paragraph: "Die „Vine Ornament“ Tiffany-Lampe ist ein echtes Kunstwerk, das die bezaubernden Farben des Herbstes ins Haus bringt. Nach Originalentwürfen von Louis Comfort Tiffany gefertigt.", src: "/magnoliatiffanystudio/vine/vine-2.jpg" },
-            { paragraph: "Der Schirm besteht aus hochwertigem Youghiogheny- und Bullseye-Glas. Die Lampe hat 40 cm Durchmesser und besteht aus 432 handgeschnittenen, sorgfältig zusammengesetzten Glaselementen.", src: "/magnoliatiffanystudio/vine/vine-3.jpg" },
-            { paragraph: "Diese Lampe ist mehr als Dekoration: sie verkörpert den ewigen Kreislauf der Jahreszeiten und zaubert Gemütlichkeit in jeden Raum.", src: "/magnoliatiffanystudio/vine/vine-4.jpg" }
+            { paragraph: "A „Vine Ornament” Tiffany lámpa egy igazi műalkotás, mely az ősz varázslatos színeit hozza el otthonokba.", src: "/magnoliatiffanystudio/vine/vine-2.jpg" },
+            { paragraph: "Az eredeti Louis Comfort Tiffany tervei alapján készült, így a híres Tiffany stílus egyedi eleganciáját tükrözi. A lámpa burája kiváló minőségű Youghiogheny és Bullseye üvegekből készült, amelyek szépsége és élénk színvilága különlegessé teszi ezt a darabot.", src: "/magnoliatiffanystudio/vine/vine-3.jpg" },
+            { paragraph: "A lámpa 40 cm átmérőjű, és 432 darab kézzel vágott, gondosan összeállított üvegelemből áll. Minden egyes üvegelem precízen illeszkedik egymáshoz, hogy az ősz változatos, meleg színei érvényesüljenek.", src: "/magnoliatiffanystudio/vine/vine-4.jpg" }
         ],
         dragonfly: [
             { title: "Dragonfly Tiffany-Lampe", src: "/magnoliatiffanystudio/dragonfly/dragonfly-1.jpg" },
-            { paragraph: "Die „Dragonfly“ Tiffany-Lampe verewigt die feine, luftige Schönheit der Libelle nach Originalentwürfen von Louis Comfort Tiffany.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-2.jpg" },
-            { paragraph: "Uroboros- und Bullseye-Gläser sorgen für beeindruckendes Lichtspiel und eine faszinierende Farbwelt.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-3.jpg" },
-            { paragraph: "Mit 40 cm Durchmesser ist sie die perfekte Raumattraktion, ohne zu dominieren.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-4.jpg" },
-            { paragraph: "Die sorgfältige Anordnung der Glaselemente und das Libellenmotiv machen dieses Stück einzigartig.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-5.jpg" },
+            { paragraph: "A „Dragonfly” Tiffany lámpa különleges varázslatot hordoz magában, hiszen a szitakötő finom, légies szépségét örökíti meg Louis Comfort Tiffany eredeti tervei alapján.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-2.jpg" },
+            { paragraph: "Az Uroboros és Bullseye Tiffany üvegek használata lenyűgöző fényjátékkal és színvilággal gazdagítja a lámpát, kiemelve a Tiffany stílusra jellemző egyedi részleteket és eleganciát.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-3.jpg" },
+            { paragraph: "A tiffany lámpabúra 40 cm átmérőjű, ami tökéletes méret ahhoz, hogy a lámpa bármely tér fókuszpontjává váljon, anélkül, hogy túlzottan dominálná a környezetét.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-4.jpg" },
+            { paragraph: "Ez a tiffany lámpa nem csupán világító eszköz, hanem művészi kifejezés is, amely a természet varázsát ötvözi az üveg kézművesség mesteri kivitelezésével. A „Dragonfly” Tiffany lámpa meleg, lágy fényt áraszt.", src: "/magnoliatiffanystudio/dragonfly/dragonfly-5.jpg" },
             { src: "/magnoliatiffanystudio/dragonfly/dragonfly-6.jpg" }
         ],
         tulip: [
             { title: "Tulip Tiffany-Lampe", src: "/magnoliatiffanystudio/tulip/tulip-1.jpg" },
-            { paragraph: "Diese Tulpen-Tiffany-Lampe ist ein bezauberndes, elegantes Stück, das die Anmut und Schönheit der Tulpe einfängt. Hochwertiges Uroboros-Glas sorgt für feine Farbabstufungen.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" },
-            { paragraph: "Die Lampe hat 36 cm Durchmesser und steht auf einem bronzenen Lampenfuß. Sie verbindet Frühlingsfrische mit zeitloser Tiffany-Ästhetik.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" }
-        ]
+            { paragraph: "Ez a tulipánmintás Tiffany lámpa egy elbűvölő és elegáns darab, amely a tulipánok kecsességét és szépségét örökíti meg.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" },
+            { paragraph: "A lámpa gyönyörű színárnyalatú Uroboros és Youghiogheny Tiffany lámpaüvegből készült. 36 cm átmérőjű tiffany lámpa egy csodaszép bronz lámpatalpon áll.", src: "/magnoliatiffanystudio/tulip/tulip-3.jpg" },
+            { paragraph: "Ez a kis, tulipánmotívumos Tiffany-lámpa a tavasz frissességét és a Tiffany-stílus időtlen szépségét ötvözi.Ez a kis, tulipánmotívumos Tiffany-lámpa a tavasz frissességét és a Tiffany-stílus időtlen szépségét ötvözi.", src: "/magnoliatiffanystudio/tulip/tulip-4.jpg" },
+        ],
+        little_peony: [
+            { title: "Kis Pünkösdirózsás Tiffany-Lampe", src: "/magnoliatiffanystudio/little_peony/little_peony-1.jpg" },
+            { paragraph: "Csodaszép színes üvegek jellemzik ezt a pünkösdirózsa mintájú Tiffany lámpát.", src: "/magnoliatiffanystudio/little_peony/little_peony-2.jpg" },
+            { paragraph: "A lámpa Youghiogheny és Bullseye üvegből készült, 36 cm-es átmérővel a kisebb méretű Tiffany lámpák közé tartozik.", src: "/magnoliatiffanystudio/little_peony/little_peony-3.jpg" },
+            { paragraph: "A virágmintás bronz lámpatalppal különleges látványt nyújt ez az asztali lámpa.", src: "/magnoliatiffanystudio/little_peony/little_peony-4.jpg" },
+        ],
     },
-
     en: {
-        // English translations (concise, matching HU layout)
         magnolia: [
             { title: "Magnolia Tiffany Lamp", src: "/magnoliatiffanystudio/magnolia/magnolia-1.jpg" },
             { paragraph: "The “Magnolia” Tiffany lamp is a true work of art and one of the largest and most spectacular Tiffany lamps. It was made after Louis Comfort Tiffany's original designs and displays the beautiful pattern of magnolia blossoms. The lamp measures 71 cm (28 inches) in diameter.", src: "/magnoliatiffanystudio/magnolia/magnolia-2.jpg" },
@@ -245,8 +257,15 @@ const TEXTS = {
         ],
         tulip: [
             { title: "Tulip Tiffany Lamp", src: "/magnoliatiffanystudio/tulip/tulip-1.jpg" },
-            { paragraph: "This tulip-motif Tiffany lamp is a charming and elegant piece that captures the grace and beauty of tulips. High-quality Uroboros glass gives the lamp its warm tonal variations.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" },
-            { paragraph: "The lamp is 36 cm in diameter and stands on a beautiful bronze base. It combines spring freshness with timeless Tiffany style.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" }
+            { paragraph: "This tulip-patterned Tiffany lamp is a charming and elegant piece that captures the grace and beauty of tulips.", src: "/magnoliatiffanystudio/tulip/tulip-2.jpg" },
+            { paragraph: "The lamp is made from beautifully colored Uroboros and Youghiogheny Tiffany glass. This 36 cm diameter Tiffany lamp stands on a stunning bronze lamp base.", src: "/magnoliatiffanystudio/tulip/tulip-3.jpg" },
+            { paragraph: "This small tulip-motif Tiffany lamp combines the freshness of spring with the timeless beauty of the Tiffany style.", src: "/magnoliatiffanystudio/tulip/tulip-4.jpg" }
+        ],
+        little_peony: [
+            { title: "Little Peony Tiffany Lamp", src: "/magnoliatiffanystudio/little_peony/little_peony-1.jpg" },
+            { paragraph: "This Tiffany lamp with a peony pattern is characterized by beautiful colorful glass.", src: "/magnoliatiffanystudio/little_peony/little_peony-2.jpg" },
+            { paragraph: "The lamp is made from Youghiogheny and Bullseye glass, with a diameter of 36 cm, making it one of the smaller Tiffany lamps.", src: "/magnoliatiffanystudio/little_peony/little_peony-3.jpg" },
+            { paragraph: "With its flower-patterned bronze lamp base, this table lamp offers a special visual appeal.", src: "/magnoliatiffanystudio/little_peony/little_peony-4.jpg" },
         ]
     }
 };
