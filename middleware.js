@@ -1,3 +1,5 @@
+// javascript
+// File: `middleware.js`
 import { NextResponse } from 'next/server';
 
 const LOCALES = ['hu', 'de', 'en'];
@@ -8,7 +10,6 @@ const DEFAULT = 'en';
 function parseAcceptLanguage(header) {
     if (!header) return null;
     const langs = header.split(',').map(s => s.trim().toLowerCase());
-    // prefer first matching supported locale
     for (const l of langs) {
         if (l.startsWith('hu')) return 'hu';
         if (l.startsWith('de')) return 'de';
@@ -19,35 +20,72 @@ function parseAcceptLanguage(header) {
 
 export function middleware(request) {
     const url = request.nextUrl.clone();
-    const { pathname, search } = url;
+    const { pathname } = url;
 
     // Skip internals and assets
     if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.includes('.')) {
         return NextResponse.next();
     }
 
-    // If path already has a locale prefix, proceed
+    // normalize host (strip port and optional www)
+    const rawHost = request.headers.get('host') || '';
+    const hostname = rawHost.split(':')[0].toLowerCase().replace(/^www\./, '');
+    const studioHosts = new Set(['tiffanystudio.at', 'tiffanystudio.hu']);
+    const isStudio = studioHosts.has(hostname);
+
+    // If path already has a locale prefix
     const pathnameHasLocale = LOCALES.some(
         (loc) => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`)
     );
-    const hostname = request.headers.get('host')?.split(':')[0] || '';
-    const studioHosts = new Set(['tiffanystudio.at', 'tiffanystudio.hu']);
 
     if (pathnameHasLocale) {
-        // If the request is for a bare locale root on a studio host, rewrite internally
         const matchedLocale = LOCALES.find(loc => pathname === `/${loc}` || pathname === `/${loc}/`);
-        if (matchedLocale && studioHosts.has(hostname)) {
+        if (matchedLocale && isStudio) {
+            // internally serve the magnoliatiffanystudio page for bare locale roots on studio hosts
             url.pathname = `/${matchedLocale}/magnoliatiffanystudio`;
-            return NextResponse.rewrite(url); // serves the studio page while keeping /hu in the browser
+            return NextResponse.rewrite(url);
         }
         return NextResponse.next();
     }
 
-    // Respect cookie if present
+    // If requesting the site root on a studio host, rewrite to the studio home (preserve browser URL)
+    if (isStudio && (pathname === '/' || pathname === '')) {
+        // Respect cookie if present
+        let targetLocale = request.cookies.get(COOKIE_NAME)?.value;
+        if (!targetLocale || !LOCALES.includes(targetLocale)) {
+            // Try geo
+            try {
+                const country = (request.geo?.country || '').toUpperCase();
+                if (country === 'HU') targetLocale = 'hu';
+                if (country === 'AT' || country === 'DE') targetLocale = 'de';
+            } catch (e) {
+                /* ignore */
+            }
+        }
+        // Fallback to Accept-Language
+        if (!targetLocale) {
+            const accept = request.headers.get('accept-language');
+            targetLocale = parseAcceptLanguage(accept) || DEFAULT;
+        }
+
+        url.pathname = `/${targetLocale}/magnoliatiffanystudio`;
+        // Keep browser URL as `/` (or later you might prefer redirect to `/${targetLocale}`), using rewrite to serve studio home
+        return NextResponse.rewrite(url);
+    }
+
+    // Respect cookie if present for non-studio hosts / other pages
     const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
     if (cookieLocale && LOCALES.includes(cookieLocale)) {
         url.pathname = `/${cookieLocale}${pathname}`;
-        return NextResponse.redirect(url);
+        const res = NextResponse.redirect(url);
+        res.cookies.set({
+            name: COOKIE_NAME,
+            value: cookieLocale,
+            path: '/',
+            maxAge: COOKIE_MAX_AGE,
+            sameSite: 'lax'
+        });
+        return res;
     }
 
     // Try geo (available on Vercel Edge); map countries
