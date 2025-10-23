@@ -72,8 +72,17 @@ export default function Home({ params }) {
 
     const goToStudio = () => {
         const locale = getLocaleFromCookie();
+        const domain = window.location.hostname
         setLocaleCookie(locale);
-        router.push(`/${locale}/tiffanystudio`);
+        if (domain === 'glassartista.com') {
+            if (locale === 'hu' || locale === 'en') {
+                router.push(`https://tiffanystudio.hu/${locale}`);
+            } else if (locale === 'de') {
+                router.push('https://tiffanystudio.at/de');
+            }
+        } else {
+            router.push(`/tiffanystudio/`);
+        }
     };
 
     return (

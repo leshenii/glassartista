@@ -47,7 +47,7 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {FaLandmarkDome} from "react-icons/fa6";
 import {BiArch, BiVerticalTop} from "react-icons/bi";
 import {LiaPencilRulerSolid} from "react-icons/lia";
-import {MdGridGoldenratio, MdVideoLibrary} from "react-icons/md";
+import {MdChurch, MdGridGoldenratio, MdVideoLibrary} from "react-icons/md";
 
 export default function NavbarGlassArtista() {
 
@@ -75,7 +75,8 @@ export default function NavbarGlassArtista() {
             canopy: 'Előtető',
             entrance: 'Bejárat',
             window: 'Ablak',
-            ceiling: 'mennyezet',
+            ceiling: 'Mennyezet',
+            ecclesial: 'Egyházi üvegek',
             // details
             engineeringDesign: 'Mérnöki tervezés',
             glasses: 'Üvegek',
@@ -103,6 +104,7 @@ export default function NavbarGlassArtista() {
             entrance: 'Eingang',
             window: 'Fenster',
             ceiling: 'Glasdecke',
+            ecclesial: 'Ecclesial',
             // details
             engineeringDesign: 'Ingenieure Planung',
             glasses: 'Gläser',
@@ -130,6 +132,7 @@ export default function NavbarGlassArtista() {
             entrance: 'Entrance',
             window: 'Window',
             ceiling: 'Ceiling',
+            ecclesial: 'Kirchenfenster',
             // details
             engineeringDesign: 'Engineering design',
             glasses: 'Glasses',
@@ -266,7 +269,7 @@ export default function NavbarGlassArtista() {
                                     />
                                 }
                             >
-                                {getNavbarLabel()}
+                                { getNavbarLabel() }
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Dropdown menu">
@@ -304,6 +307,8 @@ export default function NavbarGlassArtista() {
                                               onClick={() => handleGalleryDropdownClick('window')}>{t.window}</DropdownItem>
                                 <DropdownItem key="ceiling" startContent={<BiVerticalTop size={20}/>}
                                               onClick={() => handleGalleryDropdownClick('ceiling')}>{t.ceiling}</DropdownItem>
+                                <DropdownItem key="ecclesial" startContent={<MdChurch size={20}/>}
+                                              onClick={() => handleGalleryDropdownClick('ecclesial')}>{t.ceiling}</DropdownItem>
                             </DropdownSection>
                             <DropdownSection showDivider title={t.details}>
                                 <DropdownItem startContent={<LiaPencilRulerSolid size={20}/>}
@@ -430,16 +435,18 @@ export default function NavbarGlassArtista() {
                             </DropdownTrigger>
                         </NavbarItem>
                         <DropdownMenu aria-label="Gallery menu">
-                            <DropdownItem key="magnolia" startContent={<FaLandmarkDome size={20}/>}
+                            <DropdownItem key="dome" startContent={<FaLandmarkDome size={20}/>}
                                           onClick={() => handleGalleryDropdownClick('dome')}>{t.dome}</DropdownItem>
-                            <DropdownItem key="goldblue" startContent={<BiArch size={20}/>}
+                            <DropdownItem key="canopy" startContent={<BiArch size={20}/>}
                                           onClick={() => handleGalleryDropdownClick('canopy')}>{t.canopy}</DropdownItem>
-                            <DropdownItem key="peony" startContent={<GiDoorway size={20}/>}
+                            <DropdownItem key="entrance" startContent={<GiDoorway size={20}/>}
                                           onClick={() => handleGalleryDropdownClick('entrance')}>{t.entrance}</DropdownItem>
-                            <DropdownItem key="acorn" startContent={<GiWindowBars size={20}/>}
+                            <DropdownItem key="window" startContent={<GiWindowBars size={20}/>}
                                           onClick={() => handleGalleryDropdownClick('window')}>{t.window}</DropdownItem>
-                            <DropdownItem key="waterlily" startContent={<BiVerticalTop size={20}/>}
+                            <DropdownItem key="ceiling" startContent={<BiVerticalTop size={20}/>}
                                           onClick={() => handleGalleryDropdownClick('ceiling')}>{t.ceiling}</DropdownItem>
+                            <DropdownItem key="ecclesial" startContent={<MdChurch size={20}/>}
+                                          onClick={() => handleGalleryDropdownClick('ecclesial')}>{t.ecclesial}</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 

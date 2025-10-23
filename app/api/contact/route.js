@@ -19,7 +19,7 @@ export async function POST(req) {
             from: `Magnólia Tiffanystudió <${email}>`,
             to: process.env.SMTP_USER,
             replyTo: `"${name}" <${email}>`,
-            subject: text || 'Megkeresés a weboldalon keresztül',
+            subject: text || 'Contant form submission',
             text: `
 Name: ${name}
 Email: ${email}
