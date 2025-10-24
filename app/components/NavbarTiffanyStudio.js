@@ -190,10 +190,10 @@ export default function NavbarTiffanyStudio() {
     const goTo = (path) => {
         const domain = window.location.host;
         console.log(domain)
-        if (domain === 'tiffanystudio.at' || domain === 'tiffanystudio.hu') {
-            router.push(`https://${domain}${localized(`/${path}`)}`);
+        if (domain === 'www.tiffanystudio.at' || domain === 'www.tiffanystudio.hu') {
+            router.push(`https://${domain}${localized(`${path}`)}`);
         } else {
-            router.push(`https://${domain}${localized(`/tiffanystudio/${path}`)}`);
+            router.push(`https://${domain}${localized(`tiffanystudio/${path}`)}`);
         }
     }
 
