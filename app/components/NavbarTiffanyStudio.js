@@ -189,6 +189,7 @@ export default function NavbarTiffanyStudio() {
 
     const goTo = (path) => {
         const domain = window.location.host;
+        console.log(domain)
         if (domain === 'tiffanystudio.at' || domain === 'tiffanystudio.hu') {
             router.push(`https://${domain}${localized(`/${path}`)}`);
         } else {
