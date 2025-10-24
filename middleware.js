@@ -46,7 +46,7 @@ export function middleware(request) {
                 const MAP = {
                     '/contact': '/tiffanystudio/contact',
                     '/lampbases': '/tiffanystudio/lampbases',
-
+                    '/tiffanylamps': '/tiffanylamps',
                     '/tiffanylampsavailable': '/tiffanystudio/tiffanylampsavailable'
                 };
 
