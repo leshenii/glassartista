@@ -188,11 +188,11 @@ export default function NavbarTiffanyStudio() {
     };
 
     const goTo = (path) => {
-        const domain = window.location.hostname;
+        const domain = window.location.host;
         if (domain === 'tiffanystudio.at' || domain === 'tiffanystudio.hu') {
-            router.push(localized(`/${path}`));
+            router.push(`https://${domain}${localized(`/${path}`)}`);
         } else {
-            router.push(localized(`/tiffanystudio/${path}`));
+            router.push(`https://${domain}${localized(`/tiffanystudio/${path}`)}`);
         }
     }
 
