@@ -69,7 +69,7 @@ export default function NavbarTiffanyStudio() {
             lampVine: 'Vine Ornament Tiffany lámpa',
             lampDragonfly: 'Dragonfly Tiffany lámpa',
             lampTulip: 'Tulip Tiffany lámpa',
-            lampSmallPeony: 'Kis Peony Tiffany lámpa',
+            lampLittlePeony: 'Kis Peony Tiffany lámpa',
             // available categories
             availableGeometric: 'Rendelhető geometrikus Tiffany lámpák',
             availableTable: 'Rendelhető asztali Tiffany lámpák',
@@ -98,15 +98,15 @@ export default function NavbarTiffanyStudio() {
             lampVine: 'Ranken-Ornament Tiffany Lampe',
             lampDragonfly: 'Libelle Tiffany Lampe',
             lampTulip: 'Tulip Tiffany Lampe',
-            lampSmallPeony: 'Kleine Peony Tiffany Lampe',
+            lampLittlePeony: 'Kleine Peony Tiffany Lampe',
             // available categories
             availableGeometric: 'Bestellbare geometrische Tiffany-Lampen',
             availableTable: 'Bestellbare Tisch-Tiffany-Lampen',
             availableStanding: 'Bestellbare Stehende Tiffany-Lampen'
         },
         en: {
-            landing: 'Home',
-            main: 'Main',
+            landing: 'Landing',
+            main: 'Home',
             tiffanyLamps: 'Tiffany Lamps',
             availableLamps: 'Available Tiffany Lamps',
             lampBases: 'Lamp bases',
@@ -127,7 +127,7 @@ export default function NavbarTiffanyStudio() {
             lampVine: 'Vine Ornament Tiffany Lamp',
             lampDragonfly: 'Dragonfly Tiffany Lamp',
             lampTulip: 'Tulip Tiffany Lamp',
-            lampSmallPeony: 'Small Peony Tiffany Lamp',
+            lampLittlePeony: 'Little Peony Tiffany Lamp',
             // available categories
             availableGeometric: 'Available geometric Tiffany lamps',
             availableTable: 'Available table Tiffany lamps',
@@ -192,32 +192,35 @@ export default function NavbarTiffanyStudio() {
         console.log(domain)
         if (domain === 'www.tiffanystudio.at' || domain === 'www.tiffanystudio.hu') {
             router.push(`https://${domain}${localized(`${path}`)}`);
-        } else {
+        } else if (domain === 'www.glassartista.com') {
             router.push(`https://${domain}${localized(`tiffanystudio/${path}`)}`);
+        } else {
+            router.push(`http://${domain}${localized(`tiffanystudio/${path}`)}`);
         }
     }
 
 
     const handleLampDropdownClick = (key) => {
         if (key === 'magnolia') {
-            goTo("/tiffanylamps")
+            goTo("tiffanylamps")
         } else {
-            goTo(`/tiffanylamps#${key}`);
+            goTo(`tiffanylamps#${key}`);
         }
         setTiffanyLampsIsOpen(false);
     };
 
     const handleAvailableLampDropdownClick = (key) => {
         if (key === 'geometric') {
-            goTo("/tiffanylampsavailable")
+            goTo("tiffanylampsavailable")
         } else {
-            goTo(`/tiffanylampsavailable#${key}`);
+            goTo(`tiffanylampsavailable#${key}`);
         }
         setTiffanyLampsIsOpen(false);
     };
 
     const handleNavPush = (path) => {
-        router.push(localized(path));
+        goTo(path);
+        //router.push(localized(path));
     };
 
     const getNavbarLabel = () => {
@@ -274,7 +277,7 @@ export default function NavbarTiffanyStudio() {
                                 {getNavbarLabel()}
                             </Button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label="Dropdown menu">
+                        <DropdownMenu aria-label="Dropdown menu" >
                             <DropdownSection showDivider>
                                 <DropdownItem key="landing_page"
                                               onPress={() => router.push(localized('/'))}>
@@ -284,41 +287,43 @@ export default function NavbarTiffanyStudio() {
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="main_page"
-                                              onPress={() => handleNavPush('/tiffanystudio')}>
+                                              onPress={() => goTo('/')}>
                                 <span
-                                    className={`${pathname === '/tiffanystudio' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                    className={`${stripLocaleFromPath(pathname || '/') === '/' || pathname.endsWith('/tiffanystudio') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                     {t.main}
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="contact"
-                                              onPress={() => handleNavPush('/tiffanystudio/contact')}>
+                                              onPress={() => goTo('contact')}>
                                 <span
-                                    className={`${pathname && pathname.endsWith('/tiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                    className={`${pathname && pathname.endsWith('/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                     {t.contact}
                                 </span>
                                 </DropdownItem>
                             </DropdownSection>
-                            <DropdownSection showDivider title={t.tiffanyLamps}>
-                                <DropdownItem key="magnolia" startContent={<PiFlowerFill size={20}/>}
+                            <DropdownSection showDivider title={t.tiffanyLamps} classNames={{
+                                group: "grid grid-cols-2 gap-2"
+                            }} >
+                                <DropdownItem key="magnolia" className='border-2 border-gray-200' startContent={<PiFlowerFill size={20}/>}
                                               onClick={() => handleLampDropdownClick('magnolia')}>{t.lampMagnolia}</DropdownItem>
-                                <DropdownItem key="goldblue" startContent={<GiDragonfly size={20}/>}
+                                <DropdownItem key="goldblue" className='border-2 border-gray-200' startContent={<GiDragonfly size={20}/>}
                                               onClick={() => handleLampDropdownClick('goldblue')}>{t.lampGoldBlue}</DropdownItem>
-                                <DropdownItem key="peony" startContent={<IoRose size={20}/>}
+                                <DropdownItem key="peony" className='border-2 border-gray-200' startContent={<IoRose size={20}/>}
                                               onClick={() => handleLampDropdownClick('peony')}>{t.lampPeony}</DropdownItem>
-                                <DropdownItem key="acorn" startContent={<PiAcornFill size={20}/>}
+                                <DropdownItem key="acorn" className='border-2 border-gray-200' startContent={<PiAcornFill size={20}/>}
                                               onClick={() => handleLampDropdownClick('acorn')}>{t.lampAcorn}</DropdownItem>
-                                <DropdownItem key="waterlily" startContent={<GiLilyPads size={20}/>}
+                                <DropdownItem key="waterlily" className='border-2 border-gray-200' startContent={<GiLilyPads size={20}/>}
                                               onClick={() => handleLampDropdownClick('waterlily')}>{t.lampWaterlily}</DropdownItem>
-                                <DropdownItem key="chestnut" startContent={<GiChestnutLeaf size={20}/>}
+                                <DropdownItem key="chestnut" className='border-2 border-gray-200' startContent={<GiChestnutLeaf size={20}/>}
                                               onClick={() => handleLampDropdownClick('chestnut')}>{t.lampChestnut}</DropdownItem>
-                                <DropdownItem key="vine" startContent={<GiCurlingVines size={20}/>}
+                                <DropdownItem key="vine" className='border-2 border-gray-200' startContent={<GiCurlingVines size={20}/>}
                                               onClick={() => handleLampDropdownClick('vine')}>{t.lampVine}</DropdownItem>
-                                <DropdownItem key="dragonfly" startContent={<GiFairyWings size={20}/>}
+                                <DropdownItem key="dragonfly" className='border-2 border-gray-200' startContent={<GiFairyWings size={20}/>}
                                               onClick={() => handleLampDropdownClick('dragonfly')}>{t.lampDragonfly}</DropdownItem>
-                                <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
+                                <DropdownItem key="tulip" className='border-2 border-gray-200' startContent={<PiFlowerTulipFill size={20}/>}
                                               onClick={() => handleLampDropdownClick('tulip')}>{t.lampTulip}</DropdownItem>
-                                <DropdownItem key="small_peony" startContent={<MdLocalFlorist size={20}/>}
-                                              onClick={() => handleLampDropdownClick('small_peony')}>{t.lampSmallPeony}</DropdownItem>
+                                <DropdownItem key="little_peony" className='border-2 border-gray-200' startContent={<MdLocalFlorist size={20}/>}
+                                              onClick={() => handleLampDropdownClick('little_peony')}>{t.lampLittlePeony}</DropdownItem>
                             </DropdownSection>
                             <DropdownSection showDivider title={t.availableLamps}>
                                 <DropdownItem startContent={<IoIosGrid size={20}/>}
@@ -401,15 +406,14 @@ export default function NavbarTiffanyStudio() {
                     <NavbarItem>
                         <Tooltip content={t.backTooltip} placement="bottom" showArrow={true} radius="full"
                                  color="foreground" size="sm">
-                            <Link href={localized('/')}><FaArrowAltCircleLeft color="white" className="pt-1"
-                                                                              size={27}/></Link>
+                            <Link href={`https://glassartista.com/${currentLocale}`}><FaArrowAltCircleLeft color="white" className="pt-1" size={27}/></Link>
                         </Tooltip>
                     </NavbarItem>
                     <NavbarItem>
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => handleNavPush('/tiffanystudio')}
+                            onPress={() => goTo('/')}
                         >
                                     <span
                                         className={`${pathname && pathname.endsWith('/tiffanystudio') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
@@ -436,7 +440,7 @@ export default function NavbarTiffanyStudio() {
                                         />
                                     }>
                                     <span
-                                        className={`${pathname && pathname.endsWith('/tiffanystudio/tiffanylamps') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        className={`${pathname && pathname.endsWith('/tiffanylamps') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                                         {t.tiffanyLamps}
                                     </span>
                                 </Button>
@@ -461,8 +465,8 @@ export default function NavbarTiffanyStudio() {
                                           onClick={() => handleLampDropdownClick('dragonfly')}>{t.lampDragonfly}</DropdownItem>
                             <DropdownItem key="tulip" startContent={<PiFlowerTulipFill size={20}/>}
                                           onClick={() => handleLampDropdownClick('tulip')}>{t.lampTulip}</DropdownItem>
-                            <DropdownItem key="small_peony" startContent={<MdLocalFlorist size={20}/>}
-                                          onClick={() => handleLampDropdownClick('small_peony')}>{t.lampSmallPeony}</DropdownItem>
+                            <DropdownItem key="little_peony" startContent={<MdLocalFlorist size={20}/>}
+                                          onClick={() => handleLampDropdownClick('little_peony')}>{t.lampLittlePeony}</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
@@ -481,7 +485,7 @@ export default function NavbarTiffanyStudio() {
                                     disableRipple={true}
                                     variant="light">
                                     <span
-                                        className={`${pathname === localized('/tiffanystudio/tiffanylampsavailable') ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
+                                        className={`${pathname.endsWith('tiffanylampsavailable') ? 'underline ' : 'hover:underline hover:decoration-dashed '}`}>
                                         {t.availableLamps}
                                     </span>
                                 </Button>
@@ -521,10 +525,10 @@ export default function NavbarTiffanyStudio() {
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => handleNavPush('/tiffanystudio/contact')}
+                            onPress={() => goTo('contact')}
                         >
                         <span
-                            className={`${pathname && pathname.endsWith('/tiffanystudio/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                            className={`${pathname && pathname.endsWith('/contact') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
                             {t.contact}
                         </span>
                         </Button>
