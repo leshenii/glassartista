@@ -199,7 +199,7 @@ export default function NavbarTiffanyStudio() {
 
     const handleLampDropdownClick = (key) => {
         if (key === 'magnolia') {
-            goTo("tiffanylamps")
+            goTo("/tiffanylamps")
         } else {
             goTo(`/tiffanylamps#${key}`);
         }
@@ -208,7 +208,7 @@ export default function NavbarTiffanyStudio() {
 
     const handleAvailableLampDropdownClick = (key) => {
         if (key === 'geometric') {
-            goTo("tiffanylampsavailable")
+            goTo("/tiffanylampsavailable")
         } else {
             goTo(`/tiffanylampsavailable#${key}`);
         }

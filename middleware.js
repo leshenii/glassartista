@@ -44,10 +44,10 @@ export function middleware(request) {
             if (isStudio) {
                 // Map certain top-level locale routes to the tiffanystudio subtree
                 const MAP = {
-                    '/contact': '/contact',
-                    '/lampbases': '/lampbases',
-                    '/tiffanylamps': '/tiffanylamps',
-                    '/tiffanylampsavailable': '/tiffanylampsavailable'
+                    '/contact': '/tiffanystudio/contact',
+                    '/lampbases': '/tiffanystudio/lampbases',
+                    '/tiffanylamps': '/tiffanystudio/tiffanylamps',
+                    '/tiffanylampsavailable': '/tiffanystudio/tiffanylampsavailable'
                 };
 
                 const afterLocale = pathname.slice(`/${matchedLocale}`.length) || '/';
@@ -66,7 +66,7 @@ export function middleware(request) {
 
                 // internally serve the tiffanystudio page for bare locale roots on studio hosts
                 if (pathname === `/${matchedLocale}` || pathname === `/${matchedLocale}/`) {
-                    url.pathname = `/${matchedLocale}`;
+                    url.pathname = `/${matchedLocale}/tiffanystudio`;
                     return NextResponse.rewrite(url);
                 }
             }
@@ -94,7 +94,7 @@ export function middleware(request) {
             targetLocale = parseAcceptLanguage(accept) || DEFAULT;
         }
 
-        url.pathname = `/${targetLocale}/`;
+        url.pathname = `/${targetLocale}/tiffanystudio`;
         // Keep browser URL as `/` (or later you might prefer redirect to `/${targetLocale}`), using rewrite to serve studio home
         return NextResponse.rewrite(url);
     }
