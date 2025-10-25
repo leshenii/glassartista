@@ -6,8 +6,21 @@ import {Tooltip} from "@heroui/react";
 import {IoCloseCircle} from "react-icons/io5";
 import {Lens} from "@/app/components/lens";
 
+const isVideo = (src) => {
+    if (!src) return false;
+    const clean = src.split("?")[0].toLowerCase();
+    return clean.endsWith(".mp4") || clean.startsWith("data:video") || clean.includes("video/mp4");
+};
+
 const ImageSlide = ({
-                        slide, index, current, handleSlideClick, icon: Icon, handleTouchEnd, handleTouchMove, handleTouchStart
+                        slide,
+                        index,
+                        current,
+                        handleSlideClick,
+                        icon: Icon,
+                        handleTouchEnd,
+                        handleTouchMove,
+                        handleTouchStart
                     }) => {
     const slideRef = useRef(null);
 
@@ -68,6 +81,7 @@ const ImageSlide = ({
         event.currentTarget.style.opacity = "1";
     };
 
+
     const {src, position, title} = slide;
 
     return (<div
@@ -94,19 +108,38 @@ const ImageSlide = ({
                 }}>
 
                 {src ? (
-                    <img
-                        className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-                        style={{
-                            opacity: current === index ? 1 : 0.1,
-                            objectPosition: position || "bottom center",
-                        }}
-                        draggable={false}
-                        alt={title}
-                        src={src}
-                        onLoad={imageLoaded}
-                        loading="eager"
-                        decoding="sync"
-                    />
+                    isVideo(src) ? (
+                        <video
+                            className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover transition-opacity duration-600 ease-in-out"
+                            style={{
+                                opacity: current === index ? 1 : 0.1,
+                                objectPosition: position || "bottom center",
+                            }}
+                            draggable={false}
+                            aria-label={title}
+                            src={src}
+                            onLoadedData={imageLoaded}
+                            playsInline
+                            muted
+                            loop
+                            autoPlay={current === index}
+                            preload="auto"
+                        />
+                    ) : (
+                        <img
+                            className="absolute inset-0 w-[100%] h-[100%] rounded-xl object-cover transition-opacity duration-600 ease-in-out"
+                            style={{
+                                opacity: current === index ? 1 : 0.1,
+                                objectPosition: position || "bottom center",
+                            }}
+                            draggable={false}
+                            alt={title}
+                            src={src}
+                            onLoad={imageLoaded}
+                            loading="eager"
+                            decoding="sync"
+                        />
+                    )
                 ) : (
                     Icon && <div className="flex items-center justify-center w-full h-full">
                         <Icon size={30}/>
@@ -127,7 +160,14 @@ const ImageSlide = ({
 };
 
 const TextSlide = ({
-                       slide, index, current, handleSlideClick, icon: Icon, handleTouchEnd, handleTouchMove, handleTouchStart
+                       slide,
+                       index,
+                       current,
+                       handleSlideClick,
+                       icon: Icon,
+                       handleTouchEnd,
+                       handleTouchMove,
+                       handleTouchStart
                    }) => {
     const slideRef = useRef(null);
 
@@ -151,7 +191,7 @@ const TextSlide = ({
     };
 
     const {src, position, paragraph, title} = slide;
- 
+
     return (<div
         className="[perspective:300px] [transform-style:preserve-3d] animate__animated animate__fadeInLeftBig animate__slow">
         <li
@@ -179,7 +219,7 @@ const TextSlide = ({
                         <div ref={slideRef} className="flex flex-col items-center gap-2 md:gap-4 lg:gap-8">
                             {title && (
                                 <>
-                                    {Icon && <Icon size={35} />}
+                                    {Icon && <Icon size={35}/>}
                                     <h2 className="text-2xl md:lg:text-5xl lg:text-6xl text-center font-semibold relative allura-regular">
                                         {title}
                                     </h2>
@@ -195,7 +235,7 @@ const TextSlide = ({
                             )}
                         </div>
                     ) : (
-                        Icon && <Icon size={30} />
+                        Icon && <Icon size={30}/>
                     )}
 
                 </article>
@@ -320,8 +360,8 @@ export function ImageCarousel({slides, current, setCurrent, handlePreviousClick,
         </ul>
 
         <ImageModal
-            src={slides[current].src}
-            alt={slides[current].title}
+            src={slides[current] ? slides[current].src : ''}
+            alt={slides[current] ? slides[current].title : ''}
             open={modalOpen}
             onClose={handleModalClose}
         />
@@ -435,40 +475,70 @@ export function TextCarousel({slides, current, setCurrent, icon}) {
     </div>);
 }
 
+// javascript
 export function ImageModal({src, alt, open, onClose}) {
-    if (!open) return null;
-    return (
+    const videoRef = useRef(null);
 
+    useEffect(() => {
+        if (!open) return; // guard so effect runs only when modal is open
+        if (isVideo(src) && videoRef.current) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play().catch(() => {});
+        }
+        return () => {
+            if (videoRef.current) {
+                videoRef.current.pause();
+            }
+        };
+    }, [src, open]);
+
+    if (!open) return null;
+
+    return (
         <div
             className="fixed inset-0 z-52 flex items-center justify-center bg-black bg-opacity-80 select-none rounded-none"
             onClick={onClose}
         >
             <button
                 className="absolute top-4 right-6 text-white text-3xl font-bold z-60 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 transition"
-                onClick={e => {
+                onClick={(e) => {
                     e.stopPropagation();
                     onClose();
                 }}
-                onTouchEnd={e => {
+                onTouchEnd={(e) => {
                     e.stopPropagation();
                     onClose();
                 }}
                 aria-label="Close modal"
                 tabIndex={0}
             >
-                <IoCloseCircle size={30} className="cursor-pointer" />
+                <IoCloseCircle size={30} className="cursor-pointer"/>
             </button>
-            <Lens>
-            <img
-                draggable={false}
-                src={src}
-                alt={alt}
-                className="w-[90vw] h-[90vh] shadow-lg rounded-none"
-                style={{objectFit: 'contain'}}
-                onClick={e => e.stopPropagation()}
-            />
-            </Lens>
-        </div>
 
+            {isVideo(src) ? (
+                <video
+                    ref={videoRef}
+                    src={src}
+                    controls
+                    playsInline
+                    autoPlay
+                    draggable={false}
+                    className="w-[90vw] h-[90vh] shadow-lg rounded-none"
+                    style={{objectFit: "contain"}}
+                    onClick={(e) => e.stopPropagation()}
+                />
+            ) : (
+                <Lens>
+                    <img
+                        draggable={false}
+                        src={src}
+                        alt={alt}
+                        className="w-[90vw] h-[90vh] shadow-lg rounded-none"
+                        style={{objectFit: "contain"}}
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                </Lens>
+            )}
+        </div>
     );
 }

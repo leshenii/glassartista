@@ -104,7 +104,7 @@ export default function NavbarGlassArtista() {
             entrance: 'Eingang',
             window: 'Fenster',
             ceiling: 'Glasdecke',
-            ecclesial: 'Ecclesial',
+            ecclesial: 'Kirchenfenster',
             // details
             engineeringDesign: 'Ingenieure Planung',
             glasses: 'Gläser',
@@ -132,7 +132,7 @@ export default function NavbarGlassArtista() {
             entrance: 'Entrance',
             window: 'Window',
             ceiling: 'Ceiling',
-            ecclesial: 'Kirchenfenster',
+            ecclesial: 'Ecclesial',
             // details
             engineeringDesign: 'Engineering design',
             glasses: 'Glasses',

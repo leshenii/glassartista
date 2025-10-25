@@ -227,6 +227,8 @@ export default function NavbarTiffanyStudio() {
         const stripped = (pathname || '/').split('/').slice(2).join('/');
         const route = `/${stripped}` === '/tiffanystudio' || pathname === `/` ? `/tiffanystudio` : `/${stripped}`;
         const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
+        console.log('route: ' + route)
+        console.log('stripped' + stripped)
         switch (route) {
             case '/tiffanystudio':
                 return t.main;
@@ -235,6 +237,14 @@ export default function NavbarTiffanyStudio() {
             case '/tiffanystudio/tiffanylampsavailable':
                 return t.availableLamps;
             case '/tiffanystudio/contact':
+                return t.contact;
+            case '/':
+                return t.main;
+            case '/tiffanylamps':
+                return t.tiffanyLamps;
+            case '/tiffanylampsavailable':
+                return t.availableLamps;
+            case '/contact':
                 return t.contact;
             default:
                 return '';
