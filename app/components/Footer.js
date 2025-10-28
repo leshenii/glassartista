@@ -54,7 +54,7 @@ export default function Footer() {
     const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
 
     return (
-        <footer className="fixed bottom-0 lg:pr-2 z-53 w-screen lg:w-2/5 h-min mt-10 justify-self-end">
+        <footer className="fixed bottom-0 lg:pr-2 z-53 w-screen lg:w-2/5 h-min mt-10 justify-self-end animate__animated animate__fadeInUp">
             <div
                 className="flex flex-row gap-4 w-full my-2 items-center justify-center lg:justify-end text-gray-400 text-xs">
                 <div  className="hidden lg:flex flex-row gap-2 items-center">

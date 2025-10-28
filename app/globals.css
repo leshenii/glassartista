@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
 
 @config "../tailwind.config.js";
 
@@ -24,6 +25,11 @@
     font-style: normal;
 }
 
+.cormorant-regular {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 700;
+    font-style: normal;
+}
 
 .paragraph--p1 {
     font-weight: 400;

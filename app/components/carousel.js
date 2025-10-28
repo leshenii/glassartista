@@ -220,7 +220,7 @@ const TextSlide = ({
                             {title && (
                                 <>
                                     {Icon && <Icon size={35}/>}
-                                    <h2 className="text-2xl md:lg:text-5xl lg:text-6xl text-center font-semibold relative allura-regular">
+                                    <h2 className="text-2xl md:text-5xl lg:text-6xl text-center font-semibold relative allura-regular">
                                         {title}
                                     </h2>
                                 </>

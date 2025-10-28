@@ -1,7 +1,7 @@
 'use client'
 
-
-import {FaAddressCard, FaFacebookSquare, FaPhoneAlt} from "react-icons/fa";
+import {FaFacebookSquare, FaPhoneAlt, FaYoutube} from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 import {RiMailFill} from "react-icons/ri";
 import {AiFillInstagram} from "react-icons/ai";
 import {TbExternalLink} from "react-icons/tb";
@@ -27,6 +27,7 @@ const DICT = {
         requiredMessage: "Kérlek írd meg az üzeneted!",
         thanks: (n) => `Köszönöm, ${n}! Az üzenetedet megkaptam, hamarosan felveszem veled a kapcsolatot.`,
         contactNameHeader: "Nyíri Eszter"
+
     },
     de: {
         pageHeading: "Kontaktieren Sie mich!",
@@ -57,6 +58,38 @@ const DICT = {
         contactNameHeader: "Eszter Nyíri"
     }
 };
+
+const ADDRESS_LINES = {
+    hu: [
+        "3535 Miskolc",
+        "János utca 23."
+    ],
+    de: [
+        "Sagbichl 494C",
+        "6215, Achenkirch",
+        "Tirol, Austria"
+    ],
+    en: [
+        "Sagbichl 494C",
+        "6215, Achenkirch",
+        "Tirol, Austria"
+    ]
+};
+
+const TEL_LINES = {
+    hu: [
+        {label: "+36 70-3600950", href: "tel:+36703600950"}
+    ],
+    de: [
+        {label: "+43 (0)6766933329", href: "tel:+436766933329"},
+        {label: "+49 172 8184253", href: "tel:+491728184253"}
+    ],
+    en: [
+        {label: "+43 (0)6766933329", href: "tel:+436766933329"},
+        {label: "+49 172 8184253", href: "tel:+491728184253"}
+    ]
+};
+
 
 export default function GlassArtistaContactPage({ params }) {
 
@@ -130,30 +163,56 @@ export default function GlassArtistaContactPage({ params }) {
         setRecaptchaLoaded(true);
     }
 
+    const addressString = ADDRESS_LINES[lang].join(', ');
+    const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressString)}`;
+
+
     return (
         <div
             className="flex flex-col overflow-visible lg:flex-row gap-10 lg:gap-24 w-screen items-center justify-center lg:h-screen-minus-navbar-desktop mt-4 lg:mt-0 lg:pl-16">
             <div className="flex flex-col gap-6 h-full w-min justify-center items-start">
                 <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8 mx-auto">{L.contactNameHeader}</h2>
-                <div className="flex flex-row items-center gap-2 select-all ">
-                    <FaPhoneAlt size={25}/>
-                    +36-70/360-0950
+
+                <div className="flex flex-row items-center gap-2">
+                    <FaLocationDot size={25} />
+                    <a href={mapsHref} target="_blank" rel="noopener noreferrer">
+                        {ADDRESS_LINES[lang].map((line, idx) => (
+                            <div key={idx}>{line}</div>
+                        ))}
+                    </a>
                 </div>
+
+                <div className="flex flex-row items-center gap-2 select-all ">
+                    <FaPhoneAlt size={25} className="mb-1"/>
+                    <div className="flex flex-col">
+                        {TEL_LINES[lang].map((t, i) => (
+                            <a key={i} href={t.href}>{t.label}</a>
+                        ))}
+                    </div>
+                </div>
+
                 <div className="flex flex-row items-center gap-2 select-all ">
                     <RiMailFill size={30}/>
-                    m.tiffanystudio@gmail.com
+                    info@glassartista.com
                 </div>
-                <Link href="https://www.instagram.com/magnolia_tiffanystudio/" target="_blank">
+                <Link href="https://www.instagram.com/glassartista_h" target="_blank">
                     <div className="flex flex-row items-center gap-2 ">
                         <AiFillInstagram size={30}/>
-                        magnolia_tiffanystudio
+                        glassartista_h
                         <TbExternalLink size={16}/>
                     </div>
                 </Link>
-                <Link href="https://www.facebook.com/profile.php?id=100054201323550#" target="_blank">
+                <Link href="https://www.facebook.com/glassartistah" target="_blank">
                     <div className="flex flex-row items-center gap-2 ">
                         <FaFacebookSquare size={30}/>
-                        Magnólia Tiffanystúdió
+                        GlassArtista
+                        <TbExternalLink size={16}/>
+                    </div>
+                </Link>
+                <Link href="https://www.facebook.com/glassartistah" target="_blank">
+                    <div className="flex flex-row items-center gap-2 ">
+                        <FaYoutube size={30}/>
+                        @GlassArtista
                         <TbExternalLink size={16}/>
                     </div>
                 </Link>

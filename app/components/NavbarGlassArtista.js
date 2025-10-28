@@ -227,8 +227,6 @@ export default function NavbarGlassArtista() {
                 return t.gallery;
             case '/details':
                 return t.details;
-            case '/about':
-                return t.about;
             case '/contact':
                 return t.contact;
             default:
@@ -491,18 +489,6 @@ export default function NavbarGlassArtista() {
                         <Button
                             className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
                             radius="full"
-                            onPress={() => handleNavPush('/about')}
-                        >
-                        <span
-                            className={`${pathname && pathname.endsWith('/about') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                            {t.about}
-                        </span>
-                        </Button>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Button
-                            className="px-3 bg-transparent data-[hover=true]:bg-transparent text-xl uppercase antonio-navbar"
-                            radius="full"
                             onPress={() => handleNavPush('/contact')}
                         >
                         <span
@@ -515,16 +501,6 @@ export default function NavbarGlassArtista() {
                 <NavbarContent justify="end">
                     <NavbarItem>
                         <div className="flex flex-row gap-3 pt-1">
-                            <div className="flex flex-row gap-1 items-center justify-center pb-1">
-                                <Tooltip content={t.callTooltip} showArrow={true} radius="full" color="foreground"
-                                         placement="bottom">
-                                    <Link href="tel:+36703600950"
-                                          target="_blank"
-                                          className="text-xl font-light antonio-navbar text-white"><FaPhoneAlt
-                                        size="16px"/></Link>
-                                </Tooltip>
-                                <span className="select-all">+36-70/360-0950</span>
-                            </div>
                             <Tooltip content={t.emailTooltip} placement="bottom" showArrow={true} radius="full"
                                      color="foreground">
                                 <Link href="mailto:info@glassartista.com"

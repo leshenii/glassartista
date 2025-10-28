@@ -1,4 +1,3 @@
-// JavaScript
 'use client'
 
 import React, {createRef, useEffect, useMemo, useRef, useState} from "react";
@@ -182,397 +181,304 @@ const TEXTS = {
             { src: "/glassartista/ecclesial/ecclesial-6.jpg" },
             { src: "/glassartista/ecclesial/ecclesial-7.jpg" },
             { src: "/glassartista/ecclesial/ecclesial-8.jpg" },
-
         ],
     },
     de: {
-        magnolia: [
-            {title: "Magnólia Tiffany-Lampe", src: "/tiffanystudio/magnolia/magnolia-1.jpg"},
+        dome: [
+            {title: "Bleiglaskuppel", src: "/glassartista/dome/dome-1.webp"},
             {
-                paragraph: "Die „Magnolia“ Tiffany-Lampe ist ein wahres Kunstwerk und eines der größten und spektakulärsten Stücke unter den Tiffany-Lampen.",
-                src: "/tiffanystudio/magnolia/magnolia-2.jpg"
+                paragraph: "Die hier gezeigte Bleiglaskuppel hat eine Glasoberfläche von 10,5 Quadratmetern und wurde in Bleiglastechnik aus mundgeblasenem und handgerolltem Kathedralglas gefertigt, das von der deutschen Glashütte Lamberts speziell für diese Arbeit hergestellt wurde.",
+                src: "/glassartista/dome/dome-2.webp"
             },
             {
-                paragraph: "Sie wurde nach Originalentwürfen von Louis Comfort Tiffany gefertigt und zeigt das wunderschöne Muster der Magnolienblüten.",
-                src: "/tiffanystudio/magnolia/magnolia-3.jpg"
+                paragraph: "Die Stabilität der Kuppel wird neben der Bleisglastechnik durch eine von uns geplante und gefertigte spezielle Versteifungskonstruktion gewährleistet.",
+                src: "/glassartista/dome/dome-3.webp"
             },
             {
-                paragraph: "Der Durchmesser der Tiffany-Lampe ist beeindruckend, mit 71 cm (28 Inch), was diesem Meisterwerk allein schon eine beachtliche Größe verleiht.",
-                src: "/tiffanystudio/magnolia/magnolia-4.jpg"
+                paragraph: "Die Edelstahl-Tragkonstruktion, die die Kuppel trägt, wurde ebenfalls von unserer Firma entworfen und hergestellt.",
+                src: "/glassartista/dome/dome-4.webp"
             },
             {
-                paragraph: "Das Besondere an meiner Lampe ist, dass ich einen Teil der Blütenblätter aus dem sogenannten Drapery Tiffany-Glas gefertigt habe, das mit seiner gewellten Oberfläche die natürliche Bewegung der Blüten wiedergibt.",
-                src: "/tiffanystudio/magnolia/magnolia-5.jpg"
+                paragraph: "Die Bleiglaskuppel besteht aus 24 Teilen mit insgesamt 1820 Glaselementen und ist mit 144 geschliffenen Kristalljuwelen und unzähligen facettierten Glaselementen verziert, was diese Kreation besonders und einzigartig macht.",
+                src: "/glassartista/dome/dome-5.webp"
             },
-            {
-                paragraph: "Die Lampe besteht aus insgesamt 1260 sorgfältig ausgewählten Tiffany-Glasstücken von Youghiogheny, Uroboros und Bullseye, sodass das Spiel von Licht und Farben in jedem Detail zu beobachten ist.",
-                src: "/tiffanystudio/magnolia/magnolia-6.jpg"
-            },
-            {src: "/tiffanystudio/magnolia/magnolia-7.jpg"},
-            {src: "/tiffanystudio/magnolia/magnolia-8.jpg"},
-            {src: "/tiffanystudio/magnolia/magnolia-9.jpg"}
+            {paragraph: "Bleirinnen-Technik", src: "/glassartista/dome/dome-6.webp"},
+            {src: "/glassartista/dome/dome-7.webp"},
         ],
-        goldblue: [
-            {title: "Gold-Blue Dragonfly Tiffany-Lampe", src: "/tiffanystudio/goldblue/goldblue-1.jpg"},
+        canopy: [
+            {title: "Vordach", src: "/glassartista/canopy/canopy-1.webp"},
             {
-                paragraph: "Die Gold-Blaue „Libelle“ Tiffany Lampe ist ein wahres Schmuckstück unter den Tiffany Lampen, das in der faszinierenden Harmonie von Gold- und Blautönen erstrahlt. Die Besonderheit der Lampe liegt in dem Libellenmuster, das nach Originalentwürfen von Louis Comfort Tiffany gefertigt wurde und somit die Eleganz des Tiffany-Stils authentisch widerspiegelt.",
-                src: "/tiffanystudio/goldblue/goldblue-2.jpg"
+                paragraph: "Modern und zugleich sehr stilvoll ist dieses monumentale Vordach, das mit 160 Glaskasetten verziert ist, die jeweils 37×37 cm groß sind und mit Bleigverglasung und Fusing-Technik (Glasschmelztechnik) hergestellt wurden.",
+                src: "/glassartista/canopy/canopy-2.webp"
             },
             {
-                paragraph: "Die farblich passenden Glassteine verstärken das luxuriöse Erscheinungsbild der Lampe zusätzlich und verleihen ihr Eleganz und ein besonderes Lichtspiel.",
-                src: "/tiffanystudio/goldblue/goldblue-3.jpg"
+                paragraph: "Die Bleiglasplatten wurden in einem 3-schichtigen wärmedämmenden und gehärteten Glasverbund eingebaut, sodass sie extremen Wetterbedingungen problemlos standhalten.",
+                src: "/glassartista/canopy/canopy-3.webp"
             },
             {
-                paragraph: " Der Schirm der Tiffany Lampe hat einen Durchmesser von 50 cm und besteht aus 406 sorgfältig platzierten Youghiogheny- und Uroboros-Glasstücken, die zusammen das atemberaubende Muster der Lampe schaffen. Die Gesamthöhe des Kunstwerks erreicht zusammen mit dem bronzenen Lampenfuß „Twisted Vine“ 76 cm und ist somit ein echter Hingucker in jedem Raum.",
-                src: "/tiffanystudio/goldblue/goldblue-4.jpg"
+                paragraph: "Die Gesamtfläche der dekorativen Glaselemente die das Vordach schmücken, beträgt 22 Quadratmeter. Die Planung und Fertigung der Stahlunterkonstruktion wurden ebenfalls von unserem Unternehmen durchgeführt.",
+                src: "/glassartista/canopy/canopy-4.webp"
             },
             {
-                paragraph: "Diese Lampe ist nicht nur eine Lichtquelle, sondern ein Kunstwerk, das die Schönheit der Natur und den klassischen Charme der Tiffany-Lampen vereint. Die faszinierende Kombination aus goldenen und blauen Farbtönen sowie die detailreiche Verarbeitung der Lampe schaffen eine besondere, gemütliche Atmosphäre.",
-                src: "/tiffanystudio/goldblue/goldblue-5.jpg"
+                paragraph: "Bleirinnen- und Tiffany-Technik\n" +
+                "Projektübergabe: November 2021\n" +
+                "Herstellungszeit: 3 Monate von der Planung bis zur Übergabe"
+            },
+        ],
+        entrance: [
+            {title: "Eingang", src: "/glassartista/entrance/entrance-1.webp"},
+            {
+                paragraph: "Das hier gezeigte Hauptportal am Eingang ist zusammen mit den Glaselementen über 12,5 Meter hoch und erstreckt sich über zwei Stockwerke.",
+                src: "/glassartista/entrance/entrance-2.webp"
+            },
+            {
+                paragraph: "Die Buntglasfenster wurden aus handgewalztem Kathedralglas der Glashütte Lamberts und der Glasmanufaktur Uroboros gefertigt.",
+                src: "/glassartista/entrance/entrance-3.webp"
+            },
+            {
+                paragraph: "Im Erdgeschoss empfangen den Besucher neben der riesigen zweiflügeligen Eingangstür auf beiden Seiten jeweils ein langes und ein kürzeres Bleiglaspanel.",
+                src: "/glassartista/entrance/entrance-4.webp"
+            },
+            {
+                paragraph: "Die Musterung des Buntglases enthält sowohl klassische als auch moderne Elemente. Die äußeren, facettierten Elemente verleihen dem Buntglas eine beeindruckende Eleganz.",
+                src: "/glassartista/entrance/entrance-5.webp"
+            },
+            {
+                paragraph: "Die Bleiglasstruktur auf der Ebene des Obergeschosses repräsentiert in ihrer Musterung bereits einen viel freieren, spielerischeren Stil. Aber auch hier haben wir uns um moderne Eleganz und die Harmonie mit den Glaseinsätzen im Erdgeschoss bemüht.",
+                src: "/glassartista/entrance/entrance-6.webp"
+            },
+            {
+                paragraph: "Die ganze Kunstglaskollektion im Obergeschoss besteht aus 8 Glasfenstern, wobei das größte Fensterelement über 2×1 Meter groß ist.",
+                src: "/glassartista/entrance/entrance-7.webp"
+            },
+            {
+                paragraph: "Aufgrund der Abmessungen kam nur die Bleiverglasungstechnik in Frage, da nur so die entsprechende Stabilität des Glases bei einer so großen Glasfläche gewährleistet werden kann.",
+                src: "/glassartista/entrance/entrance-8.webp"
+            },
+            {
+                paragraph: "Die Bleiglasfenster, die den Raum im Obergeschoss schmücken, wurden mit geschliffenen Kristallsteinen verziert, was der Kreation ein unglaublich großzügiges, elegantes Aussehen verleiht.",
+                src: "/glassartista/entrance/entrance-9.webp"
+            },
+            {
+                paragraph: "Bleirinnen-Technik\nProjektübergabe: Sommer 2022\nHerstellungszeit: 1 Monat",
+                src: "/glassartista/entrance/entrance-10.webp"
             }
         ],
-        peony: [
-            {title: "Peony Tiffany-Lampe", src: "/tiffanystudio/peony/peony-1.jpg"},
+        window: [
+            {title: "Fenster", src: "/glassartista/window/window-1.jpg"},
             {
-                paragraph: "Die Tiffany-Lampe „Peony“ bringt die beeindruckende Schönheit der Pfingstrose in Ihr Zuhause.",
-                src: "/tiffanystudio/peony/peony-2.jpg"
+                paragraph: "Wenn wir das Wort Bleiglas hören, denken die meisten von uns an traditionelle Bleiverglasung oder bemalte Kirchenfenster.",
+                src: "/glassartista/window/window-2.jpg"
             },
             {
-                paragraph: "Sie wurde nach den Originalentwürfen von Louis Comfort Tiffany gefertigt und jedes Detail spiegelt die Eleganz und den künstlerischen Anspruch des Tiffany-Stils wider.",
-                src: "/tiffanystudio/peony/peony-3.jpg"
+                paragraph: "Wie viel anders und leichter ist der Stil dieses Bleiglasfensters hier, nicht wahr? Dabei wird es mit der gleichen traditionellen Bleiverglasungstechnik hergestellt, aber die Verwendung von wunderschönen, unterschiedlichen Arten und speziell bearbeiteten transparenten und farblosen Kathedralgläsern führt zu einem ganz leichten, moderneren Design.",
+                src: "/glassartista/window/window-3.jpg"
             },
             {
-                paragraph: "Der Lampenschirm der Tiffany-Lampe besteht aus 513 handgeschnittenen Stücken hochwertigen Youghiogheny- und Uroboros-Tiffany-Glases, die mit ihrer besonderen Farbgebung die Pracht der Pfingstrosenblüte zum Leben erwecken.",
-                src: "/tiffanystudio/peony/peony-4.jpg"
+                paragraph: "Das mit Kristalljuwelen verzierte Bleiglasfenster besteht aus 8 Glaskassetten und 552 Glaselementen, die insgesamt mehr als 7,5 Quadratmeter groß sind.",
+                src: "/glassartista/window/window-4.jpg"
             },
-            {src: "/tiffanystudio/peony/peony-5.jpg"},
-            {src: "/tiffanystudio/peony/peony-6.jpg"},
-            {src: "/tiffanystudio/peony/peony-7.jpg"},
-            {src: "/tiffanystudio/peony/peony-8.jpg"}
+            {
+                paragraph: "Nach der Herstellung wurden die Fensterelemente in Isolierglas eingebaut, um ihren endgültigen Platz zu finden.",
+                src: "/glassartista/window/window-5.jpg"
+            },
+            {
+                paragraph: "Nach der Konzeption der Glaskollektion half die technische Planung dabei, dass jedes einzelne Glaselement bis auf den Zehntelmillimeter genau an seinen Platz passte.",
+                src: "/glassartista/window/window-6.jpg"
+            },
+            {
+                paragraph: ". Die Bleiglas-Fensterkollektion wurde unter Verwendung der wunderbaren Kathedralgläser der berühmten deutschen Lamberts Glashütte und der amerikanischen Glasfabriken Spectrum bzw. Wissmach hergestellt.",
+                src: "/glassartista/window/window-7.jpg"
+            },
+            {
+                paragraph: "Darüber hinaus verleihen die geschliffenen Kristalljuwelen dem Fenster und der Wohnung gleichermaßen eine einzigartige, moderne Eleganz. Wer würde sich nicht freuen, wenn eine solch beeindruckende Bleiglaskollektion ihn Tag für Tag anlächeln würde?",
+                src: "/glassartista/window/window-8.jpg"
+            },
+            {
+                paragraph: "Bleirinnen-Technik\nProjektbeginn: Februar 2022\nÜbergabe: Ostern 2022",
+                src: "/glassartista/window/window-9.jpg"
+            },
+            {paragraph: "", src: "/glassartista/window/window-10.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-11.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-12.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-13.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-14.jpg"},
         ],
-        acorn: [
-            {title: "Acorn Tiffany-Lampe", src: "/tiffanystudio/acorn/acorn-1.jpg"},
+        ceiling: [
+            {title: "Glasdecke", src: "/glassartista/ceiling/ceiling-1.mp4"},
+            {paragraph: " Diese wundervolle Glasdecke, \"Meine Blume, meine Blume\", erhielt in einem Esszimmer eines neu gebauten Einfamilienhauses die Hauptrolle.", src: "/glassartista/ceiling/ceiling-2.jpg"},
+            {paragraph: "Obwohl das Gebäude und die Einrichtung minimalistisch gehalten sind, bestand die Familie auf dem farbenfrohen Blumenmuster. Wie gut sie das getan hat, nicht wahr?", src: "/glassartista/ceiling/ceiling-3.jpg"},
+            {paragraph: "Jede einzelne Blume und jedes Blatt hat eine andere Form, und durch die Verwendung verschiedener Arten und Farben von Tiffany-Glas eröffnet sich uns eine außergewöhnliche Glaskomposition.", src: "/glassartista/ceiling/ceiling-4.jpg"},
+            {paragraph: "Der Schmetterling, auf den die kleinen Mädchen bestanden, verleiht dem Glasfenster eine liebevolle Verspieltheit.", src: "/glassartista/ceiling/ceiling-5.jpg"},
+            {paragraph: "Unter einer solchen Bleiglas-Decke kann jede Mahlzeit zu einem Erlebnis werden und selbst die grauen Wochentage „aufblühen“.", src: "/glassartista/ceiling/ceiling-6.jpg"},
+            {paragraph: "", src: "/glassartista/ceiling/ceiling-7.jpg"},
             {
-                paragraph: "Die „Acorn“ Tiffany-Lampe besticht durch ihr solid, aber raffiniertes Muster, das auf Originalentwürfen des ikonischen Louis Comfort Tiffany basiert.",
-                src: "/tiffanystudio/acorn/acorn-2.jpg"
-            },
-            {
-                paragraph: "Für die Herstellung der Lampe wurden hochwertige Youghiogheny- und Bullseye-Tiffany-Gläser mit einer wunderschönen Farbpalette verwendet, die die Essenz des Tiffany-Stils perfekt wiedergeben.",
-                src: "/tiffanystudio/acorn/acorn-3.jpg"
+                paragraph: "Tiffany-Technik mit speziellem Verstärkungssystem\nProjektübergabe: Februar 2024\nHerstellungszeit: 1,5 Monate\nGröße: 120×240 cm",
+                src: "/glassartista/ceiling/ceiling-8.jpg"
             }
         ],
-        waterlily: [
-            {title: "Waterlily Tiffany-Lampe", src: "/tiffanystudio/waterlily/waterlily-1.jpg"},
-            {
-                paragraph: "Die „Waterlily“ Tiffany-Lampe ist ein wahres Meisterwerk, das an die anmutige Schönheit der Seerosen erinnert. Sie wurde nach Originalentwürfen von Louis Comfort Tiffany gefertigt und spiegelt so die feine Eleganz des Tiffany-Stils originalgetreu wider.",
-                src: "/tiffanystudio/waterlily/waterlily-2.jpg"
-            },
-            {
-                paragraph: "Das Besondere an der Lampe ist der wunderschöne Schirm aus Youghiogheny- und Uroboros-Tiffany-Gläser, der auf einzigartige Weise die Harmonie und Farbenpracht der Natur widerspiegelt.",
-                src: "/tiffanystudio/waterlily/waterlily-3.jpg"
-            },
-            {
-                paragraph: "Die Lampe hat einen Durchmesser von 50 cm, was allein schon eine beeindruckende Größe ist, aber ihre Höhe von 70 cm unterstreicht ihre Präsenz im Raum noch zusätzlich.",
-                src: "/tiffanystudio/waterlily/waterlily-4.jpg"
-            },
-            {
-                paragraph: "Der Schirm der Tiffany-Lampe besteht aus 420 handgeschnittenen Glaselementen, die sorgfältig zusammengesetzt das Seerosenmuster bilden.",
-                src: "/tiffanystudio/waterlily/waterlily-5.jpg"
-            },
-            {
-                paragraph: "Der Bronzelampenfuß, der ebenfalls den Namen „Waterlily“ trägt, ergänzt das naturnahe Erscheinungsbild der Lampe perfekt und bietet ihr eine stabile und elegante Basis.",
-                src: "/tiffanystudio/waterlily/waterlily-6.jpg"
-            },
-            {
-                paragraph: "Diese Lampe ist nicht nur ein Beleuchtungselement, sondern eine Augenweide, ein Kunstwerk, das jeden Raum mit einer eleganten, beruhigenden Atmosphäre erfüllt.",
-                src: "/tiffanystudio/waterlily/waterlily-7.jpg"
-            }
-        ],
-        chestnut: [
-            {title: "Chestnut Tiffany-Lampe", src: "/tiffanystudio/chestnut/chestnut-1.jpg"},
-            {
-                paragraph: "Die Besonderheit der „Chestnut“ Tiffany-Lampe liegt in ihrem von Kastanienblättern inspirierten Muster und der ungewöhnlichen, wellenförmigen Form des Lampenschirms, die einen ganz einzigartigen Anblick bietet.",
-                src: "/tiffanystudio/chestnut/chestnut-2.jpg"
-            },
-            {
-                paragraph: "Sie wurde nach den ursprünglichen Entwürfen von Louis Comfort Tiffany gefertigt und gibt so die Schönheit der Natur und die besondere Eleganz von Tiffanys Stil treu wieder.",
-                src: "/tiffanystudio/chestnut/chestnut-3.jpg"
-            },
-            {
-                paragraph: "Der Tiffany-Lampenschirm hat einen Durchmesser von 30 cm und besteht aus 219 sorgfältig zusammengefügten Glasstücken von Youghiogheny und Bullseye, die in wunderbaren Farben erstrahlen und das Muster der Kastanienblätter zum Leben erwecken.",
-                src: "/tiffanystudio/chestnut/chestnut-4.jpg"
-            },
-            {
-                paragraph: "Die wellenförmigen Linien der Tiffany-Lampe und ihre naturnahen Farben schaffen eine besondere Atmosphäre und heben sich durch ihre einzigartige Formensprache von anderen Lampen ab.",
-                src: "/tiffanystudio/chestnut/chestnut-5.jpg"
-            },
-            {
-                paragraph: "Die „Chesnut“ Tiffany-Lampe ist nicht nur ein Beleuchtungselement, sondern ein Kunstwerk, das das perfekte Beispiel für die Begegnung von Natur und Kunst darstellt.",
-                src: "/tiffanystudio/chestnut/chestnut-6.jpg"
-            },
-            {
-                paragraph: "Ihre Einzigartigkeit und ihr besonderes Erscheinungsbild verleihen jedem Raum eine gemütlichere und elegantere Ausstrahlung.",
-                src: "/tiffanystudio/chestnut/chestnut-7.jpg"
-            }
-        ],
-        vine: [
-            {title: "Vine Ornament Tiffany-Lampe", src: "/tiffanystudio/vine/vine-1.jpg"},
-            {
-                paragraph: "Die „Vine Ornament” Tiffany-Lampe ist ein echtes Kunstwerk, das die bezaubernden Farben des Herbstes in die Haushalte bringt. Sie wurde nach den originalen Entwürfen von Louis Comfort Tiffany gefertigt und spiegelt somit die einzigartige Eleganz des berühmten Tiffany-Stils wider.",
-                src: "/tiffanystudio/vine/vine-2.jpg"
-            },
-            {
-                paragraph: "Der Schirm der Lampe besteht aus hochwertigem Youghiogheny- und Bullseye-Glas, dessen Schönheit und lebendige Farbwelt dieses Stück besonders macht. Die Lampe hat einen Durchmesser von 40 cm und besteht aus 432 handgeschnittenen, sorgfältig zusammengesetzten Glaselementen. Jedes Glaselement passt präzise ineinander, um die vielfältigen, warmen Farben des Herbstes zur Geltung zu bringen.",
-                src: "/tiffanystudio/vine/vine-3.jpg"
-            },
-            {
-                paragraph: "Diese Tiffany-Lampe ist nicht nur ein dekorativer Gegenstand, sondern verkörpert den ewigen Kreislauf der Jahreszeiten. Sie zaubert Gemütlichkeit und eine naturnahe Atmosphäre in jeden Raum.",
-                src: "/tiffanystudio/vine/vine-4.jpg"
-            }
-        ],
-        dragonfly: [
-            {title: "Dragonfly Tiffany-Lampe", src: "/tiffanystudio/dragonfly/dragonfly-1.jpg"},
-            {
-                paragraph: "Die „Dragonfly“ Tiffany-Lampe trägt einen besonderen Zauber in sich, denn sie verewigt die feine, luftige Schönheit der Libelle nach Originalentwürfen von Louis Comfort Tiffany.",
-                src: "/tiffanystudio/dragonfly/dragonfly-2.jpg"
-            },
-            {
-                paragraph: "Die Verwendung von Uroboros- und Bullseye-Tiffany-Gläsern bereichert die Lampe mit einem beeindruckenden Lichtspiel und einer faszinierenden Farbwelt und hebt die für den Tiffany-Stil typischen einzigartigen Details und die Eleganz hervor.",
-                src: "/tiffanystudio/dragonfly/dragonfly-3.jpg"
-            },
-            {
-                paragraph: "Der Tiffany-Lampenschirm hat einen Durchmesser von 40 cm, was die perfekte Größe ist, um die Lampe zum Mittelpunkt eines jeden Raumes zu machen, ohne die Umgebung zu sehr zu dominieren. Die sorgfältige Anordnung der Glaselemente sowie die feinen Details des Libellenmusters machen dieses Stück wirklich einzigartig.",
-                src: "/tiffanystudio/dragonfly/dragonfly-4.jpg"
-            },
-            {
-                paragraph: "Diese Tiffany-Lampe ist nicht nur ein Leuchtmittel, sondern auch ein künstlerischer Ausdruck, der den Zauber der Natur mit der meisterhaften Ausführung der Glaskunst verbindet.",
-                src: "/tiffanystudio/dragonfly/dragonfly-5.jpg"
-            },
-            {
-                paragraph: "Die „Dragonfly“ Tiffany-Lampe verströmt ein warmes, sanftes Licht und zaubert gleichzeitig die Anmut und Leichtigkeit der Libelle in Ihr Zuhause.",
-                src: "/tiffanystudio/dragonfly/dragonfly-6.jpg"
-            }
-        ],
-        tulip: [
-            {title: "Tulip Tiffany-Lampe", src: "/tiffanystudio/tulip/tulip-1.jpg"},
-            {
-                paragraph: "Diese Tiffany-Lampe mit Tulpenmotiv ist ein bezauberndes und elegantes Stück, das die Anmut und Schönheit von Tulpen verewigt.",
-                src: "/tiffanystudio/tulip/tulip-2.jpg"
-            },
-            {
-                paragraph: "Die wunderschönen Farbtöne der Lampe werden durch das hochwertige Uroboros Tiffany-Glas gewährleistet, dass das Licht sanft nuanciert und eine warme Atmosphäre im Raum verbreitet.",
-                src: "/tiffanystudio/tulip/tulip-3.jpg"
-            },
-            {
-                paragraph: "Die Lampe hat einen Durchmesser von 36 cm und es steht auf einem wunderschönen Lampenfuß aus Bronze. Diese kleine Tiffany-Lampe mit ihren Tulpenmotiven vereint die Frische des Frühlings und die zeitlose Schönheit des Tiffany-Stils.",
-                src: "/tiffanystudio/tulip/tulip-4.jpg"
-            },
-        ],
-        little_peony: [
-            {title: "Kleine Peony Tiffany-Lampe", src: "/tiffanystudio/little_peony/little_peony-1.jpg"},
-            {
-                paragraph: "Wunderschöne, farbige Gläser zeichnen diese Tiffany-Lampe mit Pfingstrosenmuster aus.",
-                src: "/tiffanystudio/little_peony/little_peony-2.jpg"
-            },
-            {
-                paragraph: "Die Lampe ist aus Youghiogheny- und Bullseye-Glas gefertigt und gehört mit einem Durchmesser von 36 cm zu den kleineren Tiffany-Lampen.",
-                src: "/tiffanystudio/little_peony/little_peony-3.jpg"
-            },
-            {
-                paragraph: "Die Tischleuchte mit dem bronzenen Lampenfuß mit Blumenmuster bietet einen besonderen Anblick.",
-                src: "/tiffanystudio/little_peony/little_peony-4.jpg"
-            },
+        ecclesial: [
+            {title: "Kirchenfenster", src: "/glassartista/ecclesial/ecclesial-1.jpg"},
+            { paragraph: "Wir können mit Sicherheit sagen, dass die Kirchenfenster die spektakulärsten in der Glaskunst sind. Sie zeichnen sich durch farbenprächtige Glasmalereikompositionen aus, die den Kirchengebäuden ein wunderbares Lichtspiel verleihen.",
+                src: "/glassartista/ecclesial/ecclesial-2.jpg" },
+            { paragraph: "Wir sind sowohl in der modernen als auch in der traditionellen Kirchenglaskunst zu Hause und fertigen nicht nur neue Fenster an, sondern restaurieren auch alte oder beschädigte Bleiglasfenster.",
+                src: "/glassartista/ecclesial/ecclesial-3.jpg" },
+            { paragraph: "In dieser Fotoserie siehst du Aufnahmen der Glasfenster, die für den Gebetsraum des Kindergartens Mariä Geburt in Diósgyőr angefertigt wurden.", src: "/glassartista/ecclesial/ecclesial-4.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-5.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-6.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-7.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-8.jpg" },
         ],
     },
     en: {
-        magnolia: [
-            {title: "Magnolia Tiffany Lamp", src: "/tiffanystudio/magnolia/magnolia-1.jpg"},
+        dome: [
+            {title: "Dome", src: "/glassartista/dome/dome-1.webp"},
             {
-                paragraph: "The “Magnolia” Tiffany lamp is a true work of art and one of the largest and most spectacular Tiffany lamps. It was made after Louis Comfort Tiffany's original designs and displays the beautiful pattern of magnolia blossoms. The lamp measures 71 cm (28 inches) in diameter.",
-                src: "/tiffanystudio/magnolia/magnolia-2.jpg"
+                paragraph: "The glass surface of the stained-glass dome shown here is 10.5 square meters. It is made of blown and hand-rolled cathedral glass manufactured specifically for this work by the German Glashütte Lamberts glass factory using the lead rail technique.",
+                src: "/glassartista/dome/dome-2.webp"
             },
             {
-                paragraph: "A special feature of this lamp is that some petals were made from Drapery Tiffany glass, whose wavy surface reproduces the natural movement of the flowers. The lamp is composed of 1,260 carefully selected Youghiogheny, Uroboros and Bullseye glass pieces, creating a rich play of light and color.",
-                src: "/tiffanystudio/magnolia/magnolia-3.jpg"
+                paragraph: "Besides the application of the lead rail technology, the stability of the dome is provided by the special bracing structure designed and manufactured by us.",
+                src: "/glassartista/dome/dome-3.webp"
             },
             {
-                paragraph: "The bronze \"Senior Floor\" base provides stability; the complete piece stands 207 cm tall, making it a dramatic floor lamp as well as a light source.",
-                src: "/tiffanystudio/magnolia/magnolia-4.jpg"
+                paragraph: "The stainless-steel support structure holding the dome was also designed and got manufactured by our company.",
+                src: "/glassartista/dome/dome-4.webp"
             },
             {
-                paragraph: "This lamp is a rarity often found in collectors' holdings or museums. Its intricate pattern and high-quality glass make it one of the most valuable Tiffany reproductions.",
-                src: "/tiffanystudio/magnolia/magnolia-5.jpg"
+                paragraph: "The 24 parts of the stained-glass dome consist of 1,820 glass elements and are decorated with 144 polished crystal gemstones and countless faceted glass elements that make this piece special and unique.",
+                src: "/glassartista/dome/dome-5.webp"
             },
-            {src: "/tiffanystudio/magnolia/magnolia-6.jpg"},
-            {src: "/tiffanystudio/magnolia/magnolia-7.jpg"},
-            {src: "/tiffanystudio/magnolia/magnolia-8.jpg"},
-            {src: "/tiffanystudio/magnolia/magnolia-9.jpg"}
+            {paragraph: "Lead Rail technology", src: "/glassartista/dome/dome-6.webp"},
+            {src: "/glassartista/dome/dome-7.webp"},
         ],
-        goldblue: [
-            {title: "Gold-Blue “Dragonfly” Tiffany Lamp", src: "/tiffanystudio/goldblue/goldblue-1.jpg"},
+        canopy: [
+            {title: "Canopy", src: "/glassartista/canopy/canopy-1.webp"},
             {
-                paragraph: "The Gold-Blue “Dragonfly” is a jewel among Tiffany lamps, shining in a striking harmony of gold and blue tones.",
-                src: "/tiffanystudio/goldblue/goldblue-2.jpg"
+                paragraph: "This monumental canopy is decorated with 160 pieces of 37 x 37 cm leaded decorative glass cassettes made using the fusing technique. The decorative glass cassettes are housed in a 3-layer heat-insulated, tempered glass structure therefore they can withstand extreme weather.",
+                src: "/glassartista/canopy/canopy-2.webp"
             },
             {
-                paragraph: "Its dragonfly motif follows Louis Comfort Tiffany's original designs. Matching glass accents enhance the luxurious appearance and special light effects.",
-                src: "/tiffanystudio/goldblue/goldblue-3.jpg"
+                paragraph: "The total size of the decorative glass inserts decorating the canopy is 22 square meters.",
+                src: "/glassartista/canopy/canopy-3.webp"
             },
             {
-                paragraph: "The shade is 50 cm in diameter and made of 406 carefully placed Youghiogheny and Uroboros pieces. With the bronze “Twisted Vine” base the total height is 76 cm.",
-                src: "/tiffanystudio/goldblue/goldblue-4.jpg"
+                paragraph: "Our company designed the steel support structure as well.",
+                src: "/glassartista/canopy/canopy-4.webp"
             },
             {
-                paragraph: "More than a light, this lamp is an artwork combining natural beauty and classic Tiffany charm.",
-                src: "/tiffanystudio/goldblue/goldblue-5.jpg"
-            }
+                paragraph: "Lead rail and Tiffany technique\n" +
+                    "Projekt completion: November 2021\n" +
+                    "Production time: 3 months from design to completion"
+            },
         ],
-        peony: [
-            {title: "Peony Tiffany Lamp", src: "/tiffanystudio/peony/peony-1.jpg"},
+        entrance: [
+            {title: "Entrance", src: "/glassartista/entrance/entrance-1.webp"},
             {
-                paragraph: "The “Peony” lamp brings the impressive beauty of the peony into the home. Made after Louis Comfort Tiffany's originals, each detail reflects Tiffany elegance and craftsmanship.",
-                src: "/tiffanystudio/peony/peony-2.jpg"
+                paragraph: "The main entrance portal shown here, including the glass elements, is more than 12.5 meters and two stories high.",
+                src: "/glassartista/entrance/entrance-2.webp"
             },
             {
-                paragraph: "The shade consists of 513 hand-cut Youghiogheny and Uroboros pieces whose colors recreate the bloom's splendour.",
-                src: "/tiffanystudio/peony/peony-3.jpg"
+                paragraph: "The decorative glass windows are made of hand-rolled cathedral glass from the Glashütte Lamberts and Uroboros glass factories.",
+                src: "/glassartista/entrance/entrance-3.webp"
             },
             {
-                paragraph: "At 45 cm diameter and about 80 cm tall with the “Lady” bronze base, it serves as an elegant focal piece.",
-                src: "/tiffanystudio/peony/peony-4.jpg"
+                paragraph: "On the ground floor, next to the huge double-winged entrance door, visitors are greeted by one long and one shorter stained-glass panel on both sides.",
+                src: "/glassartista/entrance/entrance-4.webp"
             },
             {
-                paragraph: "The “Peony” is both a lighting fixture and a unique work of art that brings warmth and style to any corner of the home.",
-                src: "/tiffanystudio/peony/peony-5.jpg"
+                paragraph: "The pattern of the decorative glass contains both classic and modern elements. The edge faceted elements provide impressive elegance for the decorative glass.",
+                src: "/glassartista/entrance/entrance-5.webp"
             },
-            {src: "/tiffanystudio/peony/peony-6.jpg"},
-            {src: "/tiffanystudio/peony/peony-7.jpg"},
-            {src: "/tiffanystudio/peony/peony-8.jpg"}
+            {
+                paragraph: "The pattern of the stained-glass structure upstairs represents a much freer, more playful style. We strove here for modern elegance as well and for harmony with the glass inserts on the ground floor.",
+                src: "/glassartista/entrance/entrance-6.webp"
+            },
+            {
+                paragraph: "The decorative glass family upstairs consist of 8 glass windows, the largest window element is more than 2×1 meters in size.",
+                src: "/glassartista/entrance/entrance-7.webp"
+            },
+            {
+                paragraph: "Due to its dimensions only lead rail technology could be considered, as this is the only way to ensure the appropriate stability of such a large glass surface.",
+                src: "/glassartista/entrance/entrance-8.webp"
+            },
+            {
+                paragraph: "The stained-glass windows upstairs were decorated with polished crystal stones, which provide the piece an incredibly generous, elegant look.",
+                src: "/glassartista/entrance/entrance-9.webp"
+            },
+            {
+                paragraph: "Lead came technique\n" +
+                    "Project completion: Summer 2022\n" +
+                    "Production time: 1 month", src: "/glassartista/entrance/entrance-10.webp"
+            },
         ],
-        acorn: [
-            {title: "Acorn Tiffany Lamp", src: "/tiffanystudio/acorn/acorn-1.jpg"},
+        window: [
+            {title: "Window", src: "/glassartista/window/window-1.jpg"},
             {
-                paragraph: "The “Acorn” lamp charms with its simple yet refined pattern based on Louis Comfort Tiffany's designs. High-quality Youghiogheny and Bullseye glasses with beautiful colors were used.",
-                src: "/tiffanystudio/acorn/acorn-2.jpg"
+                paragraph: "When we hear the word 'stained glass', we often think of traditional decorative or painted church windows.",
+                src: "/glassartista/window/window-2.jpg"
             },
             {
-                paragraph: "The shade is 40 cm in diameter and made from 468 hand-cut pieces. The bronze “Acorn” base was crafted specifically for this lamp.",
-                src: "/tiffanystudio/acorn/acorn-3.jpg"
-            }
+                paragraph: "But how different and lighter in style is this stained glass window, isn’t it? It’s still made with the traditional lead came technique, but by using beautifully varied, transparent and colorless cathedral glass types, the result is a light, modern pattern.",
+                src: "/glassartista/window/window-3.jpg"
+            },
+            {
+                paragraph: "The stained glass window decorated with crystal gemstones consists of 8 glass panels and 552 decorative glass pieces, with a total surface area exceeding 7.5 square meters.",
+                src: "/glassartista/window/window-4.jpg"
+            },
+            {
+                paragraph: "After being crafted, the stained glass elements were built into insulated glass units at their final location.",
+                src: "/glassartista/window/window-5.jpg"
+            },
+            {
+                paragraph: "After designing the glass collection, engineering precision ensured that every single glass piece fit into its place with a tolerance of just tenths of a millimeter.",
+                src: "/glassartista/window/window-6.jpg"
+            },
+            {
+                paragraph: "The stained glass window collection was created using the magnificent cathedral glasses of the renowned German Lamberts Glashütte and the American Spectrum and Wissmach glassworks. The cut crystal gemstones make the artwork unique, lending a modern elegance to both the glass and the home.",
+                src: "/glassartista/window/window-7.jpg"
+            },
+            {
+                paragraph: "Who wouldn’t love to be greeted every day by such a breathtaking stained glass collection?",
+                src: "/glassartista/window/window-8.jpg"
+            },
+            {
+                paragraph: "Lead came technique\n" +
+                    "Project start: February 2022\n" +
+                    "Completion: Easter 2022\n", src: "/glassartista/window/window-9.jpg"
+            },
+            {paragraph: "", src: "/glassartista/window/window-10.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-11.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-12.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-13.jpg"},
+            {paragraph: "", src: "/glassartista/window/window-14.jpg"},
         ],
-        waterlily: [
-            {title: "Waterlily Tiffany Lamp", src: "/tiffanystudio/waterlily/waterlily-1.jpg"},
-            {
-                paragraph: "The “Waterlily” Tiffany lamp is a true masterpiece evoking the graceful beauty of water lilies. Made after Louis Comfort Tiffany's originals, it faithfully reproduces Tiffany's refined elegance.",
-                src: "/tiffanystudio/waterlily/waterlily-2.jpg"
-            },
-            {
-                paragraph: "Its beautiful shade is made from Youghiogheny and Uroboros glass, uniquely reflecting nature's harmony and color.",
-                src: "/tiffanystudio/waterlily/waterlily-3.jpg"
-            },
-            {
-                paragraph: "With a 50 cm diameter and 70 cm height, the lamp has an impressive presence in any room.",
-                src: "/tiffanystudio/waterlily/waterlily-4.jpg"
-            },
-            {
-                paragraph: "The shade is composed of 420 hand-cut elements, and the bronze “Waterlily” base provides a stable, elegant foundation.",
-                src: "/tiffanystudio/waterlily/waterlily-5.jpg"
-            },
-            {
-                paragraph: "This lamp is more than illumination — it's an eye-catching artwork that fills a space with calm elegance.",
-                src: "/tiffanystudio/waterlily/waterlily-6.jpg"
-            },
-            {src: "/tiffanystudio/waterlily/waterlily-7.jpg"}
+        ceiling: [
+            {title: "Ceiling", src: "/glassartista/ceiling/ceiling-1.mp4"},
+            {paragraph: "This beautiful stained glass ceiling, titled “My Flower, My Flower,” was installed in the dining room of a newly built family home. Although the building and its furnishings are minimalist in style, the family insisted on including colorful floral motifs—and what a great decision that was!", src: "/glassartista/ceiling/ceiling-2.jpg"},
+            {paragraph: "Each flower and leaf has a unique shape. By combining different types and colors of Tiffany glass, we created a special glass composition. The butterfly, which the little girls requested, adds a touch of playful charm to the design.", src: "/glassartista/ceiling/ceiling-3.jpg"},
+            {paragraph: "Dining under such a stained glass ceiling turns every meal into an experience—it truly brightens up everyday life.", src: "/glassartista/ceiling/ceiling-4.jpg"},
+            {paragraph: "Tiffany technique with special reinforcement system\n" +
+                    "Project completion: February 2024\n" +
+                    "Production time: 1.5 months\n" +
+                    "Size: 120×240 cm ", src: "/glassartista/ceiling/ceiling-5.jpg"},
+            {paragraph: "", src: "/glassartista/ceiling/ceiling-6.jpg"},
+            {paragraph: "", src: "/glassartista/ceiling/ceiling-7.jpg"},
+            {paragraph: "", src: "/glassartista/ceiling/ceiling-8.jpg"},
         ],
-        chestnut: [
-            {title: "Chestnut Tiffany Lamp", src: "/tiffanystudio/chestnut/chestnut-1.jpg"},
-            {
-                paragraph: "The “Chestnut” lamp features a pattern inspired by chestnut leaves and an unusual wavy shade shape that creates a unique visual.",
-                src: "/tiffanystudio/chestnut/chestnut-2.jpg"
-            },
-            {
-                paragraph: "Made after Louis Comfort Tiffany's originals, it faithfully reflects natural beauty and Tiffany elegance.",
-                src: "/tiffanystudio/chestnut/chestnut-3.jpg"
-            },
-            {
-                paragraph: "The shade is 30 cm in diameter and consists of 219 carefully assembled Youghiogheny and Bullseye pieces in wonderful colors.",
-                src: "/tiffanystudio/chestnut/chestnut-4.jpg"
-            },
-            {
-                paragraph: "The lamp's wavy lines and natural tones create a special atmosphere and stand out among other lamps.",
-                src: "/tiffanystudio/chestnut/chestnut-5.jpg"
-            },
-            {
-                paragraph: "The “Chestnut” lamp is a work of art that blends nature and craftsmanship, giving any room a cozier and more elegant feel.",
-                src: "/tiffanystudio/chestnut/chestnut-6.jpg"
-            },
-            {src: "/tiffanystudio/chestnut/chestnut-7.jpg"}
+        ecclesial: [
+            {title: "Ecclesial", src: "/glassartista/ecclesial/ecclesial-1.jpg"},
+            { paragraph: "We can confidently say that in the world of glass art, church windows are the most spectacular. These painted, colorful glass compositions create a wonderful play of light within ecclesiastical buildings.",
+                src: "/glassartista/ecclesial/ecclesial-2.jpg" },
+            { paragraph: "We are experienced in both modern and traditional church glass art — not only creating but also restoring old or damaged stained glass windows.",
+                src: "/glassartista/ecclesial/ecclesial-3.jpg" },
+            { paragraph: "This photo series showcases the stained glass window made for the Prayer Room of the Diósgyőri Kisboldogasszony Kindergarten.",
+                src: "/glassartista/ecclesial/ecclesial-4.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-5.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-6.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-7.jpg" },
+            { src: "/glassartista/ecclesial/ecclesial-8.jpg" },
         ],
-        vine: [
-            {title: "Vine Ornament Tiffany Lamp", src: "/tiffanystudio/vine/vine-1.jpg"},
-            {
-                paragraph: "The “Vine Ornament” lamp is an artwork that brings the charming colors of autumn into the home. Made after original Louis Comfort Tiffany designs, it reflects the unique elegance of Tiffany style.",
-                src: "/tiffanystudio/vine/vine-2.jpg"
-            },
-            {
-                paragraph: "The shade is made from high-quality Youghiogheny and Bullseye glass; the lamp is 40 cm in diameter and composed of 432 hand-cut elements.",
-                src: "/tiffanystudio/vine/vine-3.jpg"
-            },
-            {
-                paragraph: "More than decorative, this piece embodies the cyclical nature of seasons and adds warmth to any interior.",
-                src: "/tiffanystudio/vine/vine-4.jpg"
-            }
-        ],
-        dragonfly: [
-            {title: "Dragonfly Tiffany Lamp", src: "/tiffanystudio/dragonfly/dragonfly-1.jpg"},
-            {
-                paragraph: "The “Dragonfly” lamp captures the delicate, airy beauty of the dragonfly from Louis Comfort Tiffany's original designs.",
-                src: "/tiffanystudio/dragonfly/dragonfly-2.jpg"
-            },
-            {
-                paragraph: "Uroboros and Bullseye glasses create a stunning play of light and color that highlights Tiffany's characteristic details and elegance.",
-                src: "/tiffanystudio/dragonfly/dragonfly-3.jpg"
-            },
-            {
-                paragraph: "At 40 cm diameter it is an ideal focal point for a room without overpowering its surroundings.",
-                src: "/tiffanystudio/dragonfly/dragonfly-4.jpg"
-            },
-            {
-                paragraph: "This lamp is both a light source and an artistic expression combining nature's charm with masterful glass craftsmanship.",
-                src: "/tiffanystudio/dragonfly/dragonfly-5.jpg"
-            },
-            {src: "/tiffanystudio/dragonfly/dragonfly-6.jpg"}
-        ],
-        tulip: [
-            {title: "Tulip Tiffany Lamp", src: "/tiffanystudio/tulip/tulip-1.jpg"},
-            {
-                paragraph: "This tulip-patterned Tiffany lamp is a charming and elegant piece that captures the grace and beauty of tulips.",
-                src: "/tiffanystudio/tulip/tulip-2.jpg"
-            },
-            {
-                paragraph: "The lamp is made from beautifully colored Uroboros and Youghiogheny Tiffany glass. This 36 cm diameter Tiffany lamp stands on a stunning bronze lamp base.",
-                src: "/tiffanystudio/tulip/tulip-3.jpg"
-            },
-            {
-                paragraph: "This small tulip-motif Tiffany lamp combines the freshness of spring with the timeless beauty of the Tiffany style.",
-                src: "/tiffanystudio/tulip/tulip-4.jpg"
-            }
-        ],
-        little_peony: [
-            {title: "Little Peony Tiffany Lamp", src: "/tiffanystudio/little_peony/little_peony-1.jpg"},
-            {
-                paragraph: "This Tiffany lamp with a peony pattern is characterized by beautiful colorful glass.",
-                src: "/tiffanystudio/little_peony/little_peony-2.jpg"
-            },
-            {
-                paragraph: "The lamp is made from Youghiogheny and Bullseye glass, with a diameter of 36 cm, making it one of the smaller Tiffany lamps.",
-                src: "/tiffanystudio/little_peony/little_peony-3.jpg"
-            },
-            {
-                paragraph: "With its flower-patterned bronze lamp base, this table lamp offers a special visual appeal.",
-                src: "/tiffanystudio/little_peony/little_peony-4.jpg"
-            },
-        ]
     }
 };
 
@@ -591,7 +497,7 @@ const DICTIONARY = {
     }
 }
 
-export default function TiffanyLampsPage({params}) {
+export default function GalleryPage({params}) {
 
     const resolvedParams = React.use ? React.use(params) : params;
     const langParam = resolvedParams?.lang;

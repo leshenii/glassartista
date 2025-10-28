@@ -1,10 +1,10 @@
 'use client'
 
 import * as React from 'react';
-import { Button } from "@heroui/react";
-import { BsLampFill } from "react-icons/bs";
-import { GiWindowBars } from "react-icons/gi";
-import { useRouter } from "next/navigation";
+import {Button} from "@heroui/react";
+import {BsLampFill} from "react-icons/bs";
+import {GiWindowBars} from "react-icons/gi";
+import {useRouter} from "next/navigation";
 
 const LOCALES = ['hu', 'de', 'en'];
 const COOKIE_NAME = 'NEXT_LOCALE';
@@ -61,7 +61,7 @@ const TEXTS = {
     }
 };
 
-export default function Home({ params }) {
+export default function Home({params}) {
     const router = useRouter();
 
     // Unwrap the params Promise using React.use before accessing properties
@@ -75,9 +75,9 @@ export default function Home({ params }) {
         const domain = window.location.hostname
         setLocaleCookie(locale);
         if (domain === 'glassartista.com') {
-            if (locale === 'hu' || locale === 'en') {
+            if (locale === 'hu') {
                 router.push(`https://tiffanystudio.hu/${locale}`);
-            } else if (locale === 'de') {
+            } else if (locale === 'de' || locale === 'en') {
                 router.push('https://tiffanystudio.at/de');
             }
         } else {
@@ -102,13 +102,14 @@ export default function Home({ params }) {
                                 loading="eager"
                                 decoding="sync"
                                 width={36}
-                                style={{ objectFit: "contain" }}
+                                style={{objectFit: "contain"}}
                             />
                             <h1 className="text-3xl lg:text-5xl allura-regular pt-2">{t.title1}</h1>
                         </div>
                         <p className="text-sm lg:text-xl text-justify paragraph--p1">{t.p1}</p>
                         <div>
-                            <Button className="light" variant="faded" startContent={<BsLampFill size={20}/>} onPress={goToStudio}>
+                            <Button className="light" variant="faded" startContent={<BsLampFill size={20}/>}
+                                    onPress={goToStudio}>
                                 {t.btnPrimary}
                             </Button>
                         </div>
@@ -129,14 +130,19 @@ export default function Home({ params }) {
                                 loading="eager"
                                 decoding="sync"
                                 width={48}
-                                style={{ objectFit: "contain" }}
+                                style={{objectFit: "contain"}}
                             />
                             <h1 className="text-3xl lg:text-4xl antonio-navbar tracking-wider ">{t.title2}</h1>
                         </div>
                         <p className="text-sm lg:text-xl text-justify paragraph--p1">{t.p2}</p>
                         <div>
-                            <Button className="light" isDisabled variant="faded"
-                                    startContent={<GiWindowBars size={20}/>}>{t.btnDisabled}</Button>
+                            <Button className="light" variant="faded"
+                                    startContent={<GiWindowBars size={20}/>}
+                                    onPress={() => {
+                                        router.push('/home')
+                                    }}>
+                                {t.btnPrimary}
+                            </Button>
                         </div>
                     </div>
                 </div>
