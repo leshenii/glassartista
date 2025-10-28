@@ -170,7 +170,7 @@ export default function GlassArtistaContactPage({ params }) {
     return (
         <div
             className="flex flex-col overflow-visible lg:flex-row gap-10 lg:gap-24 w-screen items-center justify-center lg:h-screen-minus-navbar-desktop mt-4 lg:mt-0 lg:pl-16">
-            <div className="flex flex-col gap-6 h-full w-min justify-center items-start">
+            <div className="flex flex-col gap-6 h-full justify-center items-start">
                 <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8 mx-auto">{L.contactNameHeader}</h2>
 
                 <div className="flex flex-row items-center gap-2">
