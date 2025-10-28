@@ -52,7 +52,7 @@ export default function GlassArtistaPage({ params }) {
 
 
     return (
-        <div className="w-screen px-10 xl:px-0 xl:w-1/2 justify-self-center" >
+        <div className="w-screen px-10 xl:px-0 xl:w-1/2 justify-self-center pb-16" >
             <Image src="/design/glassartista_logo_text_gradient.png" alt="GlassArtista Logo" width={250} height={250} className=" justify-self-center my-12 select-none animate__animated animate__fadeInDown" draggable={false} />
             <article className="flex flex-col gap-2 text-md xl:text-lg animate__animated animate__fadeInUp">
                 <p>{t.p1}</p>
