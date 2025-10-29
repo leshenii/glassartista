@@ -78,10 +78,10 @@ export default function Home({params}) {
         if (host === 'glassartista.com') {
             if (lang === 'hu') {
                 router.push(`https://tiffanystudio.hu`);
-            } else if (lang === 'de') {
-                router.push(`https://tiffanystudio.at`);
-            } else {
+            } else if (lang === 'en') {
                 router.push(`https://tiffanystudio.at/en`);
+            } else {
+                router.push(`https://tiffanystudio.at`);
             }
         } else {
             router.push(`/tiffanystudio`);
