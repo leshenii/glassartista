@@ -6,9 +6,10 @@ import {RiMailFill} from "react-icons/ri";
 import {AiFillInstagram} from "react-icons/ai";
 import {TbExternalLink} from "react-icons/tb";
 import {Form, Input, Button, Textarea, Spinner, Skeleton} from "@heroui/react";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Link from "next/link";
+import {FaLocationDot} from "react-icons/fa6";
 
 const LOCALES = ['hu', 'de', 'en'];
 const DEFAULT_LOCALE = 'en';
@@ -58,6 +59,37 @@ const DICT = {
     }
 };
 
+const ADDRESS_LINES = {
+    hu: [
+        "3535 Miskolc",
+        "János utca 23."
+    ],
+    de: [
+        "Sagbichl 494C",
+        "6215, Achenkirch",
+        "Tirol, Austria"
+    ],
+    en: [
+        "Sagbichl 494C",
+        "6215, Achenkirch",
+        "Tirol, Austria"
+    ]
+};
+
+const TEL_LINES = {
+    hu: [
+        {label: "+36 70-3600950", href: "tel:+36703600950"}
+    ],
+    de: [
+        {label: "+43 (0)6766933329", href: "tel:+436766933329"},
+        {label: "+49 172 8184253", href: "tel:+491728184253"}
+    ],
+    en: [
+        {label: "+43 (0)6766933329", href: "tel:+436766933329"},
+        {label: "+49 172 8184253", href: "tel:+491728184253"}
+    ]
+};
+
 export default function ContactPage({ params }) {
 
     const resolvedParams = React.use ? React.use(params) : params;
@@ -69,6 +101,7 @@ export default function ContactPage({ params }) {
     const [touched, setTouched] = useState({});
     const [loading, setLoading] = useState(false);
     const [fields, setFields] = useState({
+        site: "tiffanystudio",
         name: "",
         email: "",
         message: ""
@@ -76,6 +109,8 @@ export default function ContactPage({ params }) {
     const [valid, setValid] = useState(false);
     const [recaptchaToken, setRecaptchaToken] = useState(null);
     const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
+    const recaptchaRef = useRef(null);
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -103,7 +138,7 @@ export default function ContactPage({ params }) {
         setLoading(true);
         const data = Object.fromEntries(new FormData(e.currentTarget));
         try {
-            const res = await fetch('/api/tiffanystudiocontact', {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
@@ -111,6 +146,21 @@ export default function ContactPage({ params }) {
             const result = await res.json();
             if (result.success) {
                 setSubmitted(data);
+                // Clear the form DOM to reset uncontrolled inputs (tel, subject)
+                try {
+                    e.currentTarget.reset();
+                } catch (err) {
+                    // ignore if reset isn't supported
+                }
+                // Clear controlled fields and validation state
+                setFields({ site: "tiffanystudio", name: "", email: "", message: "" });
+                setTouched({});
+                setValid(false);
+                setRecaptchaToken(null);
+                // reset recaptcha widget if available
+                if (recaptchaRef.current && typeof recaptchaRef.current.reset === 'function') {
+                    try { recaptchaRef.current.reset(); } catch (err) { /* ignore */ }
+                }
             } else {
                 alert((result.error && typeof result.error === 'string') ? result.error : 'Something went wrong');
             }
@@ -130,15 +180,33 @@ export default function ContactPage({ params }) {
         setRecaptchaLoaded(true);
     }
 
+    const addressString = ADDRESS_LINES[lang].join(', ');
+    const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressString)}`;
+
     return (
         <div
             className="flex flex-col overflow-visible lg:flex-row gap-10 lg:gap-24 w-screen items-center justify-center lg:h-screen-minus-navbar-desktop mt-4 lg:mt-0 lg:pl-16">
             <div className="flex flex-col gap-6 h-full w-min justify-center items-start">
                 <h2 className="text-5xl allura-regular underline decoration-2 underline-offset-8 mx-auto">{L.contactNameHeader}</h2>
-                <div className="flex flex-row items-center gap-2 select-all ">
-                    <FaPhoneAlt size={25}/>
-                    +36-70/360-0950
+
+                <div className="flex flex-row items-center gap-2">
+                    <FaLocationDot size={25} />
+                    <a href={mapsHref} target="_blank" rel="noopener noreferrer">
+                        {ADDRESS_LINES[lang].map((line, idx) => (
+                            <div key={idx}>{line}</div>
+                        ))}
+                    </a>
                 </div>
+
+                <div className="flex flex-row items-center gap-2 select-all ">
+                    <FaPhoneAlt size={25} className="mb-1"/>
+                    <div className="flex flex-col">
+                        {TEL_LINES[lang].map((t, i) => (
+                            <a key={i} href={t.href}>{t.label}</a>
+                        ))}
+                    </div>
+                </div>
+
                 <div className="flex flex-row items-center gap-2 select-all ">
                     <RiMailFill size={30}/>
                     m.tiffanystudio@gmail.com
@@ -240,6 +308,7 @@ export default function ContactPage({ params }) {
                     )}
                     <div style={{colorScheme: "light"}}>
                         <ReCAPTCHA
+                            ref={recaptchaRef}
                             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                             onChange={onRecaptchaChange}
                             asyncScriptOnLoad={handleRecaptchaLoad}

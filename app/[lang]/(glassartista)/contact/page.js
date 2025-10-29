@@ -6,7 +6,7 @@ import {RiMailFill} from "react-icons/ri";
 import {AiFillInstagram} from "react-icons/ai";
 import {TbExternalLink} from "react-icons/tb";
 import {Form, Input, Button, Textarea, Spinner, Skeleton} from "@heroui/react";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import Link from "next/link";
 
@@ -90,6 +90,19 @@ const TEL_LINES = {
     ]
 };
 
+const EMAIL_ADDRESSES = {
+    hu: [
+        "info@glassartista.com",
+        "glassartista.hungary@gmail.com"
+    ],
+    de: [
+        "info@glassartista.com"
+    ],
+    en: [
+        "info@glassartista.com"
+    ]
+}
+
 
 export default function GlassArtistaContactPage({ params }) {
 
@@ -102,6 +115,7 @@ export default function GlassArtistaContactPage({ params }) {
     const [touched, setTouched] = useState({});
     const [loading, setLoading] = useState(false);
     const [fields, setFields] = useState({
+        site: "glassartista",
         name: "",
         email: "",
         message: ""
@@ -109,6 +123,8 @@ export default function GlassArtistaContactPage({ params }) {
     const [valid, setValid] = useState(false);
     const [recaptchaToken, setRecaptchaToken] = useState(null);
     const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
+    const recaptchaRef = useRef(null);
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -144,6 +160,21 @@ export default function GlassArtistaContactPage({ params }) {
             const result = await res.json();
             if (result.success) {
                 setSubmitted(data);
+                // Clear the form DOM to reset uncontrolled inputs (tel, subject)
+                try {
+                    e.currentTarget.reset();
+                } catch (err) {
+                    // ignore if reset isn't supported
+                }
+                // Clear controlled fields and validation state
+                setFields({ site: "glassartista", name: "", email: "", message: "" });
+                setTouched({});
+                setValid(false);
+                setRecaptchaToken(null);
+                // reset recaptcha widget if available
+                if (recaptchaRef.current && typeof recaptchaRef.current.reset === 'function') {
+                    try { recaptchaRef.current.reset(); } catch (err) { /* ignore */ }
+                }
             } else {
                 alert((result.error && typeof result.error === 'string') ? result.error : 'Something went wrong');
             }
@@ -165,7 +196,6 @@ export default function GlassArtistaContactPage({ params }) {
 
     const addressString = ADDRESS_LINES[lang].join(', ');
     const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressString)}`;
-
 
     return (
         <div
@@ -191,10 +221,15 @@ export default function GlassArtistaContactPage({ params }) {
                     </div>
                 </div>
 
-                <div className="flex flex-row items-center gap-2 select-all ">
-                    <RiMailFill size={30}/>
-                    info@glassartista.com
+                <div className="flex flex-row items-center gap-2">
+                    <FaLocationDot size={25} />
+                    <a href={mapsHref} target="_blank" rel="noopener noreferrer">
+                        {EMAIL_ADDRESSES[lang].map((line, idx) => (
+                            <div key={idx}>{line}</div>
+                        ))}
+                    </a>
                 </div>
+
                 <Link href="https://www.instagram.com/glassartista_h" target="_blank">
                     <div className="flex flex-row items-center gap-2 ">
                         <AiFillInstagram size={30}/>
@@ -299,6 +334,7 @@ export default function GlassArtistaContactPage({ params }) {
                     )}
                     <div style={{colorScheme: "light"}}>
                         <ReCAPTCHA
+                            ref={recaptchaRef}
                             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                             onChange={onRecaptchaChange}
                             asyncScriptOnLoad={handleRecaptchaLoad}
