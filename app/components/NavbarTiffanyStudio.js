@@ -293,6 +293,7 @@ export default function NavbarTiffanyStudio() {
 
     const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
     const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
+    const isTiffAt = typeof window !== 'undefined' && window.location.hostname.replace(/^www\./, '').toLowerCase() === 'tiffanystudio.at';
 
     return (
         <>
@@ -390,14 +391,16 @@ export default function NavbarTiffanyStudio() {
                             }}
                             >
 
-                                <DropdownItem
-                                    aria-label="Magyar"
-                                    aria-current={currentLocale === 'hu' ? 'true' : undefined}
-                                    onClick={() => changeLocale('hu')}
-                                    className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
-                                >
-                                    magyar
-                                </DropdownItem>
+                                {!isTiffAt && (
+                                    <DropdownItem
+                                        aria-label="Magyar"
+                                        aria-current={currentLocale === 'hu' ? 'true' : undefined}
+                                        onClick={() => changeLocale('hu')}
+                                        className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
+                                    >
+                                        magyar
+                                    </DropdownItem>
+                                )}
                                 <DropdownItem
                                     aria-label="Deutsch"
                                     aria-current={currentLocale === 'de' ? 'true' : undefined}
