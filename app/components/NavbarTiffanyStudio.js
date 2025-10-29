@@ -327,7 +327,7 @@ export default function NavbarTiffanyStudio() {
                                 {getNavbarLabel()}
                             </Button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label="Dropdown menu" >
+                        <DropdownMenu  aria-label="Dropdown menu" >
                             <DropdownSection showDivider>
                                 <DropdownItem key="landing_page"
                                               onPress={() => router.push(localized('/'))}>
@@ -375,12 +375,14 @@ export default function NavbarTiffanyStudio() {
                                 <DropdownItem key="little_peony" className='border-2 border-gray-200' startContent={<MdLocalFlorist size={20}/>}
                                               onClick={() => handleLampDropdownClick('little_peony')}>{t.lampLittlePeony}</DropdownItem>
                             </DropdownSection>
-                            <DropdownSection showDivider title={t.availableLamps}>
-                                <DropdownItem startContent={<IoIosGrid size={20}/>}
+                            <DropdownSection showDivider title={t.availableLamps} classNames={{
+                                group: "flex flex-col gap-2"
+                            }}>
+                                <DropdownItem startContent={<IoIosGrid size={20}/>} className='border-2 border-gray-200 w-min'
                                               onClick={() => handleAvailableLampDropdownClick('geometric')}>{t.availableGeometric}</DropdownItem>
-                                <DropdownItem startContent={<LuLamp size={20}/>}
+                                <DropdownItem startContent={<LuLamp size={20}/>} className='border-2 border-gray-200 w-min'
                                               onClick={() => handleAvailableLampDropdownClick('table')}>{t.availableTable}</DropdownItem>
-                                <DropdownItem startContent={<LuLampFloor size={20}/>}
+                                <DropdownItem startContent={<LuLampFloor size={20}/>} className='border-2 border-gray-200 w-min'
                                               onClick={() => handleAvailableLampDropdownClick('standing')}>{t.availableStanding}</DropdownItem>
                             </DropdownSection>
                             <DropdownSection classNames={{

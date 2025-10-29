@@ -58,16 +58,16 @@ export default function NavbarGlassArtista() {
 
     // Host configuration (client-side mirror of middleware)
     const HOST_CONFIG = {
-        'tiffanystudio.at': { defaultLocale: 'de', hideDefault: true, isStudio: true },
-        'tiffanystudio.hu': { defaultLocale: 'hu', hideDefault: true, isStudio: true },
-        'glassartista.com': { defaultLocale: 'de', hideDefault: true, isStudio: false },
-        'localhost': { defaultLocale: 'de', hideDefault: true, isStudio: false } // same behaviour as glassartista.com
+        'tiffanystudio.at': {defaultLocale: 'de', hideDefault: true, isStudio: true},
+        'tiffanystudio.hu': {defaultLocale: 'hu', hideDefault: true, isStudio: true},
+        'glassartista.com': {defaultLocale: 'de', hideDefault: true, isStudio: false},
+        'localhost': {defaultLocale: 'de', hideDefault: true, isStudio: false} // same behaviour as glassartista.com
     };
 
     function getHostCfg() {
-        if (typeof window === 'undefined') return { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+        if (typeof window === 'undefined') return {defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false};
         const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
-        return HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+        return HOST_CONFIG[host] || {defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false};
     }
 
     const hostCfg = getHostCfg();
@@ -130,7 +130,7 @@ export default function NavbarGlassArtista() {
             videos: 'Videos'
         },
         en: {
-            landing: 'Langing',
+            landing: 'Landing',
             main: 'Main',
             gallery: 'Gallery',
             details: 'Details',
@@ -212,7 +212,7 @@ export default function NavbarGlassArtista() {
         const basePath = stripLocaleFromPath(pathname || '/');
         const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
         const host = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '') : '';
-        const cfg = HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false };
+        const cfg = HOST_CONFIG[host] || {defaultLocale: DEFAULT_LOCALE, hideDefault: false};
         let to;
         if (cfg.hideDefault && locale === cfg.defaultLocale) {
             // navigate without locale prefix for hidden default
@@ -245,11 +245,29 @@ export default function NavbarGlassArtista() {
         router.push(localized(path));
     };
 
-    const getNavbarLabel = () => {
-        const stripped = (pathname || '/').split('/').slice(2).join('/');
-        const route = `/${stripped}` === '/' || pathname === `/` ? `/` : `/${stripped}`;
+    function getNavbarLabel() {
+        // normalize pathname and remove optional locale prefix
+        const p = pathname || '/';
+        const parts = p.split('/');
+        let withoutLocale;
+        if (parts.length > 1 && LOCALES.includes(parts[1])) {
+            // remove the locale segment
+            withoutLocale = '/' + parts.slice(2).join('/');
+        } else {
+            withoutLocale = p;
+        }
+
+        // normalize slashes and remove trailing slash (except for root)
+        withoutLocale = withoutLocale.replace(/\/+/g, '/');
+        if (withoutLocale.length > 1 && withoutLocale.endsWith('/')) {
+            withoutLocale = withoutLocale.slice(0, -1);
+        }
+
+        const route = (withoutLocale === '' || withoutLocale === '/') ? '/' : withoutLocale;
         const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
+
         switch (route) {
+            case '/':
             case '/home':
                 return t.main;
             case '/gallery':
@@ -261,7 +279,7 @@ export default function NavbarGlassArtista() {
             default:
                 return '';
         }
-    };
+    }
 
     const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
     const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
@@ -296,7 +314,7 @@ export default function NavbarGlassArtista() {
                                     />
                                 }
                             >
-                                { getNavbarLabel() }
+                                {getNavbarLabel()}
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Dropdown menu">
@@ -308,11 +326,10 @@ export default function NavbarGlassArtista() {
                                     {t.landing}
                                 </span>
                                 </DropdownItem>
-                                <DropdownItem key="main_page"
+                                <DropdownItem key="main"
                                               onPress={() => handleNavPush('/home')}>
-                                <span
-                                    className={`${pathname === '/home' ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
-                                    {t.main}
+                                <span className={`${pathname && pathname.endsWith('/home') ? 'underline' : 'hover:underline hover:decoration-dashed'}`}>
+                                        {t.main}
                                 </span>
                                 </DropdownItem>
                                 <DropdownItem key="contact"
@@ -323,32 +340,36 @@ export default function NavbarGlassArtista() {
                                 </span>
                                 </DropdownItem>
                             </DropdownSection>
-                            <DropdownSection showDivider title={t.gallery}>
-                                <DropdownItem key="dome" startContent={<FaLandmarkDome size={20}/>}
+                            <DropdownSection showDivider title={t.gallery} classNames={{
+                                group: "grid grid-cols-2 gap-2"
+                            }}>
+                                <DropdownItem key="dome" startContent={<FaLandmarkDome size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleGalleryDropdownClick('dome')}>{t.dome}</DropdownItem>
-                                <DropdownItem key="canopy" startContent={<BiArch size={20}/>}
+                                <DropdownItem key="canopy" startContent={<BiArch size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleGalleryDropdownClick('canopy')}>{t.canopy}</DropdownItem>
-                                <DropdownItem key="entrance" startContent={<GiDoorway size={20}/>}
+                                <DropdownItem key="entrance" startContent={<GiDoorway size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleGalleryDropdownClick('entrance')}>{t.entrance}</DropdownItem>
-                                <DropdownItem key="window" startContent={<GiWindowBars size={20}/>}
+                                <DropdownItem key="window" startContent={<GiWindowBars size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleGalleryDropdownClick('window')}>{t.window}</DropdownItem>
-                                <DropdownItem key="ceiling" startContent={<BiVerticalTop size={20}/>}
+                                <DropdownItem key="ceiling" startContent={<BiVerticalTop size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleGalleryDropdownClick('ceiling')}>{t.ceiling}</DropdownItem>
-                                <DropdownItem key="ecclesial" startContent={<MdChurch size={20}/>}
+                                <DropdownItem key="ecclesial" startContent={<MdChurch size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleGalleryDropdownClick('ecclesial')}>{t.ceiling}</DropdownItem>
                             </DropdownSection>
-                            <DropdownSection showDivider title={t.details}>
-                                <DropdownItem startContent={<LiaPencilRulerSolid size={20}/>}
+                            <DropdownSection showDivider title={t.details} classNames={{
+                                group: "grid grid-cols-2 gap-2"
+                            }}>
+                                <DropdownItem startContent={<LiaPencilRulerSolid size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleDetailsDropdownClick('engineeringDesign')}>{t.engineeringDesign}</DropdownItem>
-                                <DropdownItem startContent={<PiCardsThreeFill size={20}/>}
+                                <DropdownItem startContent={<PiCardsThreeFill size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleDetailsDropdownClick('glasses')}>{t.glasses}</DropdownItem>
-                                <DropdownItem startContent={<MdGridGoldenratio size={20}/>}
+                                <DropdownItem startContent={<MdGridGoldenratio size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleDetailsDropdownClick('leadRailTechnology')}>{t.leadRailTechnology}</DropdownItem>
-                                <DropdownItem startContent={<FaGem size={20}/>}
+                                <DropdownItem startContent={<FaGem size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleDetailsDropdownClick('decoration')}>{t.decoration}</DropdownItem>
-                                <DropdownItem startContent={<IoHammerSharp size={20}/>}
+                                <DropdownItem startContent={<IoHammerSharp size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleDetailsDropdownClick('installation')}>{t.installation}</DropdownItem>
-                                <DropdownItem startContent={<MdVideoLibrary size={20}/>}
+                                <DropdownItem startContent={<MdVideoLibrary size={20}/>} className='border-2 border-gray-200'
                                               onClick={() => handleDetailsDropdownClick('videos')}>{t.videos}</DropdownItem>
                             </DropdownSection>
                             <DropdownSection classNames={{
@@ -356,30 +377,30 @@ export default function NavbarGlassArtista() {
                             }}
                             >
 
-                                    <DropdownItem
-                                        aria-label="Magyar"
-                                        aria-current={currentLocale === 'hu' ? 'true' : undefined}
-                                        onClick={() => changeLocale('hu')}
-                                        className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
-                                    >
-                                        magyar
-                                    </DropdownItem>
-                                    <DropdownItem
-                                        aria-label="Deutsch"
-                                        aria-current={currentLocale === 'de' ? 'true' : undefined}
-                                        onClick={() => changeLocale('de')}
-                                        className={`${baseBtnClass} ${currentLocale === 'de' ? 'underline' : ''}`}
-                                    >
-                                        deutsch
-                                    </DropdownItem>
-                                    <DropdownItem
-                                        aria-label="English"
-                                        aria-current={currentLocale === 'en' ? 'true' : undefined}
-                                        onClick={() => changeLocale('en')}
-                                        className={`${baseBtnClass} ${currentLocale === 'en' ? 'underline' : ''}`}
-                                    >
-                                        english
-                                    </DropdownItem>
+                                <DropdownItem
+                                    aria-label="Magyar"
+                                    aria-current={currentLocale === 'hu' ? 'true' : undefined}
+                                    onClick={() => changeLocale('hu')}
+                                    className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
+                                >
+                                    magyar
+                                </DropdownItem>
+                                <DropdownItem
+                                    aria-label="Deutsch"
+                                    aria-current={currentLocale === 'de' ? 'true' : undefined}
+                                    onClick={() => changeLocale('de')}
+                                    className={`${baseBtnClass} ${currentLocale === 'de' ? 'underline' : ''}`}
+                                >
+                                    deutsch
+                                </DropdownItem>
+                                <DropdownItem
+                                    aria-label="English"
+                                    aria-current={currentLocale === 'en' ? 'true' : undefined}
+                                    onClick={() => changeLocale('en')}
+                                    className={`${baseBtnClass} ${currentLocale === 'en' ? 'underline' : ''}`}
+                                >
+                                    english
+                                </DropdownItem>
 
                             </DropdownSection>
                         </DropdownMenu>
