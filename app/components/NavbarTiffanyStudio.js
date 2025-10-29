@@ -1,5 +1,7 @@
 'use client'
 
+'use client'
+
 import {
     Navbar,
     NavbarBrand,
@@ -15,14 +17,6 @@ import {
 
 import Link from "next/link";
 
-import {
-    FaArrowAltCircleLeft,
-    FaChevronDown, FaChevronUp,
-    FaFacebook,
-    FaFacebookSquare,
-    FaInstagram,
-    FaPhoneAlt
-} from "react-icons/fa";
 
 import {PiAcornFill, PiFlowerFill, PiFlowerTulipBold, PiFlowerTulipFill} from "react-icons/pi";
 import {GiChestnutLeaf, GiCurlingVines, GiDragonfly, GiFairyWings, GiLilyPads} from "react-icons/gi";
@@ -37,13 +31,31 @@ import {RiFacebookBoxFill, RiInstagramFill, RiMailFill} from "react-icons/ri";
 import {ImMail4} from "react-icons/im";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {MdLocalFlorist} from "react-icons/md";
+import {FaArrowAltCircleLeft, FaChevronDown, FaFacebookSquare, FaPhoneAlt} from "react-icons/fa";
+
 
 export default function NavbarTiffanyStudio() {
-
     const LOCALES = ['hu', 'de', 'en'];
     const DEFAULT_LOCALE = 'en';
     const COOKIE_NAME = 'NEXT_LOCALE';
     const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+
+    // Host configuration (client-side mirror of middleware)
+    const HOST_CONFIG = {
+        'tiffanystudio.at': { defaultLocale: 'de', hideDefault: true, isStudio: true },
+        'tiffanystudio.hu': { defaultLocale: 'hu', hideDefault: true, isStudio: true },
+        'glassartista.com': { defaultLocale: 'de', hideDefault: true, isStudio: false },
+        'localhost': { defaultLocale: 'de', hideDefault: true, isStudio: false } // same behaviour as glassartista.com
+    };
+
+    function getHostCfg() {
+        if (typeof window === 'undefined') return { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+        const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
+        return HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+    }
+
+    const hostCfg = getHostCfg();
+
 
     const TEXT = {
         hu: {
@@ -169,12 +181,22 @@ export default function NavbarTiffanyStudio() {
         return m ? m[1] : undefined;
     };
 
-    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || DEFAULT_LOCALE;
+    // derive current locale using path -> cookie -> host default
+    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || hostCfg.defaultLocale || DEFAULT_LOCALE;
     const search = searchParams ? `?${searchParams.toString()}` : '';
 
-    // build localized path for navigation
+    const glassHref = hostCfg.hideDefault && currentLocale === hostCfg.defaultLocale
+        ? 'https://glassartista.com'
+        : `https://glassartista.com/${currentLocale}`;
+
+    // build localized path for navigation, respecting host hideDefault
     const localized = (targetPath) => {
         if (!targetPath.startsWith('/')) targetPath = `/${targetPath}`;
+        // If current host hides its default locale and the locale equals host default, do not prefix
+        if (hostCfg.hideDefault && currentLocale === hostCfg.defaultLocale) {
+            // expose top-level paths for studio site (no prefix)
+            return `${targetPath}`;
+        }
         return `/${currentLocale}${targetPath}`;
     };
 
@@ -183,21 +205,39 @@ export default function NavbarTiffanyStudio() {
         setLocaleCookie(locale);
         const basePath = stripLocaleFromPath(pathname || '/');
         const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
-        const to = `/${locale}${basePath}${search}${hash}`;
+        const host = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '') : '';
+        const cfg = HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false };
+        let to;
+        if (cfg.hideDefault && locale === cfg.defaultLocale) {
+            // navigate to path without locale prefix
+            to = `${basePath}${search}${hash}`;
+        } else {
+            to = `/${locale}${basePath}${search}${hash}`;
+        }
         router.push(to);
     };
 
     const goTo = (path) => {
-        const domain = window.location.host;
-        console.log(domain)
-        if (domain === 'www.tiffanystudio.at' || domain === 'www.tiffanystudio.hu') {
-            router.push(`https://${domain}${localized(`${path}`)}`);
-        } else if (domain === 'www.glassartista.com') {
-            router.push(`https://${domain}${localized(`tiffanystudio/${path}`)}`);
-        } else {
-            router.push(`http://${domain}${localized(`tiffanystudio/${path}`)}`);
+        const host = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '') : '';
+        // On studio hosts, tiffanystudio pages are exposed at top level (no tiffanystudio prefix)
+        if (host === 'tiffanystudio.at' || host === 'tiffanystudio.hu') {
+            // localized already handles hideDefault
+            router.push(localized(path));
+            return;
         }
-    }
+        // On glassartista and other hosts, studio routes live under /tiffanystudio/
+        const target = `tiffanystudio/${path}`.startsWith('/') ? `tiffanystudio/${path}` : `tiffanystudio/${path}`;
+        if (host === 'glassartista.com') {
+            // navigate with absolute origin so domain + path are correct
+            const cfg = HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false };
+            // If glassartista hides de and locale is default, localized will not prefix; handle similarly:
+            const urlPath = localized(`/${target}`);
+            router.push(`https://${host}${urlPath}`);
+            return;
+        }
+        // fallback: same origin push
+        router.push(localized(`/${target}`));
+    };
 
 
     const handleLampDropdownClick = (key) => {
@@ -414,9 +454,8 @@ export default function NavbarTiffanyStudio() {
                 </NavbarBrand>
                 <NavbarContent className="hidden sm:flex gap-4 " justify="center">
                     <NavbarItem>
-                        <Tooltip content={t.backTooltip} placement="bottom" showArrow={true} radius="full"
-                                 color="foreground" size="sm">
-                            <Link href={`https://glassartista.com/${currentLocale}`}><FaArrowAltCircleLeft color="white" className="pt-1" size={27}/></Link>
+                        <Tooltip content={t.backTooltip} placement="bottom" showArrow={true} radius="full" color="foreground" size="sm">
+                            <Link href={glassHref}><FaArrowAltCircleLeft color="white" className="pt-1" size={27}/></Link>
                         </Tooltip>
                     </NavbarItem>
                     <NavbarItem>

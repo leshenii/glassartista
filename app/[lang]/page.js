@@ -74,7 +74,8 @@ export default function Home({params}) {
         const locale = getLocaleFromCookie();
         const domain = window.location.hostname
         setLocaleCookie(locale);
-        if (domain === 'glassartista.com') {
+        console.log(domain)
+        if (domain === 'wwww.glassartista.com') {
             if (locale === 'hu') {
                 router.push(`https://tiffanystudio.hu/${locale}`);
             } else if (locale === 'de' || locale === 'en') {

@@ -56,6 +56,22 @@ export default function NavbarGlassArtista() {
     const COOKIE_NAME = 'NEXT_LOCALE';
     const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
+    // Host configuration (client-side mirror of middleware)
+    const HOST_CONFIG = {
+        'tiffanystudio.at': { defaultLocale: 'de', hideDefault: true, isStudio: true },
+        'tiffanystudio.hu': { defaultLocale: 'hu', hideDefault: true, isStudio: true },
+        'glassartista.com': { defaultLocale: 'de', hideDefault: true, isStudio: false },
+        'localhost': { defaultLocale: 'de', hideDefault: true, isStudio: false } // same behaviour as glassartista.com
+    };
+
+    function getHostCfg() {
+        if (typeof window === 'undefined') return { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+        const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
+        return HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+    }
+
+    const hostCfg = getHostCfg();
+
     const TEXT = {
         hu: {
             landing: 'Kezdőlap',
@@ -176,12 +192,17 @@ export default function NavbarGlassArtista() {
         return m ? m[1] : undefined;
     };
 
-    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || DEFAULT_LOCALE;
+    // derive current locale: path -> cookie -> host default -> global default
+    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || hostCfg.defaultLocale || DEFAULT_LOCALE;
     const search = searchParams ? `?${searchParams.toString()}` : '';
 
-    // build localized path for navigation
+    // build localized path for navigation, respecting host hideDefault
     const localized = (targetPath) => {
         if (!targetPath.startsWith('/')) targetPath = `/${targetPath}`;
+        // If this host hides its default locale and the current locale equals host default, do not prefix
+        if (hostCfg.hideDefault && currentLocale === hostCfg.defaultLocale) {
+            return `${targetPath}`;
+        }
         return `/${currentLocale}${targetPath}`;
     };
 
@@ -190,7 +211,15 @@ export default function NavbarGlassArtista() {
         setLocaleCookie(locale);
         const basePath = stripLocaleFromPath(pathname || '/');
         const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
-        const to = `/${locale}${basePath}${search}${hash}`;
+        const host = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '') : '';
+        const cfg = HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false };
+        let to;
+        if (cfg.hideDefault && locale === cfg.defaultLocale) {
+            // navigate without locale prefix for hidden default
+            to = `${basePath}${search}${hash}`;
+        } else {
+            to = `/${locale}${basePath}${search}${hash}`;
+        }
         router.push(to);
     };
 

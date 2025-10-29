@@ -1,13 +1,19 @@
-// app/components/Footer.js
 "use client"
 
 import {FaCopyright} from "react-icons/fa";
-import {Avatar} from "@heroui/react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 const LOCALES = ['hu', 'de', 'en'];
 const COOKIE_NAME = 'NEXT_LOCALE';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+const DEFAULT_LOCALE = 'en';
+
+const HOST_CONFIG = {
+    'tiffanystudio.at': { defaultLocale: 'de', hideDefault: true, isStudio: true },
+    'tiffanystudio.hu': { defaultLocale: 'hu', hideDefault: true, isStudio: true },
+    'glassartista.com': { defaultLocale: 'de', hideDefault: true, isStudio: false },
+    'localhost': { defaultLocale: 'de', hideDefault: true, isStudio: false }
+};
 
 const COPYRIGHT_TEXT = {
     hu: '2022-2025 Magnólia Tiffanystúdió | Minden jog fenntartva.',
@@ -30,8 +36,21 @@ function getLocaleFromPath(pathname) {
     return (parts.length > 1 && LOCALES.includes(parts[1])) ? parts[1] : null;
 }
 
+function getLocaleFromCookie() {
+    if (typeof document === 'undefined') return undefined;
+    const m = document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]+)/);
+    return m ? m[1] : undefined;
+}
+
 function setLocaleCookie(locale) {
+    if (typeof document === 'undefined') return;
     document.cookie = `${COOKIE_NAME}=${locale}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax`;
+}
+
+function getHostCfg() {
+    if (typeof window === 'undefined') return { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
+    const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
+    return HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
 }
 
 export default function Footer() {
@@ -39,15 +58,30 @@ export default function Footer() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    const currentLocale = getLocaleFromPath(pathname);
+    const hostCfg = getHostCfg();
+
+    // derive current locale: path -> cookie -> host default -> global default
+    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || hostCfg.defaultLocale || DEFAULT_LOCALE;
     const basePath = stripLocaleFromPath(pathname);
     const search = searchParams ? `?${searchParams.toString()}` : '';
+
+    const host = (typeof window !== 'undefined') ? window.location.hostname.replace(/^www\./, '').toLowerCase() : '';
+    const hideHungarian = host === 'tiffanystudio.at';
 
     const changeLocale = (locale) => {
         if (!LOCALES.includes(locale)) return;
         setLocaleCookie(locale);
         const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
-        const to = `/${locale}${basePath}${search}${hash}`;
+        const cfg = hostCfg;
+        let to;
+        // If host hides its default locale and we're switching to that default, navigate without prefix
+        if (cfg.hideDefault && locale === cfg.defaultLocale) {
+            to = `${basePath}${search}${hash}`;
+        } else {
+            to = `/${locale}${basePath}${search}${hash}`;
+        }
+
+        // For glassartista/localhost you may want absolute navigation, but router.push with relative path works on same origin
         router.push(to);
     };
 
@@ -58,14 +92,16 @@ export default function Footer() {
             <div
                 className="flex flex-row gap-4 w-full my-2 items-center justify-center lg:justify-end text-gray-400 text-xs">
                 <div  className="hidden lg:flex flex-row gap-2 items-center">
-                    <button
-                        aria-label="Magyar"
-                        aria-current={currentLocale === 'hu' ? 'true' : undefined}
-                        onClick={() => changeLocale('hu')}
-                        className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
-                    >
-                        magyar
-                    </button>
+                    {!hideHungarian && (
+                        <button
+                            aria-label="Magyar"
+                            aria-current={currentLocale === 'hu' ? 'true' : undefined}
+                            onClick={() => changeLocale('hu')}
+                            className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
+                        >
+                            magyar
+                        </button>
+                    )}
                     <button
                         aria-label="Deutsch"
                         aria-current={currentLocale === 'de' ? 'true' : undefined}
@@ -86,7 +122,7 @@ export default function Footer() {
                 <div className="flex flex-row gap-2 lg:justify-end">
                     <FaCopyright className="mb-[1px]" size={14}/>
                     <p className="leading-4">
-                        {COPYRIGHT_TEXT[currentLocale || 'hu']}
+                        {COPYRIGHT_TEXT[currentLocale || hostCfg.defaultLocale || DEFAULT_LOCALE]}
                     </p>
                 </div>
             </div>
