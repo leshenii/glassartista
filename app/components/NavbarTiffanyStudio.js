@@ -330,7 +330,7 @@ export default function NavbarTiffanyStudio() {
                         <DropdownMenu  aria-label="Dropdown menu" >
                             <DropdownSection showDivider>
                                 <DropdownItem key="landing_page"
-                                              onPress={() => router.push(localized('/'))}>
+                                              onPress={() => router.push(glassHref)}>
                                 <span
                                     className='hover:underline hover:decoration-dashed'>
                                     {t.landing}

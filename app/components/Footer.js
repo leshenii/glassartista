@@ -15,12 +15,6 @@ const HOST_CONFIG = {
     'localhost': { defaultLocale: 'de', hideDefault: true, isStudio: false }
 };
 
-const COPYRIGHT_TEXT = {
-    hu: '2022-2025 Magnólia Tiffanystúdió | Minden jog fenntartva.',
-    de: '2022-2025 Magnolia Tiffany Studio | Alle Rechte vorbehalten.',
-    en: '2022-2025 Magnolia Tiffany Studio | All rights reserved.'
-};
-
 function stripLocaleFromPath(pathname) {
     const parts = pathname.split('/');
     if (parts.length > 1 && LOCALES.includes(parts[1])) {
@@ -65,8 +59,20 @@ export default function Footer() {
     const basePath = stripLocaleFromPath(pathname);
     const search = searchParams ? `?${searchParams.toString()}` : '';
 
+
     const host = (typeof window !== 'undefined') ? window.location.hostname.replace(/^www\./, '').toLowerCase() : '';
     const hideHungarian = host === 'tiffanystudio.at';
+    const isGlassRoot = (host === 'glassartista.com' || host === 'localhost') && basePath === '/';
+
+    const defaultBrand = (host === 'glassartista.com' || host === 'www.glassartista.com') ? 'GlassArtista' : 'Magnolia Tiffany Studio';
+    const huBrand = 'Magnólia Tiffanystudió';
+    const brand = currentLocale === 'hu' ? huBrand : defaultBrand;
+
+    const COPYRIGHT_TEXT = {
+        hu: `2022-2025 ${brand} | Minden jog fenntartva.`,
+        de: `2022-2025 ${brand} | Alle Rechte vorbehalten.`,
+        en: `2022-2025 ${brand} | All rights reserved.`
+    };
 
     const changeLocale = (locale) => {
         if (!LOCALES.includes(locale)) return;
@@ -90,8 +96,8 @@ export default function Footer() {
     return (
         <footer className="fixed bottom-0 lg:pr-2 z-53 w-screen lg:w-2/5 h-min mt-10 justify-self-end animate__animated animate__fadeInUp">
             <div
-                className="flex flex-row gap-4 w-full my-2 items-center justify-center lg:justify-end text-gray-400 text-xs">
-                <div  className="hidden lg:flex flex-row gap-2 items-center">
+                className="flex flex-col gap-1 lg:flex-row lg:gap-4 w-full my-2 items-center justify-center lg:justify-end text-gray-300 text-xs">
+                <div  className={`${isGlassRoot ? 'flex' : 'hidden lg:flex'} flex-row gap-2 items-center`}>
                     {!hideHungarian && (
                         <button
                             aria-label="Magyar"
