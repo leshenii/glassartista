@@ -94,7 +94,7 @@ export default function Footer() {
     const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
 
     return (
-        <footer className="fixed bottom-0 lg:pr-2 z-53 w-screen lg:w-2/5 h-min mt-10 justify-self-end animate__animated animate__fadeInUp">
+        <footer className="fixed bottom-0 lg:pr-2 z-53 w-screen lg:w-2/5 h-min mt-10 justify-self-end animate__animated animate__fadeInUp ">
             <div
                 className="flex flex-col gap-1 lg:flex-row lg:gap-4 w-full my-2 items-center justify-center lg:justify-end text-gray-300 text-xs">
                 <div  className={`${isGlassRoot ? 'flex' : 'hidden lg:flex'} flex-row gap-2 items-center`}>
@@ -125,7 +125,7 @@ export default function Footer() {
                         english
                     </button>
                 </div>
-                <div className="flex flex-row gap-2 lg:justify-end">
+                <div className="flex flex-row gap-2 lg:justify-end ">
                     <FaCopyright className="mb-[1px]" size={14}/>
                     <p className="leading-4">
                         {COPYRIGHT_TEXT[currentLocale || hostCfg.defaultLocale || DEFAULT_LOCALE]}
