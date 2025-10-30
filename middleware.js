@@ -1,9 +1,8 @@
-// javascript
 import { NextResponse } from 'next/server';
 
 const LOCALES = ['hu', 'de', 'en'];
 const COOKIE_NAME = 'NEXT_LOCALE';
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // kept for compatibility but not used
 const GLOBAL_DEFAULT = 'en';
 
 // Host-specific configuration
@@ -87,13 +86,7 @@ export function middleware(request) {
         }
     }
 
-    function detectLocale(hostDefaultParam, hideDefaultParam, ignoreCookie = false) {
-        // cookie (skip when ignoreCookie === true)
-        if (!ignoreCookie) {
-            const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
-            if (cookieLocale && LOCALES.includes(cookieLocale)) return cookieLocale;
-        }
-
+    function detectLocale(hostDefaultParam, hideDefaultParam /* cookies ignored */) {
         // prefer host default for hosts that hide their default
         if (hideDefaultParam && hostDefaultParam && LOCALES.includes(hostDefaultParam)) return hostDefaultParam;
 
@@ -113,48 +106,30 @@ export function middleware(request) {
     if (isStudio) {
         // If user requested site root on studio host -> serve internal studio home
         if (pathname === '/' || pathname === '') {
-            // Ignore any existing NEXT_LOCALE cookie for initial entry to studio host
-            const targetLocale = detectLocale(hostDefault, hideDefault, true);
+            // Cookies are ignored here — detectLocale never reads cookies
+            const targetLocale = detectLocale(hostDefault, hideDefault);
             url.pathname = `/${targetLocale}/tiffanystudio`;
             // If we hide default locale and target is host default, keep browser URL as '/' (rewrite)
             if (hideDefault && targetLocale === hostDefault) {
                 return NextResponse.rewrite(url);
             }
-            // Otherwise redirect user to visible locale-prefixed root
-            url.pathname = `/${targetLocale}/tiffanystudio`;
-            const res = NextResponse.redirect(url);
-            res.cookies.set({
-                name: COOKIE_NAME,
-                value: targetLocale,
-                path: '/',
-                maxAge: COOKIE_MAX_AGE,
-                sameSite: 'lax'
-            });
-            return res;
+            // Otherwise redirect user to visible locale-prefixed root (no cookie set)
+            return NextResponse.redirect(url);
         }
 
         // If path begins with /tiffanystudio and there's no locale prefix, map it same as top-level
         if (pathname.startsWith('/tiffanystudio')) {
             const after = pathname.slice('/tiffanystudio'.length) || '/';
-            // Ignore any existing NEXT_LOCALE cookie for these public studio paths
-            const targetLocale = detectLocale(hostDefault, hideDefault, true);
+            const targetLocale = detectLocale(hostDefault, hideDefault);
             url.pathname = `/${targetLocale}/tiffanystudio${after}`;
             if (hideDefault && targetLocale === hostDefault) {
                 // keep URL visible as the requested `/tiffanystudio/...` (rewrite)
                 return NextResponse.rewrite(url);
             } else {
-                // redirect to /{locale}/tiffanystudio/...
+                // redirect to /{locale}/tiffanystudio/... (no cookie set)
                 const redirectUrl = request.nextUrl.clone();
                 redirectUrl.pathname = `/${targetLocale}${pathname}`;
-                const res = NextResponse.redirect(redirectUrl);
-                res.cookies.set({
-                    name: COOKIE_NAME,
-                    value: targetLocale,
-                    path: '/',
-                    maxAge: COOKIE_MAX_AGE,
-                    sameSite: 'lax'
-                });
-                return res;
+                return NextResponse.redirect(redirectUrl);
             }
         }
 
@@ -166,61 +141,23 @@ export function middleware(request) {
                 pathname.startsWith(src + '/')
             ) {
                 const rest = pathname.slice(src.length);
-                // Ignore any existing NEXT_LOCALE cookie for mapped public routes
-                const targetLocale = detectLocale(hostDefault, hideDefault, true);
+                const targetLocale = detectLocale(hostDefault, hideDefault);
                 url.pathname = `/${targetLocale}${dst}${rest}`; // dst already contains /tiffanystudio
                 if (hideDefault && targetLocale === hostDefault) {
                     // public URL remains '/contact' etc.
                     return NextResponse.rewrite(url);
                 } else {
-                    // redirect to /{locale}/contact (visible)
+                    // redirect to /{locale}/contact (visible) without setting a cookie
                     const redirectUrl = request.nextUrl.clone();
                     redirectUrl.pathname = `/${targetLocale}${pathname}`;
-                    const res = NextResponse.redirect(redirectUrl);
-                    res.cookies.set({
-                        name: COOKIE_NAME,
-                        value: targetLocale,
-                        path: '/',
-                        maxAge: COOKIE_MAX_AGE,
-                        sameSite: 'lax'
-                    });
-                    return res;
+                    return NextResponse.redirect(redirectUrl);
                 }
             }
         }
     }
 
     // Non-studio hosts or no special mapping
-    // Respect cookie if present for non-studio hosts / other pages
-    const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
-    if (cookieLocale && LOCALES.includes(cookieLocale)) {
-        // If host hides its default locale and cookie equals that default, serve internal path without visible prefix
-        if (hideDefault && cookieLocale === hostDefault) {
-            url.pathname = `/${cookieLocale}${pathname}`.replace(`//`, '/');
-            const res = NextResponse.rewrite(url);
-            // keep cookie (optional)
-            res.cookies.set({
-                name: COOKIE_NAME,
-                value: cookieLocale,
-                path: '/',
-                maxAge: COOKIE_MAX_AGE,
-                sameSite: 'lax'
-            });
-            return res;
-        }
-        // Otherwise redirect to visible localized path
-        url.pathname = `/${cookieLocale}${pathname}`;
-        const res = NextResponse.redirect(url);
-        res.cookies.set({
-            name: COOKIE_NAME,
-            value: cookieLocale,
-            path: '/',
-            maxAge: COOKIE_MAX_AGE,
-            sameSite: 'lax'
-        });
-        return res;
-    }
-
+    // Cookies are ignored: do not read or set cookie for locale
     // Try detection
     const detected = detectLocale(hostDefault, hideDefault);
     const target = (detected && LOCALES.includes(detected)) ? detected : GLOBAL_DEFAULT;
@@ -232,17 +169,9 @@ export function middleware(request) {
         return NextResponse.rewrite(url);
     }
 
-    // Otherwise redirect to localized path (visible)
+    // Otherwise redirect to localized path (visible) — no cookie set
     url.pathname = `/${target}${pathname}`;
-    const res = NextResponse.redirect(url);
-    res.cookies.set({
-        name: COOKIE_NAME,
-        value: target,
-        path: '/',
-        maxAge: COOKIE_MAX_AGE,
-        sameSite: 'lax'
-    });
-    return res;
+    return NextResponse.redirect(url);
 }
 
 export const config = {

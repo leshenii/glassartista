@@ -30,17 +30,6 @@ function getLocaleFromPath(pathname) {
     return (parts.length > 1 && LOCALES.includes(parts[1])) ? parts[1] : null;
 }
 
-function getLocaleFromCookie() {
-    if (typeof document === 'undefined') return undefined;
-    const m = document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]+)/);
-    return m ? m[1] : undefined;
-}
-
-function setLocaleCookie(locale) {
-    if (typeof document === 'undefined') return;
-    document.cookie = `${COOKIE_NAME}=${locale}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax`;
-}
-
 function getHostCfg() {
     if (typeof window === 'undefined') return { defaultLocale: DEFAULT_LOCALE, hideDefault: false, isStudio: false };
     const host = window.location.hostname.replace(/^www\./, '').toLowerCase();
@@ -54,8 +43,8 @@ export default function Footer() {
 
     const hostCfg = getHostCfg();
 
-    // derive current locale: path -> cookie -> host default -> global default
-    const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || hostCfg.defaultLocale || DEFAULT_LOCALE;
+    // derive current locale: path -> host default -> global default
+    const currentLocale = getLocaleFromPath(pathname) || hostCfg.defaultLocale || DEFAULT_LOCALE;
     const basePath = stripLocaleFromPath(pathname);
     const search = searchParams ? `?${searchParams.toString()}` : '';
 
@@ -76,7 +65,7 @@ export default function Footer() {
 
     const changeLocale = (locale) => {
         if (!LOCALES.includes(locale)) return;
-        setLocaleCookie(locale);
+        // cookie intentionally NOT set (cookies are ignored)
         const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
         const cfg = hostCfg;
         let to;
