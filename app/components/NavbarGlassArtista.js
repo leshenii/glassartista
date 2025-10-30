@@ -284,6 +284,26 @@ export default function NavbarGlassArtista() {
     const t = TEXT[currentLocale] || TEXT[DEFAULT_LOCALE];
     const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
 
+    const HOST_PHONE = {
+        'glassartista.com': {
+            default: { href: 'tel:+436766933329', display: '+43 (0) 676 693 3329' },
+            locales: {
+                hu: { href: 'tel:+36703600950', display: '+36-70/360-0950' }, // glassartista.com/hu/...
+                en: { href: 'tel:+436766933329', display: '+43 (0) 676 693 3329' }, // glassartista.com/en/...
+                de: { href: 'tel:+436766933329', display: '+43 (0) 676 693 3329' }  // default for other locales
+            }
+        },
+        'localhost': { default: { href: 'tel:+36123456789', display: '+43 (0) 676 693 3329' } }
+    };
+
+    const _hostname = (typeof window !== 'undefined') ? window.location.hostname.replace(/^www\./, '').toLowerCase() : 'localhost';
+    const hostPhoneCfg = HOST_PHONE[_hostname] || HOST_PHONE['localhost'];
+    const phoneEntry = (hostPhoneCfg.locales && hostPhoneCfg.locales[currentLocale]) ? hostPhoneCfg.locales[currentLocale] : hostPhoneCfg.default;
+    const { href: telHref, display: displayPhone } = phoneEntry;
+
+// safe tooltip text (falls back if TEXT is missing)
+    const callTooltip = t?.callTooltip || 'Call';
+
     return (
         <>
             <Navbar position="sticky"
@@ -551,6 +571,18 @@ export default function NavbarGlassArtista() {
                 <NavbarContent justify="end">
                     <NavbarItem>
                         <div className="flex flex-row gap-3 pt-1">
+                            <div className="flex flex-row gap-1 items-center justify-center pb-1">
+                                <Tooltip content={t.callTooltip} showArrow={true} radius="full" color="foreground" placement="bottom">
+                                    <Link
+                                        href={telHref}
+                                        target="_blank"
+                                        className="text-xl font-light antonio-navbar text-white"
+                                    >
+                                        <FaPhoneAlt size="16px" />
+                                    </Link>
+                                </Tooltip>
+                                <span className="select-all">{displayPhone}</span>
+                            </div>
                             <Tooltip content={t.emailTooltip} placement="bottom" showArrow={true} radius="full"
                                      color="foreground">
                                 <Link href="mailto:info@glassartista.com"

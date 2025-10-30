@@ -432,7 +432,7 @@ export default function DetailsPage({params}) {
                                     icon={project.icon}
                                 />
                             </div>
-                            <div className="xl:w-1/2 h-full overflow-hidden text-center xl:my-auto pt-4 xl:pt-0 xl:pr-10">
+                            <div className="xl:w-1/2 h-full overflow-hidden text-center xl:my-auto pt-4 xl:pt-0 xl:pr-10 animate__animated animate__fadeInLeft ">
                                 <article className="px-6 py-4">
                                     <h2 className="text-2xl font-semibold xl:text-left mb-3">
                                         {project.slides?.[0]?.title || project.key.charAt(0).toUpperCase() + project.key.slice(1)}
