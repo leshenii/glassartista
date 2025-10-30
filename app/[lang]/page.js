@@ -134,7 +134,7 @@ export default function Home({params}) {
                         <div>
                             <Button className="light" variant="faded"
                                     startContent={<GiWindowBars size={20}/>}
-                                    onPress={goToGlassArtista}/>
+                                    onPress={goToGlassArtista}>
                                 {t.btnPrimary}
                             </Button>
                         </div>
