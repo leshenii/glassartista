@@ -7,26 +7,7 @@ import {GiWindowBars} from "react-icons/gi";
 import {useRouter} from "next/navigation";
 
 const LOCALES = ['hu', 'de', 'en'];
-const COOKIE_NAME = 'NEXT_LOCALE';
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
-const DEFAULT_LOCALE = 'en';
-
-function getLocaleFromCookie() {
-    if (typeof document === 'undefined') return DEFAULT_LOCALE;
-    const m = document.cookie.match(/(?:^|; )NEXT_LOCALE=([^;]+)/);
-    if (m && LOCALES.includes(m[1])) return m[1];
-    const nav = (navigator?.language || '').toLowerCase();
-    if (nav.startsWith('hu')) return 'hu';
-    if (nav.startsWith('de')) return 'de';
-    if (nav.startsWith('en')) return 'en';
-    return DEFAULT_LOCALE;
-}
-
-function setLocaleCookie(locale) {
-    if (typeof document === 'undefined') return;
-    if (!LOCALES.includes(locale)) return;
-    document.cookie = `${COOKIE_NAME}=${locale}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax`;
-}
+const DEFAULT_LOCALE = 'de';
 
 const TEXTS = {
     hu: {
@@ -71,10 +52,7 @@ export default function Home({params}) {
     const t = TEXTS[lang] || TEXTS[DEFAULT_LOCALE];
 
     const goToStudio = () => {
-        const locale = getLocaleFromCookie();
         const host = (typeof window !== 'undefined') ? window.location.hostname.replace(/^www\./, '').toLowerCase() : '';
-        setLocaleCookie(locale);
-        console.log("host :" + host)
         if (host === 'glassartista.com') {
             if (lang === 'hu') {
                 router.push(`https://tiffanystudio.hu`);
@@ -85,6 +63,21 @@ export default function Home({params}) {
             }
         } else {
             router.push(`/tiffanystudio`);
+        }
+    };
+
+    const goToGlassArtista = () => {
+        const host = (typeof window !== 'undefined') ? window.location.hostname.replace(/^www\./, '').toLowerCase() : '';
+        if (host === 'glassartista.com') {
+            if (lang === 'hu') {
+                router.push(`/hu/home`);
+            } else if (lang === 'en') {
+                router.push(`/en/home`);
+            } else {
+                router.push(`/home`);
+            }
+        } else {
+            router.push(`/home`);
         }
     };
 
@@ -141,9 +134,7 @@ export default function Home({params}) {
                         <div>
                             <Button className="light" variant="faded"
                                     startContent={<GiWindowBars size={20}/>}
-                                    onPress={() => {
-                                        router.push('/home')
-                                    }}>
+                                    onPress={goToGlassArtista}/>
                                 {t.btnPrimary}
                             </Button>
                         </div>
