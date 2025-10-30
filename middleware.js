@@ -1,3 +1,4 @@
+// javascript
 import { NextResponse } from 'next/server';
 
 const LOCALES = ['hu', 'de', 'en'];
@@ -86,17 +87,19 @@ export function middleware(request) {
         }
     }
 
-    function detectLocale(hostDefaultParam, hideDefaultParam) {
-        // cookie
-        const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
-        if (cookieLocale && LOCALES.includes(cookieLocale)) return cookieLocale;
+    function detectLocale(hostDefaultParam, hideDefaultParam, ignoreCookie = false) {
+        // cookie (skip when ignoreCookie === true)
+        if (!ignoreCookie) {
+            const cookieLocale = request.cookies.get(COOKIE_NAME)?.value;
+            if (cookieLocale && LOCALES.includes(cookieLocale)) return cookieLocale;
+        }
 
         // prefer host default for hosts that hide their default
         if (hideDefaultParam && hostDefaultParam && LOCALES.includes(hostDefaultParam)) return hostDefaultParam;
 
         // accept-language header
         const accept = request.headers.get('accept-language');
-        const parsed = parseAcceptLanguage(accept); // unchanged helper
+        const parsed = parseAcceptLanguage(accept);
         if (parsed && LOCALES.includes(parsed)) return parsed;
 
         // host-specific default fallback
@@ -110,7 +113,8 @@ export function middleware(request) {
     if (isStudio) {
         // If user requested site root on studio host -> serve internal studio home
         if (pathname === '/' || pathname === '') {
-            const targetLocale = detectLocale(hostDefault, hideDefault);
+            // Ignore any existing NEXT_LOCALE cookie for initial entry to studio host
+            const targetLocale = detectLocale(hostDefault, hideDefault, true);
             url.pathname = `/${targetLocale}/tiffanystudio`;
             // If we hide default locale and target is host default, keep browser URL as '/' (rewrite)
             if (hideDefault && targetLocale === hostDefault) {
@@ -132,7 +136,8 @@ export function middleware(request) {
         // If path begins with /tiffanystudio and there's no locale prefix, map it same as top-level
         if (pathname.startsWith('/tiffanystudio')) {
             const after = pathname.slice('/tiffanystudio'.length) || '/';
-            const targetLocale = detectLocale(hostDefault, hideDefault);
+            // Ignore any existing NEXT_LOCALE cookie for these public studio paths
+            const targetLocale = detectLocale(hostDefault, hideDefault, true);
             url.pathname = `/${targetLocale}/tiffanystudio${after}`;
             if (hideDefault && targetLocale === hostDefault) {
                 // keep URL visible as the requested `/tiffanystudio/...` (rewrite)
@@ -161,7 +166,8 @@ export function middleware(request) {
                 pathname.startsWith(src + '/')
             ) {
                 const rest = pathname.slice(src.length);
-                const targetLocale = detectLocale(hostDefault, hideDefault);
+                // Ignore any existing NEXT_LOCALE cookie for mapped public routes
+                const targetLocale = detectLocale(hostDefault, hideDefault, true);
                 url.pathname = `/${targetLocale}${dst}${rest}`; // dst already contains /tiffanystudio
                 if (hideDefault && targetLocale === hostDefault) {
                     // public URL remains '/contact' etc.
