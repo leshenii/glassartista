@@ -185,7 +185,9 @@ export default function NavbarTiffanyStudio() {
     const currentLocale = getLocaleFromPath(pathname) || getLocaleFromCookie() || hostCfg.defaultLocale || DEFAULT_LOCALE;
     const search = searchParams ? `?${searchParams.toString()}` : '';
 
-    const glassHref = hostCfg.hideDefault && currentLocale === hostCfg.defaultLocale
+    const hostname = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '').toLowerCase() : '';
+
+    const glassHref = (hostCfg.hideDefault && currentLocale === hostCfg.defaultLocale && !(hostname === 'tiffanystudio.hu' || hostname === 'tiffanystudio.at'))
         ? 'https://glassartista.com'
         : `https://glassartista.com/${currentLocale}`;
 
