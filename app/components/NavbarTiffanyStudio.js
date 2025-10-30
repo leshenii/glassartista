@@ -295,6 +295,12 @@ export default function NavbarTiffanyStudio() {
     const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
     const isTiffAt = typeof window !== 'undefined' && window.location.hostname.replace(/^www\./, '').toLowerCase() === 'tiffanystudio.at';
 
+    const host = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '').toLowerCase() : '';
+    const isTiffHu = host === 'tiffanystudio.hu';
+    const displayPhone = isTiffHu ? '+36-70/360-0950' : '+43 (0) 676 6933329';
+    const telHref = isTiffHu ? 'tel:+36703600950' : 'tel:+436766933329';
+
+
     return (
         <>
             <Navbar position="sticky"
@@ -592,14 +598,14 @@ export default function NavbarTiffanyStudio() {
                     <NavbarItem>
                         <div className="flex flex-row gap-3 pt-1">
                             <div className="flex flex-row gap-1 items-center justify-center pb-1">
-                                <Tooltip content={t.callTooltip} showArrow={true} radius="full" color="foreground"
-                                         placement="bottom">
-                                    <Link href="tel:+36-70/360-0950"
+                                <Tooltip content={t.callTooltip} showArrow={true} radius="full" color="foreground" placement="bottom">
+                                    <Link href={telHref}
                                           target="_blank"
-                                          className="text-xl font-light antonio-navbar text-white"><FaPhoneAlt
-                                        size="16px"/></Link>
+                                          className="text-xl font-light antonio-navbar text-white">
+                                        <FaPhoneAlt size="16px"/>
+                                    </Link>
                                 </Tooltip>
-                                <span className="select-all">+36-70/360-0950</span>
+                                <span className="select-all">{displayPhone}</span>
                             </div>
                             <Tooltip content={t.emailTooltip} placement="bottom" showArrow={true} radius="full"
                                      color="foreground">
