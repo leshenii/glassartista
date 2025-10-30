@@ -80,14 +80,17 @@ export default function Footer() {
         const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
         const cfg = hostCfg;
         let to;
-        // If host hides its default locale and we're switching to that default, navigate without prefix
-        if (cfg.hideDefault && locale === cfg.defaultLocale) {
+
+        // special-case: on tiffanystudio.hu, navigating to German should go to the root path (no /de prefix)
+        if (host === 'tiffanystudio.hu' && locale === 'de') {
+            to = `${basePath}${search}${hash}`;
+        } else if (cfg.hideDefault && locale === cfg.defaultLocale) {
+            // If host hides its default locale and we're switching to that default, navigate without prefix
             to = `${basePath}${search}${hash}`;
         } else {
             to = `/${locale}${basePath}${search}${hash}`;
         }
 
-        // For glassartista/localhost you may want absolute navigation, but router.push with relative path works on same origin
         router.push(to);
     };
 

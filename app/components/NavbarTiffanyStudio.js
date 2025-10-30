@@ -208,12 +208,17 @@ export default function NavbarTiffanyStudio() {
         const host = typeof window !== 'undefined' ? window.location.hostname.replace(/^www\./, '') : '';
         const cfg = HOST_CONFIG[host] || { defaultLocale: DEFAULT_LOCALE, hideDefault: false };
         let to;
-        if (cfg.hideDefault && locale === cfg.defaultLocale) {
-            // navigate to path without locale prefix
+
+        // special-case: on tiffanystudio.hu, navigating to German should not add a /de prefix
+        if (host === 'tiffanystudio.hu' && locale === 'de') {
+            to = `${basePath}${search}${hash}`;
+        } else if (cfg.hideDefault && locale === cfg.defaultLocale) {
+            // navigate to path without locale prefix when host hides its default locale
             to = `${basePath}${search}${hash}`;
         } else {
             to = `/${locale}${basePath}${search}${hash}`;
         }
+
         router.push(to);
     };
 
