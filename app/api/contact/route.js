@@ -18,7 +18,7 @@ export async function POST(req) {
             // Send mail
             await transporter.sendMail({
                 from: `Magnólia Tiffanystudió <${email}>`,
-                to: process.env.SMTP_USER,
+                to: process.env.SMTP_USER_TIFFANYSTUDIO,
                 replyTo: `"${name}" <${email}>`,
                 subject: text || 'Contant form submission',
                 text: `
@@ -43,7 +43,7 @@ ${message}
             // Send mail
             await transporter.sendMail({
                 from: `GlassArtista <${email}>`,
-                to: process.env.SMTP_USER,
+                to: process.env.SMTP_USER_GLASSARTISTA,
                 replyTo: `"${name}" <${email}>`,
                 subject: text || 'Contant form submission',
                 text: `
