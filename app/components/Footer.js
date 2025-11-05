@@ -2,6 +2,7 @@
 
 import {FaCopyright} from "react-icons/fa";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {Avatar} from "@heroui/react";
 
 const LOCALES = ['hu', 'de', 'en'];
 const COOKIE_NAME = 'NEXT_LOCALE';
@@ -83,39 +84,19 @@ export default function Footer() {
         router.push(to);
     };
 
-    const baseBtnClass = "p-0 bg-transparent border-0 cursor-pointer hover:text-gray-200 transition-colors";
-
     return (
         <footer className="fixed bottom-0 lg:pr-2 z-53 w-screen lg:w-2/5 h-min mt-10 justify-self-end animate__animated animate__fadeInUp ">
             <div
                 className="flex flex-col gap-1 lg:flex-row lg:gap-4 w-full my-2 items-center justify-center lg:justify-end text-gray-300 text-xs">
-                <div  className={`${isGlassRoot ? 'flex' : 'hidden lg:flex'} flex-row gap-2 items-center`}>
+                <div  className={`${isGlassRoot ? 'flex' : 'hidden lg:flex'} flex-row gap-3 items-center`}>
                     {!hideHungarian && (
-                        <button
-                            aria-label="Magyar"
-                            aria-current={currentLocale === 'hu' ? 'true' : undefined}
-                            onClick={() => changeLocale('hu')}
-                            className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
-                        >
-                            magyar
-                        </button>
+                        <Avatar alt="flag" className={`!w-5.5 !h-5.5 min-w-[20px] cursor-pointer`} draggable={false} onClick={() => changeLocale('hu')} style={currentLocale === 'hu' ? { outline: '2px solid #d1d5dc', outlineOffset: '2px' } : undefined}
+                                src={'https://flagcdn.com/hu.svg'}/>
                     )}
-                    <button
-                        aria-label="Deutsch"
-                        aria-current={currentLocale === 'de' ? 'true' : undefined}
-                        onClick={() => changeLocale('de')}
-                        className={`${baseBtnClass} ${currentLocale === 'de' ? 'underline' : ''}`}
-                    >
-                        deutsch
-                    </button>
-                    <button
-                        aria-label="English"
-                        aria-current={currentLocale === 'en' ? 'true' : undefined}
-                        onClick={() => changeLocale('en')}
-                        className={`${baseBtnClass} ${currentLocale === 'en' ? 'underline' : ''}`}
-                    >
-                        english
-                    </button>
+                    <Avatar alt="flag" className={`!w-5.5 !h-5.5 min-w-[20px] cursor-pointer`} draggable={false} onClick={() => changeLocale('de')} style={currentLocale === 'de' ? { outline: '2px solid #d1d5dc', outlineOffset: '2px' } : undefined}
+                            src={'/design/de-at.svg'}/>
+                    <Avatar alt="flag" className={`!w-5.5 !h-5.5 min-w-[20px] cursor-pointer`} draggable={false} onClick={() => changeLocale('en')} style={currentLocale === 'en' ? { outline: '2px solid #d1d5dc', outlineOffset: '2px' } : undefined}
+                            src={'https://flagcdn.com/gb.svg'}/>
                 </div>
                 <div className="flex flex-row gap-2 lg:justify-end ">
                     <FaCopyright className="mb-[1px]" size={14}/>

@@ -151,6 +151,7 @@ export default function GlassArtistaContactPage({ params }) {
         e.preventDefault();
         setLoading(true);
         const data = Object.fromEntries(new FormData(e.currentTarget));
+        data.site = fields.site;
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',

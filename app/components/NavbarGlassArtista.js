@@ -10,7 +10,7 @@ import {
     DropdownMenu,
     DropdownItem,
     Button,
-    Tooltip, DropdownSection,
+    Tooltip, DropdownSection, Avatar,
 } from "@heroui/react";
 
 import Link from "next/link";
@@ -401,25 +401,25 @@ export default function NavbarGlassArtista() {
                                     aria-label="Magyar"
                                     aria-current={currentLocale === 'hu' ? 'true' : undefined}
                                     onClick={() => changeLocale('hu')}
-                                    className={`${baseBtnClass} ${currentLocale === 'hu' ? 'underline' : ''}`}
                                 >
-                                    magyar
+                                    <Avatar alt="flag" className={`!w-6 !h-6 min-w-[20px] cursor-pointer`} draggable={false} style={currentLocale === 'hu' ? { outline: '2px solid #d1d5dc', outlineOffset: '2px' } : undefined}
+                                            src={'https://flagcdn.com/hu.svg'}/>
                                 </DropdownItem>
                                 <DropdownItem
                                     aria-label="Deutsch"
                                     aria-current={currentLocale === 'de' ? 'true' : undefined}
                                     onClick={() => changeLocale('de')}
-                                    className={`${baseBtnClass} ${currentLocale === 'de' ? 'underline' : ''}`}
                                 >
-                                    deutsch
+                                    <Avatar alt="flag" className={`!w-6 !h-6 min-w-[20px] cursor-pointer`} draggable={false} onClick={() => changeLocale('de')} style={currentLocale === 'de' ? { outline: '2px solid #d1d5dc', outlineOffset: '2px' } : undefined}
+                                            src={'/design/de-at.svg'}/>
                                 </DropdownItem>
                                 <DropdownItem
                                     aria-label="English"
                                     aria-current={currentLocale === 'en' ? 'true' : undefined}
                                     onClick={() => changeLocale('en')}
-                                    className={`${baseBtnClass} ${currentLocale === 'en' ? 'underline' : ''}`}
                                 >
-                                    english
+                                    <Avatar alt="flag" className={`!w-5.5 !h-5.5 min-w-[20px] cursor-pointer`} draggable={false} onClick={() => changeLocale('en')} style={currentLocale === 'en' ? { outline: '2px solid #d1d5dc', outlineOffset: '2px' } : undefined}
+                                            src={'https://flagcdn.com/gb.svg'}/>
                                 </DropdownItem>
 
                             </DropdownSection>
